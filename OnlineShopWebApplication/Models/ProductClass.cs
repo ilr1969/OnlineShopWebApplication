@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace OnlineShopWebApplication.Models
+﻿namespace OnlineShopWebApplication.Models
 {
-    public class GoodsClass
+    public class ProductClass
     {
         private static int ID_counter = 1;
         public int ID;
@@ -13,7 +8,7 @@ namespace OnlineShopWebApplication.Models
         public decimal Cost;
         public string Description;
 
-        public GoodsClass(string name, int cost, string descr)
+        public ProductClass(string name, int cost, string descr)
         {
             ID = ID_counter;
             Name = name;

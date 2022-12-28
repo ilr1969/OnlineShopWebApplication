@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OnlineShopWebApplication.Models;
@@ -12,17 +8,19 @@ namespace OnlineShopWebApplication.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        private readonly ProductStorage productStorage;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            productStorage = new ProductStorage();
         }
 
         public string Index(int id)
         {
+            var products = productStorage.GetAll();
             string s = null;
-            foreach (var item in GoodsStorage.goodsList)
+            foreach (var item in products)
             {
                 s +=  item.ToString() + "\n\n";
             }
