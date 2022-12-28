@@ -10,9 +10,20 @@ namespace OnlineShopWebApplication.Controllers
     public class CalcController : Controller
     {
         // GET: CalcController
-        public string Index(double x, double y)
+        public string Index(double x, double y, string s)
         {
-            return $"{x} + {y} = {x+y}";
+            switch (s)
+            {
+                case "+": return $"{x} + {y} = {x + y}";
+                case "-": return $"{x} - {y} = {x - y}";
+                case "*": return $"{x} * {y} = {x * y}";
+                default: break;
+            }
+            if (s != "+" && s != "-" && s != "*" && s != null)
+            {
+                return "Принимаются только операции +, -, *";
+            }
+            return $"{x} + {y} = {x + y}";
         }
 
         // GET: CalcController/Details/5
