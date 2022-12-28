@@ -17,11 +17,12 @@ namespace OnlineShopWebApplication.Controllers
                 case "+": return $"{x} + {y} = {x + y}";
                 case "-": return $"{x} - {y} = {x - y}";
                 case "*": return $"{x} * {y} = {x * y}";
+                case "/": return $"{x} / {y} = {x / y}";
                 default: break;
             }
             if (s != "+" && s != "-" && s != "*" && s != null)
             {
-                return "Принимаются только операции +, -, *";
+                return "Принимаются только операции +, -, *, /";
             }
             return $"{x} + {y} = {x + y}";
         }
