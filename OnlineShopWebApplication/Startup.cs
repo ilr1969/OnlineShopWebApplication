@@ -50,7 +50,7 @@ namespace OnlineShopWebApplication
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{x?}/{y?}/{s?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

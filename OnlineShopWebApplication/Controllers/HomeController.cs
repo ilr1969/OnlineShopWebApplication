@@ -13,14 +13,20 @@ namespace OnlineShopWebApplication.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public string Index(int id)
         {
-            return View();
+            string s = null;
+            foreach (var item in GoodsStorage.goodsList)
+            {
+                s +=  item.ToString() + "\n\n";
+            }
+            return s;
         }
 
 
