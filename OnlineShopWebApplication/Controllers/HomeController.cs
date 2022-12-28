@@ -18,15 +18,11 @@ namespace OnlineShopWebApplication.Controllers
             _logger = logger;
         }
 
-        /*        public IActionResult Index()
-                {
-                    return View();
-                }*/
-
-        public string Index(string name, int age)
+        public IActionResult Index()
         {
-            return $"{name} {age}";
+            return View();
         }
+
 
         public IActionResult Privacy()
         {
