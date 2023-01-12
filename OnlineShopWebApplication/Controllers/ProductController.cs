@@ -9,9 +9,10 @@ namespace OnlineShopWebApplication.Controllers
     {
         private readonly ProductStorage productStorage = new ProductStorage();
         // GET: ProductController
-        public string Index(int id)
+        public IActionResult Index(int id)
         {
-            return productStorage.TryGetByID(id);
+            var product = productStorage.TryGetByID(id);
+            return View(product);
         }
 
         // GET: ProductController/Details/5

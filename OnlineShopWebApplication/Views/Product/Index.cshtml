@@ -1,0 +1,17 @@
+﻿@model ProductClass
+
+
+    <div class="col-5 align-items-center">
+        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/d/df/Lamborghini-Diablo.jpg">
+    </div>
+    <br>
+        <h3 style="color:aqua">@Model.ID</h3>
+        <a style="color:blue" href="/product/index/@Model.ID">
+            <h3>@Model.Name</h3>
+        </a>
+        <h5>@Model.Cost</h5>
+    <br>
+        <a href=# class="btn-dark">Добавить в корзину</a>
+    <br>
+        <a href="/home/index" class="btn-dark" role="button">Продолжить покупки</a>
+    <br>
