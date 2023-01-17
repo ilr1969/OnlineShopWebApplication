@@ -10,7 +10,7 @@ namespace OnlineShopWebApplication.Models
         public string Name;
         public decimal Cost;
 
-        public CartClass(string name, decimal cost, int count)
+        public CartClass(string name, decimal cost)
         {
             Name = name;
             Cost = cost;
