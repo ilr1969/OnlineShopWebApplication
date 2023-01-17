@@ -22,7 +22,7 @@ namespace OnlineShopWebApplication.Controllers
         public ActionResult Add(int ID)
         {
             productStorage = new ProductStorage();
-            cartStorage.AddToCart(new CartClass(productStorage.TryGetByID(ID).Name, productStorage.TryGetByID(ID).Cost, 1));
+            cartStorage.AddToCart(new CartClass(productStorage.TryGetByID(ID).Name, productStorage.TryGetByID(ID).Cost));
             return View("Index", cartList);
         }
 
