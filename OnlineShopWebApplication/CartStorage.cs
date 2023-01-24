@@ -6,24 +6,46 @@ using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication
 {
-    public class CartStorage
+    public static class CartStorage
     {
-        public Dictionary<CartClass, int> productsList = new Dictionary<CartClass, int>();
+        public static List<CartClass> carts = new List<CartClass>();
 
-        public Dictionary<CartClass, int> GetCart()
+        internal static CartClass TryGetByUserId(string userId)
         {
-            return productsList;
+            return carts.FirstOrDefault(x => x.UserID == userId);
         }
 
-        public void AddToCart(CartClass product)
+        internal static void Add(ProductClass product, string userId)
         {
-            if (productsList.Where(prod => prod.Key.Name == product.Name).Count() == 1)
+            var existingCart = TryGetByUserId(userId);
+            if (existingCart == null)
             {
-                productsList[productsList.First(prod => prod.Key.Name == product.Name).Key]++;
+                carts.Add(new CartClass
+                {
+                    Id = Guid.NewGuid(),
+                    UserID = userId,
+                    CartItems = new List<CartItem>
+                    {
+                        new CartItem
+                        {
+                            Id = Guid.NewGuid(),
+                            Product = product,
+                            Count = 1
+                        }
+                    }
+                });
             }
             else
             {
-                productsList[product] = 1;
+                var existingCartItem = existingCart.CartItems.FirstOrDefault(x => x.Product.Name == product.Name);
+                if (existingCartItem == null)
+                {
+                    existingCart.CartItems.Add(new CartItem { Id = Guid.NewGuid(), Product = product, Count = 1 });
+                }
+                else
+                {
+                    existingCartItem.Count++;
+                }
             }
         }
     }

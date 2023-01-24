@@ -1,17 +1,18 @@
 ﻿@model ProductClass
 
+<div class="row; card shadow">
+    <div class="card-header; text-center"><h2>@Model.Name</h2></div>
 
-    <div class="col-5 align-items-center">
-        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/d/df/Lamborghini-Diablo.jpg">
+    <div class="card-text; text-center">
+        <img class="card-img" src=@Model.ImagePath>
     </div>
-    <br>
-        <h3 style="color:aqua">@Model.ID</h3>
-        <a style="color:blue" href="/product/index/@Model.ID">
-            <h3>@Model.Name</h3>
-        </a>
-        <h5>@Model.Cost</h5>
-    <br>
-        <a href="/cart/add?ID=@Model.ID" class="btn-dark">Добавить в корзину</a>
-    <br>
-        <a href="/home/index" class="btn-dark" role="button">Продолжить покупки</a>
-    <br>
+
+    <div class="card-footer; text-center">
+        <h4>Стоимость автомобиля: @Model.Cost</h4>
+        <br>
+        <a href="/cart/add?productId=@Model.ID" class="btn btn-success">Добавить в корзину</a>
+        <a href="/home/index" class="btn btn-primary">Продолжить покупки</a>
+    </div>
+</div>
+
+

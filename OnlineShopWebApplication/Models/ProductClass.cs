@@ -7,14 +7,16 @@
         public string Name;
         public decimal Cost;
         public string Description;
+        public string ImagePath;
 
-        public ProductClass(string name, int cost, string descr)
+        public ProductClass(string name, int cost, string descr, string imagePath)
         {
             ID = ID_counter;
             Name = name;
             Cost = cost;
             Description = descr;
             ID_counter++;
+            ImagePath = imagePath;
         }
 
         public override string ToString()
