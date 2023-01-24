@@ -10,20 +10,18 @@ namespace OnlineShopWebApplication.Controllers
 {
     public class CartController : Controller
     {
-        public static CartStorage cartStorage = new CartStorage();
-        public Dictionary<CartClass, int> cartList = cartStorage.GetCart();
-        public ProductStorage productStorage;
         // GET: CartController
         public ActionResult Index()
         {
-            return View(cartList);
+            var cart = CartStorage.TryGetByUserId(Constants.UserId);
+            return View(cart);
         }
 
-        public ActionResult Add(int ID)
+        public ActionResult Add(int productId)
         {
-            productStorage = new ProductStorage();
-            cartStorage.AddToCart(new CartClass(productStorage.TryGetByID(ID).Name, productStorage.TryGetByID(ID).Cost));
-            return View("Index", cartList);
+            var product = ProductStorage.TryGetById(productId);
+            CartStorage.Add(product, Constants.UserId);
+            return RedirectToAction("Index");
         }
 
         // GET: CartController/Details/5

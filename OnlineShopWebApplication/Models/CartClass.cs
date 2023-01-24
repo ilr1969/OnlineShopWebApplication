@@ -7,13 +7,15 @@ namespace OnlineShopWebApplication.Models
 {
     public class CartClass
     {
-        public string Name;
-        public decimal Cost;
-
-        public CartClass(string name, decimal cost)
+        public Guid Id;
+        public string UserID;
+        public List<CartItem> CartItems;
+        public decimal FullCost
         {
-            Name = name;
-            Cost = cost;
+            get
+            {
+                return CartItems.Sum(x => x.Cost);
+            }
         }
     }
 }

@@ -10,13 +10,11 @@ namespace OnlineShopWebApplication.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ProductStorage productStorage;
-        private readonly CartStorage cartClass;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
             productStorage = new ProductStorage();
-            cartClass = new CartStorage();
         }
 
         public IActionResult Index(int id)
