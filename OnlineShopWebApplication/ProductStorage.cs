@@ -5,7 +5,7 @@ using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication
 {
-    public class ProductStorage
+    public class ProductStorage : IProductStorage
     {
         public static List<ProductClass> productsList = new List<ProductClass>()
         {
@@ -17,7 +17,7 @@ namespace OnlineShopWebApplication
             new ProductClass("Kopeyka", 700, "foo", "/images/image6.jpg"),
         };
 
-        public static ProductClass TryGetById(int productId)
+        public ProductClass TryGetById(int productId)
         {
             return productsList.FirstOrDefault(product => product.ID == productId);
         }
@@ -26,6 +26,5 @@ namespace OnlineShopWebApplication
         {
             return productsList;
         }
-
     }
 }

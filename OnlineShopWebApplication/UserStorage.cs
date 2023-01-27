@@ -6,7 +6,7 @@ using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication
 {
-    public class UserStorage
+    public class UserStorage : IUserStorage
     {
         public List<UserClass> usersList = new List<UserClass>();
 
