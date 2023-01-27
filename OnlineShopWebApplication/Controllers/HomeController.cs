@@ -8,17 +8,17 @@ namespace OnlineShopWebApplication.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IProductStorage iProductStorage;
+        private readonly IProductStorage productStorage;
 
         public HomeController(ILogger<HomeController> logger, IProductStorage productStorage)
         {
             _logger = logger;
-            iProductStorage = productStorage;
+            this.productStorage = productStorage;
         }
 
         public IActionResult Index(int id)
         {
-            var products = iProductStorage.GetAll();
+            var products = productStorage.GetAll();
             return View(products);
         }
 

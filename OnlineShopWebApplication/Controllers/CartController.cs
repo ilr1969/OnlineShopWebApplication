@@ -5,35 +5,39 @@ namespace OnlineShopWebApplication.Controllers
 {
     public class CartController : Controller
     {
-        private readonly IProductStorage iProductStorage;
-        public CartController(IProductStorage productStorage)
+        private readonly IProductStorage productStorage;
+        private readonly ICartStorage cartStorage;
+        public CartController(IProductStorage productStorage, ICartStorage cartStorage)
         {
-            iProductStorage = productStorage;
+            this.productStorage = productStorage;
+            this.cartStorage = cartStorage;
         }
         // GET: CartController
         public ActionResult Index()
         {
-            var cart = CartStorage.TryGetByUserId(Constants.UserId);
+            var cart = cartStorage.TryGetByUserId(Constants.UserId);
             return View(cart);
         }
 
         public ActionResult Add(int productId)
         {
-            var product = iProductStorage.TryGetById(productId);
-            CartStorage.Add(product, Constants.UserId);
+            var product = productStorage.TryGetById(productId);
+            cartStorage.Add(product, Constants.UserId);
             return RedirectToAction("Index");
         }
 
-        // GET: CartController/Details/5
-        public ActionResult Details(int id)
+        // GET: CartController/ChangeCount(int count, string product)
+        public ActionResult ChangeCount(int count, string product)
         {
-            return View();
+            cartStorage.ChangeCount(count, product);
+            return RedirectToAction("Index");
         }
 
-        // GET: CartController/Create
-        public ActionResult Create()
+        // GET: CartController/Clear
+        public ActionResult Clear()
         {
-            return View();
+            cartStorage.ClearBasket();
+            return RedirectToAction("Index");
         }
 
         // POST: CartController/Create

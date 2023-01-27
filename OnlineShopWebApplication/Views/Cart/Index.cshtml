@@ -18,7 +18,11 @@ else
             {
                 <tr>
                     <td>@product.Product.Name</td>
-                    <td>@product.Count</td>
+                    <td>
+                        <a class="btn btn-light" href="/cart/changeCount?count=-1&product=@product.Product.Name"><b>-</b></a>
+                        @product.Count
+                        <a class="btn btn-light" href="/cart/changeCount?count=1&product=@product.Product.Name"><b>+</b></a>
+                    </td>
                     <td>@product.Product.Cost</td>
                     <td>@product.Cost</td>
                 </tr>
@@ -31,6 +35,9 @@ else
     <div style="text-align:center">
         <a class="btn btn-primary" href="/home/index">Продолжить покупки</a>
         <a class="btn btn-success" href="#">Оформить заказ</a>
+    </div>
+    <div style="text-align:right">
+        <a class="btn btn-danger" href="/cart/clear">Очистить корзину</a>
     </div>
 
 
