@@ -5,21 +5,21 @@ using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication
 {
-    public static class CartStorage
+    public class CartInMemoryStorage : ICartStorage
     {
-        public static List<CartClass> carts = new List<CartClass>();
+        public static List<CartClass> cart = new List<CartClass>();
 
-        internal static CartClass TryGetByUserId(string userId)
+        public CartClass TryGetByUserId(string userId)
         {
-            return carts.FirstOrDefault(x => x.UserID == userId);
+            return cart.FirstOrDefault(x => x.UserID == userId);
         }
 
-        internal static void Add(ProductClass product, string userId)
+        public void Add(ProductClass product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart == null)
             {
-                carts.Add(new CartClass
+                cart.Add(new CartClass
                 {
                     Id = Guid.NewGuid(),
                     UserID = userId,
@@ -45,6 +45,26 @@ namespace OnlineShopWebApplication
                 {
                     existingCartItem.Count++;
                 }
+            }
+        }
+
+        public void ClearBasket()
+        {
+            cart.Clear();
+        }
+
+        public void ChangeCount(int count, string product)
+        {
+            var userCart = cart.First(x => x.UserID == Constants.UserId);
+            var prodToChange = userCart.CartItems.First(x => x.Product.Name == product);
+            prodToChange.Count += count;
+            if (prodToChange.Count == 0)
+            {
+                userCart.CartItems.Remove(prodToChange);
+            }
+            if (userCart.CartItems.Count == 0)
+            {
+                userCart = null;
             }
         }
     }
