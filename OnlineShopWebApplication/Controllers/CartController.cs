@@ -10,6 +10,11 @@ namespace OnlineShopWebApplication.Controllers
 {
     public class CartController : Controller
     {
+        private readonly IProductStorage iProductStorage;
+        public CartController(IProductStorage productStorage)
+        {
+            iProductStorage = productStorage;
+        }
         // GET: CartController
         public ActionResult Index()
         {
@@ -19,7 +24,7 @@ namespace OnlineShopWebApplication.Controllers
 
         public ActionResult Add(int productId)
         {
-            var product = ProductStorage.TryGetById(productId);
+            var product = iProductStorage.TryGetById(productId);
             CartStorage.Add(product, Constants.UserId);
             return RedirectToAction("Index");
         }

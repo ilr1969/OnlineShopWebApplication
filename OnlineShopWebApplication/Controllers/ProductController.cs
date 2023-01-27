@@ -7,10 +7,15 @@ namespace OnlineShopWebApplication.Controllers
 {
     public class ProductController : Controller
     {
+        private readonly IProductStorage iProductStorage;
+        public ProductController(IProductStorage productStorage)
+        {
+            iProductStorage = productStorage;
+        }
         // GET: ProductController
         public IActionResult Index(int ID)
         {
-            var product = ProductStorage.TryGetById(ID);
+            var product = iProductStorage.TryGetById(ID);
             return View(product);
         }
 

@@ -9,17 +9,17 @@ namespace OnlineShopWebApplication.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ProductStorage productStorage;
+        private readonly IProductStorage iProductStorage;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IProductStorage productStorage)
         {
             _logger = logger;
-            productStorage = new ProductStorage();
+            iProductStorage = productStorage;
         }
 
         public IActionResult Index(int id)
         {
-            var products = productStorage.GetAll();
+            var products = iProductStorage.GetAll();
             return View(products);
         }
 
@@ -27,7 +27,6 @@ namespace OnlineShopWebApplication.Controllers
         {
             return View("Cart");
         }
-
 
         public IActionResult Privacy()
         {
