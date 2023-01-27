@@ -19,8 +19,8 @@ namespace OnlineShopWebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton<IProductStorage, ProductStorage>();
-            services.AddSingleton<IUserStorage, UserStorage>();
+            services.AddSingleton<IProductStorage, ProductInMemoryStorage>();
+            services.AddSingleton<IUserStorage, UserInMemoryStorage>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

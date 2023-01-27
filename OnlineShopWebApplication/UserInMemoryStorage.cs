@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication
 {
-    public class UserStorage : IUserStorage
+    public class UserInMemoryStorage : IUserStorage
     {
         public List<UserClass> usersList = new List<UserClass>();
 
