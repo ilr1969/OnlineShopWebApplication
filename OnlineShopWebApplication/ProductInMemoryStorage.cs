@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication
 {
-    public class ProductStorage : IProductStorage
+    public class ProductInMemoryStorage : IProductStorage
     {
         public static List<ProductClass> productsList = new List<ProductClass>()
         {
