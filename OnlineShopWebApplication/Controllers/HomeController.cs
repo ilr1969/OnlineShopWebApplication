@@ -16,13 +16,13 @@ namespace OnlineShopWebApplication.Controllers
             this.productStorage = productStorage;
         }
 
-        public IActionResult Index(int id)
+        public IActionResult Index()
         {
             var products = productStorage.GetAll();
             return View(products);
         }
 
-        public IActionResult Cart(int id)
+        public IActionResult Cart()
         {
             return View("Cart");
         }

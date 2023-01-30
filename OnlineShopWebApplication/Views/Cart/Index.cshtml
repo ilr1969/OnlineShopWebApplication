@@ -19,9 +19,9 @@ else
                 <tr>
                     <td>@product.Product.Name</td>
                     <td>
-                        <a class="btn btn-light" href="/cart/changeCount?count=-1&product=@product.Product.Name"><b>-</b></a>
+                        <a class="btn btn-light" asp-controller="cart" asp-action="changeCount" asp-route-count="-1" asp-route-product="@product.Product.Name"><b>-</b></a>
                         @product.Count
-                        <a class="btn btn-light" href="/cart/changeCount?count=1&product=@product.Product.Name"><b>+</b></a>
+                        <a class="btn btn-light" asp-controller="cart" asp-action="changeCount" asp-route-count="1" asp-route-product="@product.Product.Name"><b>+</b></a>
                     </td>
                     <td>@product.Product.Cost</td>
                     <td>@product.Cost</td>

@@ -9,12 +9,12 @@
     {
         <div class="col-3 border-success shadow">
             <br>
-            <a href="/product/index/@product.ID"><img class="card-img-top" src=@product.ImagePath height="150"></a>
-            <a style="color:blue" href="/product/index/@product.ID">
+            <a asp-controller="product" asp-action="index" asp-route-productId="@product.ID"><img class="card-img-top" src=@product.ImagePath height="150"></a>
+            <a style="color:blue" asp-controller="product" asp-action="index" asp-route-productId="@product.ID">
                 <h3>@product.Name</h3>
             </a>
             <h5>@product.Cost</h5>
-            <a href="/cart/add?productId=@product.ID" class=" btn btn-success">Купить</a>
+            <a class=" btn btn-success" asp-controller="cart" asp-action="add" asp-route-productId="@product.ID">Купить</a>
             <p>
         </div>
      }

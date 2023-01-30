@@ -4,36 +4,37 @@ using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Controllers
 {
-    public class CompareController : Controller
+    public class FavoriteController : Controller
     {
-        public IProductStorage productStorage;
+        public static List<ProductClass> favorite = new List<ProductClass>();
+        readonly IProductStorage productStorage;
 
-        public CompareController(IProductStorage productStorage)
+        public FavoriteController(IProductStorage productStorage)
         {
             this.productStorage = productStorage;
         }
-
-        public static List<ProductClass> compareList = new List<ProductClass>();
-        // GET: CompareController
+        // GET: FavoriteController
         public ActionResult Index()
         {
-            return View(compareList);
+            return View(favorite);
         }
 
+        // GET: FavoriteController/Create
         public ActionResult Add(int productId)
         {
             var product = productStorage.TryGetById(productId);
-            if (!compareList.Contains(product))
+            if (!favorite.Contains(product))
             {
-                compareList.Add(product);
+                favorite.Add(product);
             }
             return RedirectToAction("index");
         }
 
-        public IActionResult Delete(int productId)
+        // GET: FavoriteController/Delete/5
+        public ActionResult Delete(int productId)
         {
             var product = productStorage.TryGetById(productId);
-            compareList.Remove(product);
+            favorite.Remove(product);
             return RedirectToAction("index");
         }
     }
