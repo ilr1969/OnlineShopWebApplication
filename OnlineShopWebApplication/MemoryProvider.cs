@@ -9,7 +9,7 @@ namespace OnlineShopWebApplication
         {
             this.cartStorage = cartStorage;
         }
-        string Path = "order.txt";
+        readonly string Path = "order.txt";
 
         public async void WriteOrderToFile()
         {

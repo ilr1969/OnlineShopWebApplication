@@ -3,6 +3,7 @@
 <div class="row; card shadow; position-relative">
     <h2>@Model.Name</h2>
     <a class="btn btn-info" style="position:absolute; right: 3px; top: 3px" asp-controller="compare" asp-action="add" asp-route-productId="@Model.ID">Добавить в сравнение</a>
+    <a class="btn btn-info" style="position:absolute; right: 200px; top: 3px" asp-controller="favorite" asp-action="add" asp-route-productId="@Model.ID">Добавить в избранное</a>
 
 
     <div class="card-text; text-center">
@@ -12,8 +13,8 @@
     <div class="card-footer; text-center">
         <h4>Стоимость автомобиля: @Model.Cost</h4>
         <br>
-        <a href="/cart/add?productId=@Model.ID" class="btn btn-success">Добавить в корзину</a>
-        <a href="/home/index" class="btn btn-primary">Продолжить покупки</a>
+        <a asp-controller="cart" asp-action="add" asp-route-productId="@Model.ID" class="btn btn-success">Добавить в корзину</a>
+        <a class="btn btn-primary" asp-controller="home" asp-action="index">Продолжить покупки</a>
     </div>
 </div>
 

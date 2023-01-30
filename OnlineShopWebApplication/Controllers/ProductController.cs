@@ -11,22 +11,10 @@ namespace OnlineShopWebApplication.Controllers
             this.productStorage = productStorage;
         }
         // GET: ProductController
-        public IActionResult Index(int ID)
+        public IActionResult Index(int productId)
         {
-            var product = productStorage.TryGetById(ID);
+            var product = productStorage.TryGetById(productId);
             return View(product);
-        }
-
-        // GET: ProductController/Details/5
-        public ActionResult Details()
-        {
-            return View();
-        }
-
-        // GET: ProductController/Create
-        public ActionResult Create()
-        {
-            return View();
         }
     }
 }
