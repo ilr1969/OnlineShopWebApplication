@@ -1,0 +1,24 @@
+﻿@model CartClass
+
+Укажите данные для доставки @Constants.UserId
+
+<table>
+    <tr>
+        <td>Имя:</td>
+        <td><input name="name" /></td>
+    </tr>
+    <tr>
+        <td>Телефон:</td>
+        <td><input name="phone"/></td>
+    </tr>
+    <tr>
+        <td>Адрес доставки:</td>
+        <td><input name="address"/></td>
+    </tr>
+</table>
+
+<br />
+<input type="checkbox"  name="agree"/> Подтверждаю корректность данных.
+<br />
+
+<a class="btn btn-success" asp-controller="order" asp-action="success">Оформить</a>
