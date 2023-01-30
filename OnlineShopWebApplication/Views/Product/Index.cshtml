@@ -1,7 +1,9 @@
 ﻿@model ProductClass
 
-<div class="row; card shadow">
-    <div class="card-header; text-center"><h2>@Model.Name</h2></div>
+<div class="row; card shadow; position-relative">
+    <h2>@Model.Name</h2>
+    <a class="btn btn-info" style="position:absolute; right: 3px; top: 3px" asp-controller="compare" asp-action="add" asp-route-productId="@Model.ID">Добавить в сравнение</a>
+
 
     <div class="card-text; text-center">
         <img class="card-img" src=@Model.ImagePath>
