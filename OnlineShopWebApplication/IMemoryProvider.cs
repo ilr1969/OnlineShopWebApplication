@@ -4,6 +4,6 @@
     {
         static string Path;
 
-        public void WriteOrderToFile();
+        void WriteOrderToFile();
     }
 }
