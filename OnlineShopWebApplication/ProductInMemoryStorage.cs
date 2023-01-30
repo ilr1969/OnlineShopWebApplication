@@ -6,7 +6,7 @@ namespace OnlineShopWebApplication
 {
     public class ProductInMemoryStorage : IProductStorage
     {
-        public static List<ProductClass> productsList = new List<ProductClass>()
+        public List<ProductClass> productsList = new List<ProductClass>()
         {
             new ProductClass("Ferrari", 15000000, "good", "/images/image1.jpg"),
             new ProductClass("Lambo", 25000000, "best", "/images/image2.jpg"),

@@ -25,11 +25,5 @@ namespace OnlineShopWebApplication.Controllers
             cartStorage.ClearBasket();
             return View();
         }
-
-/*        // GET: OrderController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }*/
     }
 }

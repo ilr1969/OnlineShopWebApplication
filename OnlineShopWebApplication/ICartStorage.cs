@@ -5,9 +5,9 @@ namespace OnlineShopWebApplication
 {
     public interface ICartStorage
     {
-        public static List<CartClass> carts = new List<CartClass>();
+        static List<CartClass> carts = new List<CartClass>();
 
-        public CartClass TryGetByUserId(string userId);
+        CartClass TryGetByUserId(string userId);
 
         void Add(ProductClass product, string userId);
 

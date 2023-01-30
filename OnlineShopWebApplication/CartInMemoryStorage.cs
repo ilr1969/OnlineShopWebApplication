@@ -7,7 +7,7 @@ namespace OnlineShopWebApplication
 {
     public class CartInMemoryStorage : ICartStorage
     {
-        public static List<CartClass> cart = new List<CartClass>();
+        public List<CartClass> cart = new List<CartClass>();
 
         public CartClass TryGetByUserId(string userId)
         {
