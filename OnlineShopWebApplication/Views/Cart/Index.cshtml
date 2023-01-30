@@ -33,11 +33,11 @@ else
     <br>
     <h3 style="text-align:right">Общая стоимость: @Model.FullCost</h3>
     <div style="text-align:center">
-        <a class="btn btn-primary" href="/home/index">Продолжить покупки</a>
-        <a class="btn btn-success" href="#">Оформить заказ</a>
+        <a class="btn btn-primary" asp-controller="home" asp-action="index">Продолжить покупки</a>
+        <a class="btn btn-success" asp-controller="order" asp-action="index">Оформить заказ</a>
     </div>
     <div style="text-align:right">
-        <a class="btn btn-danger" href="/cart/clear">Очистить корзину</a>
+        <a class="btn btn-danger" asp-controller="cart" asp-action="clear">Очистить корзину</a>
     </div>
 
 

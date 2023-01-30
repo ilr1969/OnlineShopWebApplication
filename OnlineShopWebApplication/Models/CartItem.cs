@@ -14,5 +14,9 @@ namespace OnlineShopWebApplication.Models
                 return Product.Cost * Count;
             }
         }
+        public override string ToString()
+        {
+            return $"{Product.Name}; {Count}; {Cost}; {Product.Description} \n";
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace OnlineShopWebApplication
     {
         public static List<CartClass> carts = new List<CartClass>();
 
-        CartClass TryGetByUserId(string userId);
+        public CartClass TryGetByUserId(string userId);
 
         void Add(ProductClass product, string userId);
 
