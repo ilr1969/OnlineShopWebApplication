@@ -1,22 +1,32 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
+using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication
 {
     public class MemoryProvider : IMemoryProvider
     {
         public ICartStorage cartStorage;
-        public MemoryProvider(ICartStorage cartStorage)
+        public IOrderStorage orderStorage;
+        public MemoryProvider(ICartStorage cartStorage, IOrderStorage orderStorage)
         {
             this.cartStorage = cartStorage;
+            this.orderStorage = orderStorage;
         }
-        readonly string Path = "order.txt";
+        
 
         public async void WriteOrderToFile()
         {
-            var userOrder = cartStorage.TryGetByUserId(Constants.UserId).CartItems;
-            var userOrderString = $"{string.Join("",userOrder)}";
-            using StreamWriter writer = new StreamWriter(Path, false);
-            await writer.WriteLineAsync($"{Constants.UserId}:\n{userOrderString}");
+            string orderPath = "order.txt";
+            var orderData = orderStorage.GetOrderList();
+            using StreamWriter writer = new StreamWriter(orderPath, false);
+            await writer.WriteLineAsync(SerializeList(orderData));
+        }
+
+        private string SerializeList(object list)
+        {
+            return JsonConvert.SerializeObject(list);
         }
     }
 }

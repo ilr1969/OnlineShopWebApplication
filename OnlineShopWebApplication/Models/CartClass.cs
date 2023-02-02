@@ -16,5 +16,12 @@ namespace OnlineShopWebApplication.Models
                 return CartItems.Sum(x => x.Cost);
             }
         }
+        public decimal Amount
+        {
+            get
+            {
+                return CartItems.Sum(x => x.Count);
+            }
+        }
     }
 }
