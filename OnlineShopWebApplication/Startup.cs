@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnlineShopWebApplication.Controllers;
 
 namespace OnlineShopWebApplication
 {
@@ -23,6 +24,7 @@ namespace OnlineShopWebApplication
             services.AddSingleton<IUserStorage, UserInMemoryStorage>();
             services.AddSingleton<ICartStorage, CartInMemoryStorage>();
             services.AddSingleton<IMemoryProvider, MemoryProvider>();
+            services.AddSingleton<IOrderStorage, OrderInMemoryStorage>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

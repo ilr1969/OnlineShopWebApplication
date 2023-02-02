@@ -1,3 +1,1 @@
-Гость:
-Lambo; 1; 25000000; best 
-
+[{"UserID":"Гость","CartItems":[{"Id":"fbba4415-9d33-4e81-ad6b-c74737f2cdbf","Product":{"ID":3,"Name":"Camaro","Cost":5000000.0,"Description":"good","ImagePath":"/images/image3.jpg"},"Count":2,"Cost":10000000.0}],"FullCost":10000000.0,"Name":"Дмитрий","Address":"павыавы","Phone":"+78127401000"},{"UserID":"Гость","CartItems":[{"Id":"bf1e7756-c7a3-4368-a149-cfc9559f8d71","Product":{"ID":2,"Name":"Lambo","Cost":25000000.0,"Description":"best","ImagePath":"/images/image2.jpg"},"Count":3,"Cost":75000000.0},{"Id":"bf1194db-f9ee-48d4-8212-faafffa34375","Product":{"ID":1,"Name":"Ferrari","Cost":15000000.0,"Description":"good","ImagePath":"/images/image1.jpg"},"Count":1,"Cost":15000000.0}],"FullCost":90000000.0,"Name":"Дмитрий Савченко","Address":"иавы","Phone":"авы"}]
