@@ -6,11 +6,22 @@ namespace OnlineShopWebApplication
 {
     public class UserInMemoryStorage : IUserStorage
     {
-        public List<UserClass> usersList = new List<UserClass>();
-
-        public UserClass GetUser(string name)
+        public List<UserClass> usersList = new List<UserClass>()
         {
-            return usersList.First(user => user.Name == name);
+            new UserClass("Дмитрий", "123"),
+            new UserClass("Дмитрий Савченко", "1")
+        };
+
+        public UserClass TryGetUser(string name)
+        {
+            if (name != null)
+            {
+                return usersList.FirstOrDefault(user => user.Name == name);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void AddUser(UserClass user)

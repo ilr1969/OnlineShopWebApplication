@@ -6,10 +6,12 @@ namespace OnlineShopWebApplication.Models
     {
         public Guid ID;
         public string Name;
+        public string Password;
 
-        public UserClass(string name)
+        public UserClass(string name, string password)
         {
             Name = name;
+            Password = password;
         }
     }
 }
