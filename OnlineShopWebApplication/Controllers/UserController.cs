@@ -19,7 +19,7 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         // GET: UserControllerRegsterForm
-        public ActionResult RegsterForm()
+        public ActionResult RegisterForm()
         {
             return View();
         }
@@ -33,7 +33,7 @@ namespace OnlineShopWebApplication.Controllers
                 Constants.UserId = name;
                 return Redirect("/home/index");
             }
-            return View("Loginform");
+            return View("LoginForm");
         }
 
         // GET: UserController/Create
@@ -45,7 +45,12 @@ namespace OnlineShopWebApplication.Controllers
                 userStorage.AddUser(new UserClass(name, password1));
                 return Redirect("/home/index");
             }
-            return View("RegsterForm");
+            return View("RegisterForm");
+        }
+
+        public ActionResult RegisterError()
+        {
+            return View();
         }
     }
 }
