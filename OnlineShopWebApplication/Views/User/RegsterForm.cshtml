@@ -1,0 +1,22 @@
+﻿@model IUserStorage
+
+    <h2>Регистрация</h2>
+    <form method="post">
+        <div>
+            <table>
+                <tr>
+                    <td>Имя: </td>
+                    <td><input type="text" name="name" /></td>
+                </tr>
+                <tr>
+                    <td>Пароль: </td>
+                    <td><input type="text" name="password1" /></td>
+                </tr>
+                <tr>
+                    <td>Повторите пароль: </td>
+                    <td><input type="text" name="password2" /></td>
+                </tr>
+            </table>
+            <button class="btn btn-success" type="submit" asp-controller="user" asp-action="register">Зарегистрироваться</button>
+        </div>
+    </form>

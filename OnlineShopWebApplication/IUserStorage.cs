@@ -7,7 +7,7 @@ namespace OnlineShopWebApplication
     {
         static List<UserClass> usersList;
 
-        UserClass GetUser(string name);
+        UserClass TryGetUser(string name);
 
         void AddUser(UserClass user);
     }
