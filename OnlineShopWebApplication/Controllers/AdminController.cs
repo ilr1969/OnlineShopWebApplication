@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace OnlineShopWebApplication.Controllers
 {
     public class AdminController : Controller
     {
+        IProductStorage productStorage;
+
+        public AdminController(IProductStorage productStorage)
+        {
+            this.productStorage = productStorage;
+        }
+
         // GET: AdminController
         public ActionResult Orders()
         {
@@ -18,7 +20,7 @@ namespace OnlineShopWebApplication.Controllers
         // GET: AdminController/Products/
         public ActionResult Products()
         {
-            return View();
+            return View(productStorage.GetAll());
         }
 
         // GET: AdminController/Users
@@ -31,6 +33,17 @@ namespace OnlineShopWebApplication.Controllers
         public ActionResult Roles()
         {
             return View();
+        }
+        // GET: AdminController/AddProduct
+        public ActionResult AddProduct()
+        {
+            return View();
+        }
+        // GET: AdminController/EditProduct
+        public ActionResult EditProduct(int productId)
+        {
+            var product = productStorage.TryGetById(productId);
+            return View(product);
         }
     }
 }

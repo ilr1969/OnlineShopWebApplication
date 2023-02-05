@@ -1,0 +1,26 @@
+﻿@model ProductClass
+
+<h2>Добавление нового продукта</h2>
+<form method="post">
+    <div>
+        <table>
+            <tr>
+                <td>Название: </td>
+                <td><input type="text" name="name" /></td>
+            </tr>
+            <tr>
+                <td>Описание: </td>
+                <td><input type="text" name="description" /></td>
+            </tr>
+            <tr>
+                <td>Стоимость: </td>
+                <td><input type="text" name="cost" /></td>
+            </tr>
+            <tr>
+                <td>ImagePath: </td>
+                <td><input type="text" name="ImagePath" /></td>
+            </tr>
+        </table>
+        <button class="btn btn-success" type="submit" asp-controller="product" asp-action="add">Добавить</button>
+    </div>
+</form>
