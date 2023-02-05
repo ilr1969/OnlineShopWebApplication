@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using Newtonsoft.Json;
-using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication
 {
@@ -14,7 +12,7 @@ namespace OnlineShopWebApplication
             this.cartStorage = cartStorage;
             this.orderStorage = orderStorage;
         }
-        
+
 
         public async void WriteOrderToFile()
         {
