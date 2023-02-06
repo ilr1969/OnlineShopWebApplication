@@ -1,0 +1,26 @@
+﻿@model List<ProductClass>
+
+<table class="table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Наименование</th>
+        <th>Описание</th>
+        <th>Цена</th>
+        <th>Фото</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var item in @Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td><a asp-controller="product" asp-action="index" asp-route-productId="@item.ID">@item.Name</a></td>
+            <td>@item.Description</td>
+            <td>@item.Cost</td>
+            <td><img src=@item.ImagePath alt="Вот так выглядит автомобиль" width=300 /></td>
+            <td><a asp-controller="admin" asp-action="editproduct" asp-route-productId="@item.ID">Редактировать</a></td>
+            <td><a asp-controller="product" asp-action="remove" asp-route-productId="@item.ID">Удалить</a></td>
+        </tr>
+    }
+</table>
+
