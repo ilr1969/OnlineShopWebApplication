@@ -1,31 +1,32 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApplication.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace OnlineShopWebApplication.Controllers
 {
     public class FavoriteController : Controller
     {
-        public static List<ProductClass> favorite = new List<ProductClass>();
         readonly IProductStorage productStorage;
+        readonly IFavoriteStorage favoriteStorage;
 
-        public FavoriteController(IProductStorage productStorage)
+        public FavoriteController(IProductStorage productStorage, IFavoriteStorage favoriteStorage)
         {
             this.productStorage = productStorage;
+            this.favoriteStorage = favoriteStorage;
         }
         // GET: FavoriteController
         public ActionResult Index()
         {
-            return View(favorite);
+            var favoriteList = favoriteStorage.GetAll();
+            return View(favoriteList);
         }
 
         // GET: FavoriteController/Create
         public ActionResult Add(int productId)
         {
+            var favoriteList = favoriteStorage.GetAll();
             var product = productStorage.TryGetById(productId);
-            if (!favorite.Contains(product))
+            if (!favoriteList.Contains(product))
             {
-                favorite.Add(product);
+                favoriteList.Add(product);
             }
             return RedirectToAction("index");
         }
@@ -33,8 +34,9 @@ namespace OnlineShopWebApplication.Controllers
         // GET: FavoriteController/Delete/5
         public ActionResult Delete(int productId)
         {
+            var favoriteList = favoriteStorage.GetAll();
             var product = productStorage.TryGetById(productId);
-            favorite.Remove(product);
+            favoriteList.Remove(product);
             return RedirectToAction("index");
         }
     }

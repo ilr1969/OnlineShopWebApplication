@@ -1,41 +1,33 @@
 ﻿@model List<ProductClass>
 
-<table>
-    <tr>
-        <td class="col-3">
-            <ul style="list-style:square">
-                <li><a asp-controller="admin" asp-action="orders">Заказы</a></li>
-                <li><a asp-controller="admin" asp-action="products">Продукты</a></li>
-                <li><a asp-controller="admin" asp-action="users">Пользователи</a></li>
-                <li><a asp-controller="admin" asp-action="roles">Роли</a></li>
-            </ul>
-        </td>
-        <td class="col-9">
-            <h3>Список продуктов</h3>
-            <a asp-controller="admin" asp-action="addProduct">Добавить новый продукт</a>
-            <table class="table-bordered">
+<div class="row">
+    @await Html.PartialAsync("AdminLeftMenu")
+
+    <div class="col-9">
+        <h3>Список продуктов</h3>
+        <a asp-controller="admin" asp-action="addProduct">Добавить новый продукт</a>
+        <table class="table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Наименование</th>
+                <th>Описание</th>
+                <th>Цена</th>
+                <th>Фото</th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var item in @Model)
+            {
                 <tr>
-                    <th>ID</th>
-                    <th>Наименование</th>
-                    <th>Описание</th>
-                    <th>Цена</th>
-                    <th>Фото</th>
-                    <th></th>
-                    <th></th>
+                    <td>@item.ID</td>
+                    <td><a asp-controller="product" asp-action="index" asp-route-productId="@item.ID">@item.Name</a></td>
+                    <td>@item.Description</td>
+                    <td>@item.Cost</td>
+                    <td><img src=@item.ImagePath alt="Вот так выглядит автомобиль" width=300 /></td>
+                    <td><a asp-controller="admin" asp-action="editproduct" asp-route-productId="@item.ID">Редактировать</a></td>
+                    <td><a asp-controller="product" asp-action="remove" asp-route-productId="@item.ID">Удалить</a></td>
                 </tr>
-                @foreach (var item in @Model)
-                {
-                    <tr>
-                        <td>@item.ID</td>
-                        <td><a asp-controller="product" asp-action="index" asp-route-productId="@item.ID">@item.Name</a></td>
-                        <td>@item.Description</td>
-                        <td>@item.Cost</td>
-                        <td><img src=@item.ImagePath alt="Вот так выглядит автомобиль" width=300 /></td>
-                        <td><a asp-controller="admin" asp-action="editproduct" asp-route-productId="@item.ID">Редактировать</a></td>
-                        <td><a asp-controller="product" asp-action="remove" asp-route-productId="@item.ID">Удалить</a></td>
-                    </tr>
-                }
-            </table>
-        </td>
-    </tr>
-</table>
+            }
+        </table>
+    </div>
+</div>

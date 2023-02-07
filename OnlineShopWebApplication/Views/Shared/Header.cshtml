@@ -2,7 +2,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OnlineShopWebApplication</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ILR1969</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -13,13 +13,13 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">На главную</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">Корзина<sup style="color:red">@await Component.InvokeAsync("Cart")</sup></a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">&#128722;<sup style="color:red">@await Component.InvokeAsync("Cart")</sup></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="compare" asp-action="Index">Список сравнения</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="compare" asp-action="Index">&#128221;</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="favorite" asp-action="Index">Избранное</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="favorite" asp-action="Index">&#11088;<sup style="color:red">@await Component.InvokeAsync("Favorite")</sup></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="user" asp-action="LoginForm">Вход</a>
@@ -31,7 +31,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="admin" asp-action="orders">Админ</a>
                         </li>
                         <li>
-                            <input type="search" name="searchText" onkeydown="search()" placeholder="Поиск">
+                            <input type="search" id="searchInput" name="searchText" onkeydown="search()" placeholder="Поиск">
                         </li>
                         <li>
                             <button class="btn" type="submit" id="searchButton" asp-controller="search" asp-action="index">&#128269;</button>
@@ -46,7 +46,6 @@
 <script>
     function search() {
         if (event.code == 'Enter') {
-            var text = document.getElementById('searchtext');
             document.getElementById('searchButton').click()
         }
     }

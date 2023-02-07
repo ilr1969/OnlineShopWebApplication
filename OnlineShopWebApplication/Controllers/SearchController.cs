@@ -17,8 +17,15 @@ namespace OnlineShopWebApplication.Controllers
         public ActionResult Index(string searchText)
         {
             var products = productStorage.GetAll();
-            var SearchedProducts = products.Where(x => x.Name.ToLower().Contains(searchText.ToLower())).ToList();
-            return View(SearchedProducts);
+            if (searchText != null)
+            {
+                var SearchedProducts = products.Where(x => x.Name.ToLower().Contains(searchText.ToLower())).ToList();
+                return View(SearchedProducts);
+            }
+            else
+            {
+                return Redirect("/home/index");
+            }
         }
     }
 }
