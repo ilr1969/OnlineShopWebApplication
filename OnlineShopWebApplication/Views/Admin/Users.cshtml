@@ -1,17 +1,9 @@
 ﻿@model List<UserClass>
 
-<table>
-    <tr>
-        <td class="col-3">
-            <ul>
-                <li><a asp-controller="admin" asp-action="orders">Заказы</a></li>
-                <li><a asp-controller="admin" asp-action="products">Продукты</a></li>
-                <li><a asp-controller="admin" asp-action="users">Пользователи</a></li>
-                <li><a asp-controller="admin" asp-action="roles">Роли</a></li>
-            </ul>
-        </td>
-        <td class="col-9">
+    <div class="row">
+        @await Html.PartialAsync("AdminLeftMenu")
+
+        <div class="col-9">
             <p style="text-align:center">Пользователи</p>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>

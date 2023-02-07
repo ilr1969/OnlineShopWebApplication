@@ -24,6 +24,7 @@ namespace OnlineShopWebApplication
             services.AddSingleton<ICartStorage, CartInMemoryStorage>();
             services.AddSingleton<IMemoryProvider, MemoryProvider>();
             services.AddSingleton<IOrderStorage, OrderInMemoryStorage>();
+            services.AddSingleton<IFavoriteStorage, FavoriteInMemoryStorage>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
