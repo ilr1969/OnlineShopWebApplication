@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication
@@ -6,7 +7,7 @@ namespace OnlineShopWebApplication
     public interface IProductStorage
     {
         static List<ProductClass> productsList;
-        ProductClass TryGetById(int productId);
+        ProductClass TryGetById(Guid productId);
         List<ProductClass> GetAll();
     }
 }

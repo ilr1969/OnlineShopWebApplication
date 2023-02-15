@@ -1,22 +1,27 @@
-﻿namespace OnlineShopWebApplication.Models
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace OnlineShopWebApplication.Models
 {
     public class ProductClass
     {
-        private static int ID_counter = 1;
-        public int ID;
-        public string Name;
-        public decimal Cost;
-        public string Description;
-        public string ImagePath;
+        public Guid ID { get; set; }
 
-        public ProductClass(string name, int cost, string descr, string imagePath)
+        [Required(ErrorMessage = "Поле обязательно для заполнения")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "Поле обязательно для заполнения")]
+        [Range(0, 100000000, ErrorMessage = "Укажите корректную сумму")]
+        public decimal Cost { get; set; }
+
+        [Required(ErrorMessage = "Поле обязательно для заполнения")]
+        public string Description { get; set; }
+
+        public string ImagePath { get; set; }
+
+        public ProductClass()
         {
-            ID = ID_counter;
-            Name = name;
-            Cost = cost;
-            Description = descr;
-            ID_counter++;
-            ImagePath = imagePath;
+            ID = Guid.NewGuid();
         }
 
         public override string ToString()

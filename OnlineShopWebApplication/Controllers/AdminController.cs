@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace OnlineShopWebApplication.Controllers
 {
@@ -40,7 +41,7 @@ namespace OnlineShopWebApplication.Controllers
             return View();
         }
         // GET: AdminController/EditProduct
-        public ActionResult EditProduct(int productId)
+        public ActionResult EditProduct(Guid productId)
         {
             var product = productStorage.TryGetById(productId);
             return View(product);

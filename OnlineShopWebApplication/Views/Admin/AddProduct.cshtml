@@ -1,26 +1,28 @@
 ﻿@model ProductClass
 
 <h2>Добавление нового продукта</h2>
-<form method="post">
+<form method="post" asp-controller="product" asp-action="add">
     <div>
-        <table>
-            <tr>
-                <td>Название: </td>
-                <td><input type="text" name="name" /></td>
-            </tr>
-            <tr>
-                <td>Описание: </td>
-                <td><input type="text" name="description" /></td>
-            </tr>
-            <tr>
-                <td>Стоимость: </td>
-                <td><input type="text" name="cost" /></td>
-            </tr>
-            <tr>
-                <td>ImagePath: </td>
-                <td><input type="text" name="ImagePath" /></td>
-            </tr>
-        </table>
-        <button class="btn btn-success" type="submit" asp-controller="product" asp-action="add">Добавить</button>
+            <div>
+                <label asp-for="Name">Название: </label><br />
+                <input asp-for="Name" type="text" name="Name" />
+                <span asp-validation-for="Name"></span>
+            </div>
+            <div>
+                <label asp-for="Description">Описание: </label><br />
+                <input asp-for="Description" type="text" name="Description" />
+                <span asp-validation-for="Description"></span>
+            </div>
+            <div>
+                <label asp-for="Cost">Стоимость: </label><br />
+                <<input asp-for="Cost" type="number" name="Cost" />
+                <span asp-validation-for="Cost"></span>
+            </div>
+            <div>
+                <label asp-for="ImagePath">ImagePath: </label><br />
+                <input asp-for="ImagePath" type="text" name="ImagePath" />
+                <span asp-validation-for="ImagePath"></span>
+            </div>
+        <button class="btn btn-success" type="submit">Добавить</button>
     </div>
 </form>
