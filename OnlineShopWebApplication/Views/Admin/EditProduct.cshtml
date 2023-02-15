@@ -1,29 +1,31 @@
 ﻿@model ProductClass
 
 <h2>Редактирование продукта</h2>
-<form method="post">
+<form method="post" asp-controller="product" asp-action="edit">
     <div>
-        <table>
-            <tr>
-                <td><input type="text" value="@Model.ID" name="productId" hidden/></td>
-            </tr>
-            <tr>
-                <td>Название: </td>
-                <td><input type="text" value="@Model.Name" name="name" /></td>
-            </tr>
-            <tr>
-                <td>Описание: </td>
-                <td><input type="text" value="@Model.Description" name="description" /></td>
-            </tr>
-            <tr>
-                <td>Стоимость: </td>
-                <td><input type="text" value="@Model.Cost" name="cost" /></td>
-            </tr>
-            <tr>
-                <td>ImagePath: </td>
-                <td><input type="text" value="@Model.ImagePath" name="ImagePath" /></td>
-            </tr>
-        </table>
-        <button class="btn btn-success" type="submit" asp-controller="product" asp-action="edit">Сохранить изменения</button>
+        <div>
+            <input type="text" value="@Model.ID" name="ID" disabled /></>
+        </div>
+        <div>
+            <label asp-for="Name">Название: </label>
+            <input asp-for="Name" type="text" value="@Model.Name" name="Name" /></>
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div>
+            <label asp-for="Description">Описание: </label>
+            <input asp-for="Description" type="text" value="@Model.Description" name="Description" /></>
+            <span asp-validation-for="Description"></span>
+        </div>
+        <div>
+            <label asp-for="Cost">Стоимость: </label>
+            <input asp-for="Cost" type="number" value="@Model.Cost" name="Cost" /></>
+            <span asp-validation-for="Cost"></span>
+        </div>
+        <div>
+            <label asp-for="ImagePath">ImagePath: </label>
+            <input asp-for="ImagePath" type="text" value="@Model.ImagePath" name="ImagePath" /></>
+            <span asp-validation-for="ImagePath"></span>
+        </div>
+        <button class="btn btn-success" type="submit">Сохранить изменения</button>
     </div>
 </form>

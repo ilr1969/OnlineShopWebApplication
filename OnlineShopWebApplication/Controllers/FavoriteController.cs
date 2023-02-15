@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace OnlineShopWebApplication.Controllers
 {
@@ -20,7 +21,7 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         // GET: FavoriteController/Create
-        public ActionResult Add(int productId)
+        public ActionResult Add(Guid productId)
         {
             var favoriteList = favoriteStorage.GetAll();
             var product = productStorage.TryGetById(productId);
@@ -32,7 +33,7 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         // GET: FavoriteController/Delete/5
-        public ActionResult Delete(int productId)
+        public ActionResult Delete(Guid productId)
         {
             var favoriteList = favoriteStorage.GetAll();
             var product = productStorage.TryGetById(productId);

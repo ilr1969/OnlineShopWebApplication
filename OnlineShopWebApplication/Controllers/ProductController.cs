@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Controllers
@@ -11,22 +12,26 @@ namespace OnlineShopWebApplication.Controllers
             this.productStorage = productStorage;
         }
         // GET: ProductController
-        public IActionResult Index(int productId)
+        public IActionResult Index(Guid productId)
         {
             var product = productStorage.TryGetById(productId);
             return View(product);
         }
         [HttpPost]
-        public IActionResult Edit(int productId, string name, int cost, string description, string imagepath)
+        public IActionResult Edit(ProductClass product)
         {
-            var productToEdit = productStorage.TryGetById(productId);
-            productToEdit.Name = name;
-            productToEdit.Description = description;
-            productToEdit.Cost = cost;
-            productToEdit.ImagePath = imagepath;
-            return Redirect("/admin/products");
+            var productToEdit = productStorage.TryGetById(product.ID);
+            if (ModelState.IsValid)
+            {
+                productToEdit.Name = product.Name;
+                productToEdit.Description = product.Description;
+                productToEdit.Cost = product.Cost;
+                productToEdit.ImagePath = product.ImagePath;
+                return Redirect("/admin/products");
+            }
+            return RedirectToAction("edit", productToEdit);
         }
-        public IActionResult Remove(int productId)
+        public IActionResult Remove(Guid productId)
         {
             var productList = productStorage.GetAll();
             var productToRemove = productStorage.TryGetById(productId);
@@ -34,11 +39,15 @@ namespace OnlineShopWebApplication.Controllers
             return Redirect("/admin/products");
         }
         [HttpPost]
-        public IActionResult Add(string name, int cost, string description, string imagepath)
+        public IActionResult Add(ProductClass product)
         {
-            var productList = productStorage.GetAll();
-            productList.Add(new ProductClass(name, cost, description, imagepath));
-            return Redirect("/admin/products");
+            if (ModelState.IsValid)
+            {
+                var productList = productStorage.GetAll();
+                productList.Add(product);
+                return Redirect("/admin/products");
+            }
+            return View();
         }
     }
 }

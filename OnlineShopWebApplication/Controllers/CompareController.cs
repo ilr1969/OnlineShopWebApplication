@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication.Models;
 
@@ -20,7 +21,7 @@ namespace OnlineShopWebApplication.Controllers
             return View(compareList);
         }
 
-        public ActionResult Add(int productId)
+        public ActionResult Add(Guid productId)
         {
             var product = productStorage.TryGetById(productId);
             if (!compareList.Contains(product))
@@ -30,7 +31,7 @@ namespace OnlineShopWebApplication.Controllers
             return RedirectToAction("index");
         }
 
-        public IActionResult Delete(int productId)
+        public IActionResult Delete(Guid productId)
         {
             var product = productStorage.TryGetById(productId);
             compareList.Remove(product);
