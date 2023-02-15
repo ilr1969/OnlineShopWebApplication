@@ -9,7 +9,7 @@ namespace OnlineShopWebApplication.Models
 
         [Required(ErrorMessage = "Имя обязательно")]
         [StringLength(20, MinimumLength = 3,ErrorMessage = "Имя не может быть короче 3 символов")]
-        public string Name { get; set; }
+        public string Name { get ; set; }
 
         [Required(ErrorMessage = "Почта обязательна")]
         [EmailAddress(ErrorMessage = "Указан некорректный адрес почты")]

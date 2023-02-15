@@ -14,6 +14,11 @@
             <span asp-validation-for="Email"></span>
         </div>
         <div>
+            <label asp-for="Age">Возраст: </label><br />
+            <input type="number" name="Age" asp-for="Age" />
+            <span asp-validation-for="Age"></span>
+        </div>
+        <div>
             <label asp-for="Password">Пароль: </label><br />
             <input type="password" name="Password" asp-for="Password" />
             <span asp-validation-for="Password"></span>
