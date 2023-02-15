@@ -24,11 +24,11 @@ namespace OnlineShopWebApplication.Controllers
             return View();
         }
 
-        // GET: UserController/Details/5
+        // GET: UserController/Login
         public ActionResult Login(string name, string password)
         {
-            var user = userStorage.TryGetUser(name);
-            if (user != null && user.Password == password)
+            var userFromDatadase = userStorage.TryGetUser(name);
+            if (userFromDatadase != null && password == userFromDatadase.Password)
             {
                 Constants.UserId = name;
                 return Redirect("/home/index");
@@ -37,12 +37,11 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         // GET: UserController/Create
-        public ActionResult Register(string name, string password1, string password2)
+        public ActionResult Register(UserClass user)
         {
-            var user = userStorage.TryGetUser(name);
-            if (user == null)
+            if (ModelState.IsValid)
             {
-                userStorage.AddUser(new UserClass(name, password1));
+                userStorage.AddUser(user);
                 return Redirect("/home/index");
             }
             return View("RegisterForm");

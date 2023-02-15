@@ -1,22 +1,28 @@
-﻿@model IUserStorage
+﻿@model UserClass
 
-    <h2>Регистрация</h2>
-    <form method="post">
+<h2>Регистрация</h2>
+<form method="post" asp-controller="user" asp-action="register">
+    <div>
         <div>
-            <table>
-                <tr>
-                    <td>Имя: </td>
-                    <td><input type="text" name="name" /></td>
-                </tr>
-                <tr>
-                    <td>Пароль: </td>
-                    <td><input type="text" name="password1" /></td>
-                </tr>
-                <tr>
-                    <td>Повторите пароль: </td>
-                    <td><input type="text" name="password2" /></td>
-                </tr>
-            </table>
-            <button class="btn btn-success" type="submit" asp-controller="user" asp-action="register">Зарегистрироваться</button>
+            <label asp-for="Name">Имя: </label><br />
+            <input type="text" name="Name" asp-for="Name" />
+            <span asp-validation-for="Name"></span>
         </div>
-    </form>
+        <div>
+            <label asp-for="Email">Email: </label><br />
+            <input type="email" name="Email" asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div>
+            <label asp-for="Password">Пароль: </label><br />
+            <input type="password" name="Password" asp-for="Password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div>
+            <label asp-for="ComparePassword">Повторите пароль: </label><br />
+            <input type="password" name="ComparePassword" asp-for="ComparePassword" />
+            <span asp-validation-for="ComparePassword"></span>
+        </div>
+        <button class="btn btn-success" type="submit">Зарегистрироваться</button>
+    </div>
+</form>
