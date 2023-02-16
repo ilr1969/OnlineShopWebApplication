@@ -1,0 +1,78 @@
+﻿@model OrderClass
+
+<h2>Детали заказа</h2>
+<div>
+    <table>
+        <tr>
+            <td>Номер заказа:</td>
+            <td>@Model.OrderNumber</td>
+        </tr>
+        <tr>
+            <td>Статус заказа:</td>
+            <td>
+                <select id="status">
+                    <option value="Создан">Создан</option>
+                    <option value="Обработан">Обработан</option>
+                    <option value="В доставке">В доставке</option>
+                    <option value="Доставлен">Доставлен</option>
+                    <option value="Отменён">Отменён</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Клиент:</td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td>Адрес доставки:</td>
+            <td>@Model.Address</td>
+        </tr>
+        <tr>
+            <td>Телефон:</td>
+            <td>@Model.Phone</td>
+        </tr>
+        <tr>
+            <td>Заказ создан:</td>
+            <td>@Model.CreationDatetime</td>
+        </tr>
+        <tr>
+            <td>User ID:</td>
+            <td>@Model.userCart.UserID</td>
+        </tr>
+    </table>
+
+    <br />
+    <br />
+    <table class="table-bordered" width="100%">
+        <tr>
+            <th>ID</th>
+            <th>Наименование</th>
+            <th>Описание</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Общая стоимость</th>
+        </tr>
+        @foreach (var item in @Model.userCart.CartItems)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Product.Name</td>
+                <td>@item.Product.Description</td>
+                <td>@item.Product.Cost</td>
+                <td>@item.Count</td>
+                <td>@item.Cost</td>
+            </tr>
+        }
+    </table>
+    <br />
+    <p><h4>Общая сумма: @Model.userCart.FullCost</h4></p>
+    <br />
+    <a class="btn btn-success" asp-controller="order" asp-action="saveOrder" asp-route-productId="@Model.Id" asp-route-status="GetStatus()">Сохранить изменения</a>
+</div>
+
+
+<script>
+    function GetStatus() {
+        return document.getElementById("status").addEventListener("change", event.target)
+    }
+</script>

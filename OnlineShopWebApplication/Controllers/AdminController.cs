@@ -6,16 +6,18 @@ namespace OnlineShopWebApplication.Controllers
     public class AdminController : Controller
     {
         IProductStorage productStorage;
+        IOrderStorage orderStorage;
 
-        public AdminController(IProductStorage productStorage)
+        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage)
         {
             this.productStorage = productStorage;
+            this.orderStorage = orderStorage;
         }
 
         // GET: AdminController
         public ActionResult Orders()
         {
-            return View();
+            return View(orderStorage.GetOrderList());
         }
 
         // GET: AdminController/Products/

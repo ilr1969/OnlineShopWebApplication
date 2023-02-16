@@ -3,26 +3,26 @@
 <h2>Добавление нового продукта</h2>
 <form method="post" asp-controller="product" asp-action="add">
     <div>
-            <div>
-                <label asp-for="Name">Название: </label><br />
-                <input asp-for="Name" type="text" name="Name" />
-                <span asp-validation-for="Name"></span>
-            </div>
-            <div>
-                <label asp-for="Description">Описание: </label><br />
-                <input asp-for="Description" type="text" name="Description" />
-                <span asp-validation-for="Description"></span>
-            </div>
-            <div>
-                <label asp-for="Cost">Стоимость: </label><br />
-                <<input asp-for="Cost" type="number" name="Cost" />
-                <span asp-validation-for="Cost"></span>
-            </div>
-            <div>
-                <label asp-for="ImagePath">ImagePath: </label><br />
-                <input asp-for="ImagePath" type="text" name="ImagePath" />
-                <span asp-validation-for="ImagePath"></span>
-            </div>
+        <div>
+            <label asp-for="Name">Название: </label><br />
+            <input asp-for="Name" type="text" name="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div>
+            <label asp-for="Description">Описание: </label><br />
+            <input asp-for="Description" type="text" name="Description" />
+            <span asp-validation-for="Description"></span>
+        </div>
+        <div>
+            <label asp-for="Cost">Стоимость: </label><br />
+            <<input asp-for="Cost" type="number" name="Cost" />
+            <span asp-validation-for="Cost"></span>
+        </div>
+        <div>
+            <label asp-for="ImagePath">ImagePath: </label><br />
+            <input asp-for="ImagePath" type="text" name="ImagePath" />
+            <span asp-validation-for="ImagePath"></span>
+        </div>
         <button class="btn btn-success" type="submit">Добавить</button>
     </div>
 </form>

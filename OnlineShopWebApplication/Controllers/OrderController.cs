@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Controllers
@@ -26,14 +28,24 @@ namespace OnlineShopWebApplication.Controllers
         // GET: OrderController/Success
         public ActionResult Success(OrderClass order)
         {
-            var userCart = cartStorage.TryGetByUserId(Constants.UserId);
-            order.FullCost = userCart.FullCost;
-            order.CartItems = userCart.CartItems;
-            order.UserID = Constants.UserId;
+            order.userCart = cartStorage.TryGetByUserId(Constants.UserId);
             orderStorage.Add(order);
             memoryProvider.WriteOrderToFile();
             cartStorage.ClearBasket();
             return View();
+        }
+
+        public IActionResult Detail(Guid productId)
+        {
+            var order = orderStorage.GetOrderList().FirstOrDefault(x => x.Id == productId);
+            return View(order);
+        }
+
+        public IActionResult SaveOrder(Guid productId, string status)
+        {
+            var order = orderStorage.GetOrderList().FirstOrDefault(x => x.Id == productId);
+            order.Status = status;
+            return View("Detail", order);
         }
     }
 }

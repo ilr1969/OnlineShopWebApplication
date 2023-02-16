@@ -1,22 +1,27 @@
-﻿
+﻿@model OrderClass
 
 Укажите данные для доставки @Constants.UserId
 <form method="post" asp-controller="order" asp-action="success">
-        <div>
-            <label>Имя:</label><br />
-            <input type="text" name="name" required />
-        </div>
-        <div>
-            <label>Телефон:</label><br />
-            <input type="number" name="phone" required />
-        </div>
-        <div>
-            <label>Адрес доставки:</label><br />
-            <input type="text" name="address" required />
-        </div>
-
-    <br />
-    <input type="checkbox" name="agree" /> Подтверждаю корректность данных.
+    <div>
+        <label asp-for="Name">Имя:</label><br />
+        <input asp-for="Name" type="text" name="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label asp-for="Phone">Телефон:</label><br />
+        <input asp-for="Phone" type="tel" name="Phone" />
+        <span asp-validation-for="Phone"></span>
+    </div>
+    <div>
+        <label asp-for="Address">Адрес доставки:</label><br />
+        <input asp-for="Address" type="text" name="Address" />
+        <span asp-validation-for="Address"></span>
+    </div>
+    <div>
+        <input asp-for="Agree" type="checkbox" name="Agree" required />
+        <label asp-for="Agree">Тут я соглашаюсь с тем, что придумали ваши юристы:</label>
+        <span asp-validation-for="Agree"></span>
+    </div>
 
     <br />
     <button class="btn btn-success" type="submit">Оформить</button>
