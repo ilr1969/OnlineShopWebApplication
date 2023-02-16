@@ -8,8 +8,8 @@ namespace OnlineShopWebApplication
     {
         public List<UserClass> usersList = new List<UserClass>()
         {
-/*            new UserClass("Дмитрий", "123"),
-            new UserClass("Дмитрий Савченко", "1")*/
+            new UserClass() {Name = "Дмитрий", Password = "123" },
+            new UserClass() {Name = "Дмитрий Савченко", Password = "1" }
         };
 
         public UserClass TryGetUser(string name)
