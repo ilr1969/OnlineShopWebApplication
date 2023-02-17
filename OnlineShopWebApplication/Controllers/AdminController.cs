@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Controllers
 {
@@ -7,11 +8,13 @@ namespace OnlineShopWebApplication.Controllers
     {
         IProductStorage productStorage;
         IOrderStorage orderStorage;
+        IUserRoleStorage userRoleStorage;
 
-        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage)
+        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage, IUserRoleStorage userRoleStorage)
         {
             this.productStorage = productStorage;
             this.orderStorage = orderStorage;
+            this.userRoleStorage = userRoleStorage;
         }
 
         // GET: AdminController
@@ -33,20 +36,9 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         // GET: AdminController/Roles
-        public ActionResult Roles()
+        public ActionResult UserRoles()
         {
-            return View();
-        }
-        // GET: AdminController/AddProduct
-        public ActionResult AddProduct()
-        {
-            return View();
-        }
-        // GET: AdminController/EditProduct
-        public ActionResult EditProduct(Guid productId)
-        {
-            var product = productStorage.TryGetById(productId);
-            return View(product);
+            return View(userRoleStorage.GetRolesList());
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿@model ProductClass
 
 <h2>Редактирование продукта</h2>
-<form method="post" asp-controller="product" asp-action="edit">
+<form method="post" asp-controller="product" asp-action="SaveProduct">
     <div>
         <div>
-            <input type="text" value="@Model.ID" name="ID" disabled /></>
+            <input value="@Model.ID" name="productId" hidden /></>
         </div>
         <div>
             <label asp-for="Name">Название: </label>

@@ -17,10 +17,18 @@ namespace OnlineShopWebApplication.Controllers
             var product = productStorage.TryGetById(productId);
             return View(product);
         }
-        [HttpPost]
-        public IActionResult Edit(ProductClass product)
+
+        // GET: ProductController/EditProduct
+        public ActionResult EditProduct(Guid productId)
         {
-            var productToEdit = productStorage.TryGetById(product.ID);
+            var product = productStorage.TryGetById(productId);
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult SaveProduct(Guid productId, ProductClass product)
+        {
+            var productToEdit = productStorage.TryGetById(productId);
             if (ModelState.IsValid)
             {
                 productToEdit.Name = product.Name;
@@ -38,6 +46,13 @@ namespace OnlineShopWebApplication.Controllers
             productList.Remove(productToRemove);
             return Redirect("/admin/products");
         }
+
+        // GET: ProductController/AddProduct
+        public ActionResult AddProduct()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Add(ProductClass product)
         {
