@@ -1,0 +1,18 @@
+﻿@model UserRoleClass
+
+<form method="post" asp-controller="UserRole" asp-action="SaveRole">
+    <div>
+        <input name="userRoleId" value="@Model.Id" hidden><br />
+    </div>
+    <div>
+        <label asp-for="RoleName">Название роли</label><br />
+        <input asp-for="RoleName" name="RoleName" value="@Model.RoleName" />
+        <span asp-validation-for="RoleName"></span>
+    </div>
+    <div>
+        <label asp-for="RoleDescription">Описание роли</label><br />
+        <input asp-for="RoleDescription" name="RoleDescription" value="@Model.RoleDescription" />
+        <span asp-validation-for="RoleDescription"></span>
+    </div>
+    <button class="btm btn-success" type="submit">Обновить</button>
+</form>

@@ -1,0 +1,15 @@
+﻿@model UserRoleClass
+
+<form method="post" asp-controller="UserRole" asp-action="AddRole">
+    <div>
+        <label asp-for="RoleName">Название роли</label><br />
+        <input asp-for="RoleName" name="RoleName"/>
+        <span asp-validation-for="RoleName"></span>
+    </div>
+    <div>
+        <label asp-for="RoleDescription">Описание роли</label><br />
+        <input asp-for="RoleDescription" name="RoleDescription"/>
+        <span asp-validation-for="RoleDescription"></span>
+    </div>
+    <button class="btm btn-success" type="submit">Создать</button>
+</form>

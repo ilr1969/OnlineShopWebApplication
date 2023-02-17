@@ -1,0 +1,29 @@
+﻿@model List<UserRoleClass>
+
+<div class="row">
+    @await Html.PartialAsync("AdminLeftMenu")
+
+    <div class="col-9">
+        <h3>Список ролей</h3>
+        <a asp-controller="UserRole" asp-action="AddUserRole">Добавить новую роль</a>
+        <table class="table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Наименование</th>
+                <th>Описание</th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var item in @Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.RoleName</td>
+                    <td>@item.RoleDescription</td>
+                    <td><a asp-controller="userrole" asp-action="edituserrole" asp-route-userRoleId="@item.Id">Редактировать</a></td>
+                    <td><a asp-controller="userrole" asp-action="removeuserrole" asp-route-userRoleId="@item.Id">Удалить</a></td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
