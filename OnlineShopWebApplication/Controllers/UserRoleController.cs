@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication.Models;
 
@@ -51,9 +48,7 @@ namespace OnlineShopWebApplication.Controllers
         [HttpPost]
         public ActionResult SaveRole(Guid userRoleId, string roleName, string roleDescription)
         {
-            var UserRoleToEdit = userRoleStorage.GetRole(userRoleId);
-            UserRoleToEdit.RoleName = roleName;
-            UserRoleToEdit.RoleDescription = roleDescription;
+            userRoleStorage.UpdateRole(userRoleId, roleName, roleDescription);
             return Redirect("/admin/userroles");
         }
 

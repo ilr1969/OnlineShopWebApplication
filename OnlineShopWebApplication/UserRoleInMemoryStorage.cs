@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication
@@ -27,6 +26,13 @@ namespace OnlineShopWebApplication
         public void RemoveUserRole(UserRoleClass userRole)
         {
             userRoles.Remove(userRole);
+        }
+
+        public void UpdateRole(Guid userRoleId, string roleName, string roleDescription)
+        {
+            var UserRoleToEdit = GetRole(userRoleId);
+            UserRoleToEdit.RoleName = roleName;
+            UserRoleToEdit.RoleDescription = roleDescription;
         }
     }
 }

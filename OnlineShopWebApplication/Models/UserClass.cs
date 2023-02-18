@@ -8,8 +8,8 @@ namespace OnlineShopWebApplication.Models
         public Guid ID { get; set; }
 
         [Required(ErrorMessage = "Имя обязательно")]
-        [StringLength(20, MinimumLength = 3,ErrorMessage = "Имя не может быть короче 3 символов")]
-        public string Name { get ; set; }
+        [StringLength(20, MinimumLength = 3, ErrorMessage = "Имя не может быть короче 3 символов")]
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "Почта обязательна")]
         [EmailAddress(ErrorMessage = "Указан некорректный адрес почты")]

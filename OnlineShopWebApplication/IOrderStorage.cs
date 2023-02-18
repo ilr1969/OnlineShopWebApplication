@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication
@@ -9,5 +10,6 @@ namespace OnlineShopWebApplication
 
         void Add(OrderClass order);
         List<OrderClass> GetOrderList();
+        void ChangeOrderStatus(Guid productId, OrderStatus status);
     }
 }
