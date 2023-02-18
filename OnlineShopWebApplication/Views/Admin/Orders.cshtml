@@ -22,7 +22,7 @@
                 {
                     <tr>
                         <td>@item.OrderNumber</td>
-                        <td>@item.Status</td>
+                        <td>@EnumHelper.GetEnumDiaplayName(item.Status)</td>
                         <td>@item.Name</td>
                         <td>@item.CreationDatetime</td>
                         <td><a asp-controller="order" asp-action="detail" asp-route-productId="@item.Id">Подробности</a></td>

@@ -41,10 +41,11 @@ namespace OnlineShopWebApplication.Controllers
             return View(order);
         }
 
-        public IActionResult SaveOrder(Guid productId, string status)
+        [HttpPost]
+        public IActionResult SaveOrder(Guid productId, OrderStatus status)
         {
+            orderStorage.ChangeOrderStatus(productId, status);
             var order = orderStorage.GetOrderList().FirstOrDefault(x => x.Id == productId);
-            order.Status = status;
             return View("Detail", order);
         }
     }

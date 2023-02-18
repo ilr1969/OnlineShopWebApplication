@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApplication.Models
@@ -18,7 +17,7 @@ namespace OnlineShopWebApplication.Models
 
         [Required(ErrorMessage = "Укажите телефон для связи")]
         public string Phone { get; set; }
-        public string Status { get; set; }
+        public OrderStatus Status { get; set; }
         public DateTime CreationDatetime { get; set; }
 
         [Required(ErrorMessage = "Необходимо согласие")]
@@ -29,8 +28,8 @@ namespace OnlineShopWebApplication.Models
         {
             Id = Guid.NewGuid();
             OrderCounter++;
+            Status = OrderStatus.Created;
             OrderNumber = OrderCounter;
-            Status = "Создан";
             CreationDatetime = DateTime.Now;
         }
     }
