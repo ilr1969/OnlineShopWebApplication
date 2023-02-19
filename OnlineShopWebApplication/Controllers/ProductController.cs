@@ -35,7 +35,7 @@ namespace OnlineShopWebApplication.Controllers
                 productToEdit.Description = product.Description;
                 productToEdit.Cost = product.Cost;
                 productToEdit.ImagePath = product.ImagePath;
-                return Redirect("/admin/products");
+                return Redirect("/admin/admin/products");
             }
             return RedirectToAction("edit", productToEdit);
         }
@@ -44,7 +44,7 @@ namespace OnlineShopWebApplication.Controllers
             var productList = productStorage.GetAll();
             var productToRemove = productStorage.TryGetById(productId);
             productList.Remove(productToRemove);
-            return Redirect("/admin/products");
+            return Redirect("/admin/admin/products");
         }
 
         // GET: ProductController/AddProduct
@@ -60,7 +60,7 @@ namespace OnlineShopWebApplication.Controllers
             {
                 var productList = productStorage.GetAll();
                 productList.Add(product);
-                return Redirect("/admin/products");
+                return Redirect("/admin/admin/products");
             }
             return View();
         }

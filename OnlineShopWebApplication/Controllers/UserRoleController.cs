@@ -33,7 +33,7 @@ namespace OnlineShopWebApplication.Controllers
             if (ModelState.IsValid && userRoleList.FirstOrDefault(x => x.RoleName == userRole.RoleName) == null)
             {
                 userRoleStorage.AddUserRole(userRole);
-                return RedirectToAction("UserRoles", "Admin");
+                return Redirect("/admin/admin/userroles");
             }
             return View("AddUserRole");
         }
@@ -49,7 +49,7 @@ namespace OnlineShopWebApplication.Controllers
         public ActionResult SaveRole(Guid userRoleId, string roleName, string roleDescription)
         {
             userRoleStorage.UpdateRole(userRoleId, roleName, roleDescription);
-            return Redirect("/admin/userroles");
+            return Redirect("/admin/admin/userroles");
         }
 
         // GET: UserRoleController/RemoveUserRole/5
@@ -57,7 +57,7 @@ namespace OnlineShopWebApplication.Controllers
         {
             var UserRoleToRemove = userRoleStorage.GetRole(userRoleId);
             userRoleStorage.RemoveUserRole(UserRoleToRemove);
-            return Redirect("/admin/userroles");
+            return Redirect("/admin/admin/userroles");
         }
     }
 }

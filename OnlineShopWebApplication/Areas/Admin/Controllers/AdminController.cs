@@ -2,6 +2,7 @@
 
 namespace OnlineShopWebApplication.Controllers
 {
+    [Area("Admin")]
     public class AdminController : Controller
     {
         IProductStorage productStorage;
