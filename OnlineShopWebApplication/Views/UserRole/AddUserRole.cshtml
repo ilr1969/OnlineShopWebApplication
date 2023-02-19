@@ -1,6 +1,6 @@
 ﻿@model UserRoleClass
 
-<form method="post" asp-controller="UserRole" asp-action="AddRole">
+<form method="post" asp-area="" asp-controller="UserRole" asp-action="AddRole">
     <div>
         <label asp-for="RoleName">Название роли</label><br />
         <input asp-for="RoleName" name="RoleName"/>
