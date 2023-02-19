@@ -1,9 +1,0 @@
-2023-02-19 23:04:15.530 +03:00 [INF] HTTP GET / responded 200 in 406.8787 ms
-2023-02-19 23:04:20.496 +03:00 [INF] HTTP GET /cart/add responded 302 in 32.0329 ms
-2023-02-19 23:04:20.533 +03:00 [INF] HTTP GET /Cart responded 200 in 25.4448 ms
-2023-02-19 23:04:21.789 +03:00 [INF] HTTP GET / responded 200 in 8.2241 ms
-2023-02-19 23:04:22.503 +03:00 [INF] HTTP GET /product responded 200 in 42.0704 ms
-2023-02-19 23:04:24.061 +03:00 [INF] HTTP GET /compare/add responded 302 in 5.8250 ms
-2023-02-19 23:04:24.088 +03:00 [INF] HTTP GET /Compare responded 200 in 12.9857 ms
-2023-02-19 23:04:26.163 +03:00 [INF] HTTP GET /compare/delete responded 302 in 7.8681 ms
-2023-02-19 23:04:26.180 +03:00 [INF] HTTP GET /Compare responded 200 in 3.8829 ms
