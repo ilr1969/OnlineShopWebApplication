@@ -6,7 +6,7 @@
     <div class="col-9">
         <h3>Список пользователей</h3>
         <a asp-area="admin" asp-controller="User" asp-action="AddUser">Добавить пользователя</a>
-        <table class="table-bordered">
+        <table class="table-bordered" width="100%">
             <tr>
                 <th>ID</th>
                 <th>Имя</th>
@@ -28,7 +28,7 @@
                         <ul class="dropdown-menu" aria-labelledby="actionMenu">
                             <li class="dropdown-item"><a asp-area="admin" asp-controller="user" asp-action="editUser" asp-route-userId="@item.ID">Редактировать</a></li>
                             <li class="dropdown-item"><a asp-area="admin" asp-controller="user" asp-action="changePassword" asp-route-userId="@item.ID">Сменить пароль</a></li>
-                            <li class="dropdown-item"><a asp-area="admin" asp-controller="user" asp-action="removeUser" asp-route-userId="@item.ID">Удалить</a></li>
+                            <li class="dropdown-item"><a data-toggle="modal" data-target="#deleteModal" data-userId="@item.ID">Удалить</a></li>
                         </ul>
                     </td>
                 </tr>
@@ -36,3 +36,36 @@
         </table>
     </div>
 </div>
+
+<form method="post" asp-area="admin" asp-controller="user" asp-action="removeUser">
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Подтвердите удаление пользователя</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer" style="display:flex; justify-content:center">
+                        <input type="text" name="userId" hidden />
+                        <button type="submit" class="btn btn-primary">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section scripts
+{
+    <script>
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var recipient = button.attr('data-userId')
+            var modal = $(this)
+            modal.find('.modal-footer input').val(recipient)
+        })
+    </script>
+}
+
