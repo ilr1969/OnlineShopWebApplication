@@ -27,7 +27,7 @@ namespace OnlineShopWebApplication.Controllers
         // GET: UserController/Login
         public ActionResult Login(string name, string password)
         {
-            var userFromDatadase = userStorage.TryGetUser(name);
+            var userFromDatadase = userStorage.TryGetUserByName(name);
             if (userFromDatadase != null && password == userFromDatadase.Password)
             {
                 Constants.UserId = name;

@@ -16,8 +16,10 @@ namespace OnlineShopWebApplication.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Укажите возраст")]
-        [Range(18, 60, ErrorMessage = "Вам должно быть не менее 18 лет")]
+        [Range(18, 100, ErrorMessage = "Вам должно быть не менее 18 лет")]
         public string Age { get; set; }
+
+        public string Role { get; set; }
 
         [Required(ErrorMessage = "Пароль обязателен")]
         [StringLength(12, MinimumLength = 10, ErrorMessage = "Пароль должен быть не менее 10 символов")]

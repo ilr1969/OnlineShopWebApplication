@@ -1,0 +1,46 @@
+﻿@model UserClass
+
+@{ Random random = new Random();
+    string randomPass = "";
+    for (int i = 0; i < 10; i++)
+    {
+        randomPass += Convert.ToChar(random.Next(33, 125));
+    }
+}
+
+<h2>Добавление нового пользователя</h2>
+<form method="post" asp-area="admin" asp-controller="user" asp-action="add">
+    <div>
+        <div>
+            <label asp-for="Name">Имя: </label><br />
+            <input asp-for="Name" type="text" name="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div>
+            <label asp-for="Email">Email: </label><br />
+            <input asp-for="Email" type="email" name="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div>
+            <label asp-for="Age">Возраст: </label><br />
+            <input asp-for="Age" type="number" name="Age" />
+            <span asp-validation-for="Age"></span>
+        </div>
+        <div>
+            <label asp-for="Role">Роль: </label><br />
+            <input asp-for="Role" type="text" name="Role" />
+            <span asp-validation-for="Role"></span>
+        </div>
+        <div>
+            <label asp-for="Password">Пароль: </label><br />
+            <input asp-for="Password" type="text" name="Password" value="@randomPass" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div>
+            <label asp-for="ComparePassword">Пароль: </label><br />
+            <input asp-for="ComparePassword" type="text" name="ComparePassword" value="@randomPass" />
+            <span asp-validation-for="ComparePassword"></span>
+        </div>
+        <button class="btn btn-success" type="submit">Добавить</button>
+    </div>
+</form>

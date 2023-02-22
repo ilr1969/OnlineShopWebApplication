@@ -1,7 +1,7 @@
 ﻿@model ProductClass
 
 <h2>Редактирование продукта</h2>
-<form method="post" asp-controller="product" asp-action="SaveProduct">
+<form method="post" asp-area="admin" asp-controller="product" asp-action="SaveProduct">
     <div>
         <div>
             <input value="@Model.ID" name="productId" hidden /></>

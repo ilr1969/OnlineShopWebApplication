@@ -1,9 +1,38 @@
 ﻿@model List<UserClass>
 
-    <div class="row">
-        @await Html.PartialAsync("AdminLeftMenu")
+<div class="row">
+    @await Html.PartialAsync("AdminLeftMenu")
 
-        <div class="col-9">
-            <p style="text-align:center">Пользователи</p>
-        </div>
+    <div class="col-9">
+        <h3>Список пользователей</h3>
+        <a asp-area="admin" asp-controller="User" asp-action="AddUser">Добавить пользователя</a>
+        <table class="table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Email</th>
+                <th>Возраст</th>
+                <th>Роль</th>
+                <th></th>
+            </tr>
+            @foreach (var item in @Model)
+            {
+                <tr>
+                    <td>@item.ID</td>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td>@item.Age</td>
+                    <td>@item.Role</td>
+                    <td class="dropdown">
+                        <button class="btn btn-success dropdown-toggle" type="button" id="actionMenu" data-toggle="dropdown">Действие</button>
+                        <ul class="dropdown-menu" aria-labelledby="actionMenu">
+                            <li class="dropdown-item"><a asp-area="admin" asp-controller="user" asp-action="editUser" asp-route-userId="@item.ID">Редактировать</a></li>
+                            <li class="dropdown-item"><a asp-area="admin" asp-controller="user" asp-action="changePassword" asp-route-userId="@item.ID">Сменить пароль</a></li>
+                            <li class="dropdown-item"><a asp-area="admin" asp-controller="user" asp-action="removeUser" asp-route-userId="@item.ID">Удалить</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            }
+        </table>
     </div>
+</div>
