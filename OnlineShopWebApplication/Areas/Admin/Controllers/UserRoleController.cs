@@ -3,8 +3,9 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication.Models;
 
-namespace OnlineShopWebApplication.Controllers
+namespace OnlineShopWebApplication.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class UserRoleController : Controller
     {
         IUserRoleStorage userRoleStorage;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace OnlineShopWebApplication.Controllers
+namespace OnlineShopWebApplication.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class AdminController : Controller
@@ -8,12 +8,14 @@ namespace OnlineShopWebApplication.Controllers
         IProductStorage productStorage;
         IOrderStorage orderStorage;
         IUserRoleStorage userRoleStorage;
+        IUserStorage userStorage;
 
-        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage, IUserRoleStorage userRoleStorage)
+        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage, IUserRoleStorage userRoleStorage, IUserStorage userStorage)
         {
             this.productStorage = productStorage;
             this.orderStorage = orderStorage;
             this.userRoleStorage = userRoleStorage;
+            this.userStorage = userStorage;
         }
 
         // GET: AdminController
@@ -31,7 +33,7 @@ namespace OnlineShopWebApplication.Controllers
         // GET: AdminController/Users
         public ActionResult Users()
         {
-            return View();
+            return View(userStorage.GetAll());
         }
 
         // GET: AdminController/Roles

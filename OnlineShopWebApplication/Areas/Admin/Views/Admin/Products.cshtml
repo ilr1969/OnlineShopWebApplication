@@ -5,7 +5,7 @@
 
     <div class="col-9">
         <h3>Список продуктов</h3>
-        <a asp-area="" asp-controller="product" asp-action="addProduct">Добавить новый продукт</a>
+        <a asp-area="admin" asp-controller="product" asp-action="addProduct">Добавить новый продукт</a>
         <table class="table-bordered">
             <tr>
                 <th>ID</th>
@@ -24,8 +24,8 @@
                     <td>@item.Description</td>
                     <td>@item.Cost</td>
                     <td><img src=@item.ImagePath alt="Вот так выглядит автомобиль" width=300 /></td>
-                    <td><a asp-area="" asp-controller="product" asp-action="editproduct" asp-route-productId="@item.ID">Редактировать</a></td>
-                    <td><a asp-area="" asp-controller="product" asp-action="remove" asp-route-productId="@item.ID">Удалить</a></td>
+                    <td><a asp-area="admin" asp-controller="product" asp-action="editproduct" asp-route-productId="@item.ID">Редактировать</a></td>
+                    <td><a asp-area="admin" asp-controller="product" asp-action="remove" asp-route-productId="@item.ID">Удалить</a></td>
                 </tr>
             }
         </table>

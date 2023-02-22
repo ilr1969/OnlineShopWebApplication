@@ -1,6 +1,6 @@
 ﻿@model UserRoleClass
 
-<form method="post" asp-controller="UserRole" asp-action="SaveRole">
+<form method="post" asp-area="admin" asp-controller="UserRole" asp-action="SaveRole">
     <div>
         <input name="userRoleId" value="@Model.Id" hidden><br />
     </div>

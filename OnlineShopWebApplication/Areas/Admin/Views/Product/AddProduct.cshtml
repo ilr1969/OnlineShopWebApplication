@@ -1,7 +1,7 @@
 ﻿@model ProductClass
 
 <h2>Добавление нового продукта</h2>
-<form method="post" asp-controller="product" asp-action="add">
+<form method="post" asp-area="admin" asp-controller="product" asp-action="add">
     <div>
         <div>
             <label asp-for="Name">Название: </label><br />
