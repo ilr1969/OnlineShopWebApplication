@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Database;
+using OnlineShopWebApplication.Helpers;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Areas.Admin.Controllers
@@ -8,20 +10,24 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductStorage productStorage;
-        public ProductController(IProductStorage productStorage)
+        private readonly ToViewModelConverter toViewModelConverter;
+        private readonly DatabaseContext databaseContext;
+        public ProductController(IProductStorage productStorage, ToViewModelConverter toViewModelConverter, DatabaseContext databaseContext)
         {
             this.productStorage = productStorage;
+            this.toViewModelConverter = toViewModelConverter;
+            this.databaseContext = databaseContext;
         }
 
         // GET: ProductController/EditProduct
         public ActionResult EditProduct(Guid productId)
         {
             var product = productStorage.TryGetById(productId);
-            return View(product);
+            return View(toViewModelConverter.ProductToViewModel(product));
         }
 
         [HttpPost]
-        public IActionResult SaveProduct(Guid productId, ProductClass product)
+        public IActionResult SaveProduct(Guid productId, ProductViewModel product)
         {
             var productToEdit = productStorage.TryGetById(productId);
             if (ModelState.IsValid)
@@ -30,15 +36,14 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
                 productToEdit.Description = product.Description;
                 productToEdit.Cost = product.Cost;
                 productToEdit.ImagePath = product.ImagePath;
+                databaseContext.SaveChanges();
                 return Redirect("/admin/admin/products");
             }
-            return RedirectToAction("edit", productToEdit);
+            return RedirectToAction("EditProduct", toViewModelConverter.ProductToViewModel(productToEdit));
         }
         public IActionResult Remove(Guid productId)
         {
-            var productList = productStorage.GetAll();
-            var productToRemove = productStorage.TryGetById(productId);
-            productList.Remove(productToRemove);
+            productStorage.Remove(productId);
             return Redirect("/admin/admin/products");
         }
 
@@ -49,12 +54,11 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(ProductClass product)
+        public IActionResult Add(ProductViewModel product)
         {
             if (ModelState.IsValid)
             {
-                var productList = productStorage.GetAll();
-                productList.Add(product);
+                productStorage.Add(ToModelConverter.ProductToModel(product));
                 return Redirect("/admin/admin/products");
             }
             return View();

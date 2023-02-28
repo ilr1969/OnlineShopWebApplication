@@ -5,7 +5,7 @@ namespace OnlineShopWebApplication
 {
     public interface IFavoriteStorage
     {
-        static List<ProductClass> favoriteList;
-        List<ProductClass> GetAll();
+        static List<ProductViewModel> favoriteList;
+        List<ProductViewModel> GetAll();
     }
 }

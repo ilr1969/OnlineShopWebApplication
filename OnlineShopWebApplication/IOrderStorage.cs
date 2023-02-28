@@ -6,10 +6,10 @@ namespace OnlineShopWebApplication
 {
     public interface IOrderStorage
     {
-        static List<OrderClass> orders;
+        static List<OrderViewModel> orders;
 
-        void Add(OrderClass order);
-        List<OrderClass> GetOrderList();
-        void ChangeOrderStatus(Guid productId, OrderStatus status);
+        void Add(OrderViewModel order);
+        List<OrderViewModel> GetOrderList();
+        void ChangeOrderStatus(Guid productId, OrderStatusViewModel status);
     }
 }

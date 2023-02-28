@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApplication.Models
 {
-    public class UserRoleClass
+    public class UserRoleViewModel
     {
         public Guid Id;
 
@@ -13,7 +13,7 @@ namespace OnlineShopWebApplication.Models
         [Required(ErrorMessage = "Укажите назначение роли")]
         public string RoleDescription { get; set; }
 
-        public UserRoleClass()
+        public UserRoleViewModel()
         {
             Id = Guid.NewGuid();
         }

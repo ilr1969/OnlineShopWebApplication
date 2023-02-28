@@ -28,7 +28,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddRole(UserRoleClass userRole)
+        public IActionResult AddRole(UserRoleViewModel userRole)
         {
             var userRoleList = userRoleStorage.GetRolesList();
             if (ModelState.IsValid && userRoleList.FirstOrDefault(x => x.RoleName == userRole.RoleName) == null)

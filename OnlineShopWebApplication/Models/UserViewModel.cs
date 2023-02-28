@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApplication.Models
 {
-    public class UserClass
+    public class UserViewModel
     {
         public Guid ID { get; set; }
 
@@ -29,7 +29,7 @@ namespace OnlineShopWebApplication.Models
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ComparePassword { get; set; }
 
-        public UserClass()
+        public UserViewModel()
         {
             ID = Guid.NewGuid();
         }

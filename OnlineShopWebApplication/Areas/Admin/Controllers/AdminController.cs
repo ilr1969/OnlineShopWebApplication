@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Database;
+using OnlineShopWebApplication.Helpers;
 
 namespace OnlineShopWebApplication.Areas.Admin.Controllers
 {
@@ -9,13 +11,15 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         IOrderStorage orderStorage;
         IUserRoleStorage userRoleStorage;
         IUserStorage userStorage;
+        private readonly ToViewModelConverter toViewModelConverter;
 
-        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage, IUserRoleStorage userRoleStorage, IUserStorage userStorage)
+        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage, IUserRoleStorage userRoleStorage, IUserStorage userStorage, ToViewModelConverter toViewModelConverter)
         {
             this.productStorage = productStorage;
             this.orderStorage = orderStorage;
             this.userRoleStorage = userRoleStorage;
             this.userStorage = userStorage;
+            this.toViewModelConverter = toViewModelConverter;
         }
 
         // GET: AdminController
@@ -27,7 +31,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         // GET: AdminController/Products/
         public ActionResult Products()
         {
-            return View(productStorage.GetAll());
+            return View(toViewModelConverter.ProductsToViewModel(productStorage.GetAll()));
         }
 
         // GET: AdminController/Users

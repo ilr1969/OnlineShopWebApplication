@@ -22,7 +22,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
 
         // GET: UserController/Add
         [HttpPost]
-        public ActionResult Add(UserClass user)
+        public ActionResult Add(UserViewModel user)
         {
             if (ModelState.IsValid)
             {
@@ -41,7 +41,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
 
         // POST: UserController/SaveUser
         [HttpPost]
-        public ActionResult SaveUser(Guid userId, UserClass user)
+        public ActionResult SaveUser(Guid userId, UserViewModel user)
         {
             userStorage.ChangeUserData(userId, user);
             return Redirect("/admin/admin/users");

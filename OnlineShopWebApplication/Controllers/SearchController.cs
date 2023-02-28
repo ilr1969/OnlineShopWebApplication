@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Database;
 
 namespace OnlineShopWebApplication.Controllers
 {

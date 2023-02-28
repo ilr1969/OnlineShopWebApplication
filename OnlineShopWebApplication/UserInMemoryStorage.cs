@@ -7,13 +7,13 @@ namespace OnlineShopWebApplication
 {
     public class UserInMemoryStorage : IUserStorage
     {
-        public List<UserClass> usersList = new List<UserClass>()
+        public List<UserViewModel> usersList = new List<UserViewModel>()
         {
-            new UserClass() {Name = "Дмитрий", Password = "123" },
-            new UserClass() {Name = "Дмитрий Савченко", Password = "1" }
+            new UserViewModel() {Name = "Дмитрий", Password = "123" },
+            new UserViewModel() {Name = "Дмитрий Савченко", Password = "1" }
         };
 
-        public UserClass TryGetUserByName(string name)
+        public UserViewModel TryGetUserByName(string name)
         {
             if (name != null)
             {
@@ -25,12 +25,12 @@ namespace OnlineShopWebApplication
             }
         }
 
-        public void AddUser(UserClass user)
+        public void AddUser(UserViewModel user)
         {
             usersList.Add(user);
         }
 
-        public List<UserClass> GetAll()
+        public List<UserViewModel> GetAll()
         {
             return usersList;
         }
@@ -41,7 +41,7 @@ namespace OnlineShopWebApplication
             usersList.Remove(userToDelete);
         }
 
-        public UserClass TryGetUserById(Guid userId)
+        public UserViewModel TryGetUserById(Guid userId)
         {
             return usersList.First(x => x.ID == userId);
         }
@@ -58,7 +58,7 @@ namespace OnlineShopWebApplication
             user.Password = randomPass;
         }
 
-        public void ChangeUserData(Guid userId, UserClass user)
+        public void ChangeUserData(Guid userId, UserViewModel user)
         {
             var userToEdit = TryGetUserById(userId);
             userToEdit.Name = user.Name;
