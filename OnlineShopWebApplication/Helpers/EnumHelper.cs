@@ -7,7 +7,7 @@ namespace OnlineShopWebApplication.Helpers
 {
     public class EnumHelper
     {
-        public static string GetEnumDiaplayName(OrderStatus status)
+        public static string GetEnumDiaplayName(OrderStatusViewModel status)
         {
             return status.GetType().GetMember(status.ToString()).First().GetCustomAttribute<DisplayAttribute>().GetName();
         }

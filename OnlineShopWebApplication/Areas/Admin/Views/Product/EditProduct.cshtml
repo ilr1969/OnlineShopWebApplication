@@ -1,4 +1,4 @@
-﻿@model ProductClass
+﻿@model ProductViewModel
 
 <h2>Редактирование продукта</h2>
 <form method="post" asp-area="admin" asp-controller="product" asp-action="SaveProduct">
@@ -18,7 +18,7 @@
         </div>
         <div>
             <label asp-for="Cost">Стоимость: </label>
-            <input asp-for="Cost" type="number" value="@Model.Cost" name="Cost" /></>
+            <input asp-for="Cost" type="text" value="@Model.Cost" name="Cost" /></>
             <span asp-validation-for="Cost"></span>
         </div>
         <div>

@@ -7,20 +7,20 @@ namespace OnlineShopWebApplication
 {
     public class OrderInMemoryStorage : IOrderStorage
     {
-        public List<OrderClass> orders = new List<OrderClass>();
+        public List<OrderViewModel> orders = new List<OrderViewModel>();
 
-        public void Add(OrderClass order)
+        public void Add(OrderViewModel order)
         {
             orders.Add(order);
         }
 
-        public void ChangeOrderStatus(Guid productId, OrderStatus status)
+        public void ChangeOrderStatus(Guid productId, OrderStatusViewModel status)
         {
             var order = orders.First(x => x.Id == productId);
             order.Status = status;
         }
 
-        public List<OrderClass> GetOrderList()
+        public List<OrderViewModel> GetOrderList()
         {
             return orders;
         }

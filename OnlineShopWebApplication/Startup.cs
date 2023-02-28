@@ -1,8 +1,13 @@
+using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using OnlineShop.Database;
+using OnlineShopWebApplication.Helpers;
 using Serilog;
 
 namespace OnlineShopWebApplication
@@ -19,14 +24,26 @@ namespace OnlineShopWebApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string connection = Configuration.GetConnectionString("OnlineShop");
+            services.AddDbContext<DatabaseContext>(option => option.UseSqlServer(connection));
+            services.AddSingleton<ToViewModelConverter>();
+            services.AddSingleton<ToModelConverter>();
             services.AddControllersWithViews();
-            services.AddSingleton<IProductStorage, ProductInMemoryStorage>();
+            services.AddTransient<IProductStorage, ProductDbStorage>();
             services.AddSingleton<IUserStorage, UserInMemoryStorage>();
-            services.AddSingleton<ICartStorage, CartInMemoryStorage>();
-            services.AddSingleton<IMemoryProvider, MemoryProvider>();
+            services.AddTransient<ICartStorage, CartDbStorage>();
+            services.AddTransient<IMemoryProvider, MemoryProvider>();
             services.AddSingleton<IOrderStorage, OrderInMemoryStorage>();
             services.AddSingleton<IFavoriteStorage, FavoriteInMemoryStorage>();
             services.AddSingleton<IUserRoleStorage, UserRoleInMemoryStorage>();
+
+            services.Configure<RequestLocalizationOptions>(option => { 
+                var supportedCultures = new[] { 
+                    new CultureInfo("en-US"), 
+                };
+                option.SupportedCultures = supportedCultures;
+                option.SupportedUICultures = supportedCultures;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +67,9 @@ namespace OnlineShopWebApplication
             app.UseRouting();
 
             app.UseAuthorization();
+
+            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value;
+            app.UseRequestLocalization(localizationOptions);
 
             app.UseEndpoints(endpoints =>
             {

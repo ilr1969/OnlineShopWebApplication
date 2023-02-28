@@ -6,15 +6,15 @@ namespace OnlineShopWebApplication
 {
     public interface IUserStorage
     {
-        static List<UserClass> usersList;
+        static List<UserViewModel> usersList;
 
-        UserClass TryGetUserByName(string name);
+        UserViewModel TryGetUserByName(string name);
 
-        void AddUser(UserClass user);
-        List<UserClass> GetAll();
+        void AddUser(UserViewModel user);
+        List<UserViewModel> GetAll();
         void DeleteUser(Guid userId);
-        UserClass TryGetUserById(Guid userId);
+        UserViewModel TryGetUserById(Guid userId);
         void changePassword(Guid userId);
-        void ChangeUserData(Guid userId, UserClass user);
+        void ChangeUserData(Guid userId, UserViewModel user);
     }
 }

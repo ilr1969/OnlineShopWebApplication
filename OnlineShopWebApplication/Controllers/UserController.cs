@@ -37,7 +37,7 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         // GET: UserController/Create
-        public ActionResult Register(UserClass user)
+        public ActionResult Register(UserViewModel user)
         {
             if (ModelState.IsValid)
             {

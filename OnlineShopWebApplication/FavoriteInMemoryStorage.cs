@@ -5,8 +5,8 @@ namespace OnlineShopWebApplication
 {
     public class FavoriteInMemoryStorage : IFavoriteStorage
     {
-        public List<ProductClass> favoriteList = new List<ProductClass>();
-        public List<ProductClass> GetAll()
+        public List<ProductViewModel> favoriteList = new List<ProductViewModel>();
+        public List<ProductViewModel> GetAll()
         {
             return favoriteList;
         }

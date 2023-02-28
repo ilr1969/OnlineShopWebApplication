@@ -7,23 +7,23 @@ namespace OnlineShopWebApplication
 {
     public class UserRoleInMemoryStorage : IUserRoleStorage
     {
-        public List<UserRoleClass> userRoles = new List<UserRoleClass>()
+        public List<UserRoleViewModel> userRoles = new List<UserRoleViewModel>()
         {
-            new UserRoleClass() {RoleName = "Admin", RoleDescription = "Full rights"}
+            new UserRoleViewModel() {RoleName = "Admin", RoleDescription = "Full rights"}
         };
-        public List<UserRoleClass> GetRolesList()
+        public List<UserRoleViewModel> GetRolesList()
         {
             return userRoles;
         }
-        public UserRoleClass GetRole(Guid userRoleId)
+        public UserRoleViewModel GetRole(Guid userRoleId)
         {
             return userRoles.FirstOrDefault(x => x.Id == userRoleId);
         }
-        public void AddUserRole(UserRoleClass userRole)
+        public void AddUserRole(UserRoleViewModel userRole)
         {
             userRoles.Add(userRole);
         }
-        public void RemoveUserRole(UserRoleClass userRole)
+        public void RemoveUserRole(UserRoleViewModel userRole)
         {
             userRoles.Remove(userRole);
         }

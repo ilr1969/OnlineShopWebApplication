@@ -1,4 +1,4 @@
-﻿@model CartClass
+﻿@model CartViewModel
 
 @if (@Model == null || @Model.CartItems.Count == 0)
 {
@@ -19,9 +19,9 @@ else
                 <tr>
                     <td>@product.Product.Name</td>
                     <td>
-                        <a class="btn btn-light" asp-controller="cart" asp-action="changeCount" asp-route-count="-1" asp-route-product="@product.Product.Name"><b>-</b></a>
+                        <a class="btn btn-light" asp-controller="cart" asp-action="changeCount" asp-route-count="-1" asp-route-userId="@Model.UserID" asp-route-product="@product.Product.Name"><b>-</b></a>
                         @product.Count
-                        <a class="btn btn-light" asp-controller="cart" asp-action="changeCount" asp-route-count="1" asp-route-product="@product.Product.Name"><b>+</b></a>
+                        <a class="btn btn-light" asp-controller="cart" asp-action="changeCount" asp-route-count="1" asp-route-userId="@Model.UserID" asp-route-product="@product.Product.Name"><b>+</b></a>
                     </td>
                     <td>@product.Product.Cost</td>
                     <td>@product.Cost</td>
@@ -37,7 +37,7 @@ else
         <a class="btn btn-success" asp-controller="order" asp-action="index">Оформить заказ</a>
     </div>
     <div style="text-align:right">
-        <a class="btn btn-danger" asp-controller="cart" asp-action="clear">Очистить корзину</a>
+        <a class="btn btn-danger" asp-controller="cart" asp-action="clear" asp-route-userId="@Model.UserID">Очистить корзину</a>
     </div>
 
 

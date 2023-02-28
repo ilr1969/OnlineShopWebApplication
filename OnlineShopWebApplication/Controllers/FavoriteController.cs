@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Database;
+using OnlineShopWebApplication.Helpers;
 
 namespace OnlineShopWebApplication.Controllers
 {
@@ -7,11 +9,13 @@ namespace OnlineShopWebApplication.Controllers
     {
         readonly IProductStorage productStorage;
         readonly IFavoriteStorage favoriteStorage;
+        private readonly ToViewModelConverter toViewModelConverter;
 
-        public FavoriteController(IProductStorage productStorage, IFavoriteStorage favoriteStorage)
+        public FavoriteController(IProductStorage productStorage, IFavoriteStorage favoriteStorage, ToViewModelConverter toViewModelConverter)
         {
             this.productStorage = productStorage;
             this.favoriteStorage = favoriteStorage;
+            this.toViewModelConverter = toViewModelConverter;
         }
         // GET: FavoriteController
         public ActionResult Index()
@@ -25,9 +29,9 @@ namespace OnlineShopWebApplication.Controllers
         {
             var favoriteList = favoriteStorage.GetAll();
             var product = productStorage.TryGetById(productId);
-            if (!favoriteList.Contains(product))
+            if (!favoriteList.Contains(toViewModelConverter.ProductToViewModel(product)))
             {
-                favoriteList.Add(product);
+                favoriteList.Add(toViewModelConverter.ProductToViewModel(product));
             }
             return RedirectToAction("index");
         }
@@ -37,7 +41,7 @@ namespace OnlineShopWebApplication.Controllers
         {
             var favoriteList = favoriteStorage.GetAll();
             var product = productStorage.TryGetById(productId);
-            favoriteList.Remove(product);
+            favoriteList.Remove(toViewModelConverter.ProductToViewModel(product));
             return RedirectToAction("index");
         }
     }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Database;
+using OnlineShopWebApplication.Helpers;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Controllers
@@ -10,12 +12,14 @@ namespace OnlineShopWebApplication.Controllers
         public ICartStorage cartStorage;
         public IMemoryProvider memoryProvider;
         public IOrderStorage orderStorage;
+        public ToViewModelConverter toViewModelConverter;
 
-        public OrderController(ICartStorage cartStorage, IMemoryProvider memoryProvider, IOrderStorage orderStorage)
+        public OrderController(ICartStorage cartStorage, IMemoryProvider memoryProvider, IOrderStorage orderStorage, ToViewModelConverter toViewModelConverter)
         {
             this.cartStorage = cartStorage;
             this.memoryProvider = memoryProvider;
             this.orderStorage = orderStorage;
+            this.toViewModelConverter = toViewModelConverter;
         }
 
         // GET: OrderController
@@ -26,12 +30,12 @@ namespace OnlineShopWebApplication.Controllers
 
         [HttpPost]
         // GET: OrderController/Success
-        public ActionResult Success(OrderClass order)
+        public ActionResult Success(string userId, OrderViewModel order)
         {
-            order.userCart = cartStorage.TryGetByUserId(Constants.UserId);
+            order.userCart = toViewModelConverter.CartToViewModel(cartStorage.TryGetByUserId(userId));
             orderStorage.Add(order);
             memoryProvider.WriteOrderToFile();
-            cartStorage.ClearBasket();
+            cartStorage.ClearBasket(userId);
             return View();
         }
 
@@ -42,7 +46,7 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveOrder(Guid productId, OrderStatus status)
+        public IActionResult SaveOrder(Guid productId, OrderStatusViewModel status)
         {
             orderStorage.ChangeOrderStatus(productId, status);
             var order = orderStorage.GetOrderList().FirstOrDefault(x => x.Id == productId);

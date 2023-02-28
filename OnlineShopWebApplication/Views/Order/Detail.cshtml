@@ -1,4 +1,4 @@
-﻿@model OrderClass
+﻿@model OrderViewModel
 
 <h2>Детали заказа</h2>
 
@@ -13,7 +13,7 @@
                 <td>Статус заказа:</td>
                 <td>
                     <select asp-for="@Model.Status"
-                            asp-items="@Html.GetEnumSelectList<OrderStatus>()"
+                            asp-items="@Html.GetEnumSelectList<OrderStatusViewModel>()"
                             class="form-control">
                     </select>
                 </td>
