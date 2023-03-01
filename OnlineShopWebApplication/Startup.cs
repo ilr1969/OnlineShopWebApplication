@@ -30,11 +30,12 @@ namespace OnlineShopWebApplication
             services.AddSingleton<ToModelConverter>();
             services.AddControllersWithViews();
             services.AddTransient<IProductStorage, ProductDbStorage>();
+            services.AddTransient<ICompareStorage, CompareDbStorage>();
             services.AddSingleton<IUserStorage, UserInMemoryStorage>();
             services.AddTransient<ICartStorage, CartDbStorage>();
             services.AddTransient<IMemoryProvider, MemoryProvider>();
             services.AddSingleton<IOrderStorage, OrderInMemoryStorage>();
-            services.AddSingleton<IFavoriteStorage, FavoriteInMemoryStorage>();
+            services.AddTransient<IFavoriteStorage, FavoriteDbStorage>();
             services.AddSingleton<IUserRoleStorage, UserRoleInMemoryStorage>();
 
             services.Configure<RequestLocalizationOptions>(option => { 

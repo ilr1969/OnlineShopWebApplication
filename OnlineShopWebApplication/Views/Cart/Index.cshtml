@@ -1,6 +1,6 @@
 ﻿@model CartViewModel
 
-@if (@Model == null || @Model.CartItems.Count == 0)
+@if (@Model == null || @Model.CartItems == null || @Model.CartItems.Count == 0)
 {
     <p>В корзине пусто!</p>
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Database;
 
 namespace OnlineShopWebApplication.Views.Shared.Components.Favorite
 {
@@ -13,8 +14,8 @@ namespace OnlineShopWebApplication.Views.Shared.Components.Favorite
 
         public IViewComponentResult Invoke()
         {
-            var favoriteList = favoriteStorage.GetAll();
-            var favoriteAmount = favoriteList?.Count ?? 0;
+            var favoriteList = favoriteStorage.TryGetById(Constants.UserId);
+            var favoriteAmount = favoriteList?.FavoriteItems.Count ?? 0;
             return View("favorite", favoriteAmount);
         }
     }

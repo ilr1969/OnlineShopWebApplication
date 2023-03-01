@@ -13,7 +13,7 @@ namespace OnlineShopWebApplication.Helpers
         {
             var product = new Product
             {
-                ID = productviewmodel.ID,
+                Id = productviewmodel.ID,
                 Name = productviewmodel.Name,
                 Description = productviewmodel.Description,
                 Cost = productviewmodel.Cost,
