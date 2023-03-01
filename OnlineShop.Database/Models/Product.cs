@@ -6,7 +6,7 @@ namespace OnlineShop.Database.Models
 {
     public class Product
     {
-        public Guid ID { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 
@@ -17,10 +17,14 @@ namespace OnlineShop.Database.Models
         public string ImagePath { get; set; }
 
         public List<CartItem> CartItems { get; set; }
+        public List<FavoriteItem> FavoriteItems { get; set; }
+        public List<CompareItem> CompareItems { get; set; }
 
         public Product()
         {
             CartItems = new List<CartItem>();
+            FavoriteItems = new List<FavoriteItem>();
+            CompareItems = new List<CompareItem>();
         }
     }
 }

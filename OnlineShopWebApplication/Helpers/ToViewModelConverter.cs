@@ -13,7 +13,7 @@ namespace OnlineShopWebApplication.Helpers
         {
             var productViewModel = new ProductViewModel
             {
-                ID = product.ID,
+                ID = product.Id,
                 Name = product.Name,
                 Description = product.Description,
                 Cost = product.Cost,
@@ -28,7 +28,7 @@ namespace OnlineShopWebApplication.Helpers
             foreach (var prod in products)
             {
                 var productViewModel = new ProductViewModel();
-                productViewModel.ID = prod.ID;
+                productViewModel.ID = prod.Id;
                 productViewModel.Name = prod.Name;
                 productViewModel.Description = prod.Description;
                 productViewModel.Cost = prod.Cost;
@@ -48,17 +48,6 @@ namespace OnlineShopWebApplication.Helpers
                 cartViewModel.CartItems = CartItemsToViewModel(cart.CartItems);
             }
             return cartViewModel;
-        }
-
-        public CartItemViewModel CartItemToViewModel(CartItem cartItem)
-        {
-            var cartItemViewModel = new CartItemViewModel
-            {
-                Id = cartItem.Id,
-                Product = ProductToViewModel(cartItem.Product),
-                Count = cartItem.Count
-            };
-            return cartItemViewModel;
         }
 
         public List<CartItemViewModel> CartItemsToViewModel(List<CartItem> cartItems)

@@ -26,7 +26,7 @@ namespace OnlineShop.Database
 
         public Product TryGetById(Guid productId)
         {
-            return databaseContext.Products.FirstOrDefault(product => product.ID == productId);
+            return databaseContext.Products.FirstOrDefault(product => product.Id == productId);
         }
 
         public List<Product> GetAll()
