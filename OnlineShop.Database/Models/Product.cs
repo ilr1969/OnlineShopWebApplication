@@ -21,6 +21,7 @@ namespace OnlineShop.Database.Models
 
         public Product()
         {
+            Id = Guid.NewGuid();
             CartItems = new List<CartItem>();
             CreationDateTime = DateTime.Now;
         }
