@@ -10,7 +10,7 @@ using OnlineShop.Database;
 namespace OnlineShop.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230303085728_Initialization")]
+    [Migration("20230303094538_Initialization")]
     partial class Initialization
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

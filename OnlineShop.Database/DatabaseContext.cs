@@ -20,7 +20,7 @@ namespace OnlineShop.Database
         public DbSet<Order> Orders { get; set; }
 
         //Начальное заполнение товарами
-/*        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>().HasData(
                             new Product() { Name = "Ferrari", Cost = 15000000, Description = "good", ImagePath = "/images/image1.jpg" },
@@ -30,6 +30,6 @@ namespace OnlineShop.Database
                             new Product() { Name = "Volga", Cost = 7000, Description = "not bad", ImagePath = "/images/image5.jpg" },
                             new Product() { Name = "Kopeyka", Cost = 700, Description = "foo", ImagePath = "/images/image6.jpg" }
                 );
-        }*/
+        }
     }
 }
