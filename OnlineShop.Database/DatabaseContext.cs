@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop.Database.Models;
 
 namespace OnlineShop.Database
@@ -19,5 +16,8 @@ namespace OnlineShop.Database
         /*public DbSet<CartItem> CartItems { get; set; }*/
         public DbSet<FavoriteProduct> FavoriteProducts { get; set; }
         public DbSet<CompareProduct> CompareProducts { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        /*public DbSet<OrderStatus> OrderStatuses { get; set; }*/
     }
 }

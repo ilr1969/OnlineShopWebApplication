@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Database.Models;
@@ -36,7 +35,6 @@ namespace OnlineShop.Database
                         {
                             Product = product,
                             Count = 1,
-                            cart = newCart
                         }
                     };
                 databaseContext.Carts.Add(newCart);
@@ -47,7 +45,7 @@ namespace OnlineShop.Database
                 var existingCartItem = existingCart.CartItems.FirstOrDefault(x => x.Product.Name == product.Name);
                 if (existingCartItem == null)
                 {
-                    existingCart.CartItems.Add(new CartItem { Product = product, Count = 1, cart = existingCart });
+                    existingCart.CartItems.Add(new CartItem { Product = product, Count = 1 });
                 }
                 else
                 {
@@ -60,7 +58,7 @@ namespace OnlineShop.Database
         public void ClearBasket(string userId)
         {
             var userCart = TryGetByUserId(userId);
-            userCart.CartItems.Clear();
+            databaseContext.Carts.Remove(userCart);
             databaseContext.SaveChanges();
         }
 

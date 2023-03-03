@@ -9,19 +9,17 @@ namespace OnlineShopWebApplication.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductStorage productStorage;
-        private readonly ToViewModelConverter toViewModelConverter;
 
-        public HomeController(ILogger<HomeController> logger, IProductStorage productStorage, ToViewModelConverter toViewModelConverter)
+        public HomeController(ILogger<HomeController> logger, IProductStorage productStorage)
         {
             _logger = logger;
             this.productStorage = productStorage;
-            this.toViewModelConverter = toViewModelConverter;
         }
 
         public IActionResult Index()
         {
             var products = productStorage.GetAll();
-            return View(toViewModelConverter.ProductsToViewModel(products));
+            return View(products.ToProductsViewModel());
         }
 
         public IActionResult Cart()

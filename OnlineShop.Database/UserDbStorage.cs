@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using OnlineShopWebApplication.Models;
+using OnlineShop.Database.Models;
 
-namespace OnlineShopWebApplication
+namespace OnlineShop.Database
 {
-    public class UserInMemoryStorage : IUserStorage
+    public class UserDbStorage : IUserStorage
     {
-        public List<UserViewModel> usersList = new List<UserViewModel>()
+        public List<User> usersList = new List<User>()
         {
-            new UserViewModel() {Name = "Дмитрий", Password = "123" },
-            new UserViewModel() {Name = "Дмитрий Савченко", Password = "1" }
+            new User() {Name = "Дмитрий", Password = "123" },
+            new User() {Name = "Дмитрий Савченко", Password = "1" }
         };
 
-        public UserViewModel TryGetUserByName(string name)
+        public User TryGetUserByName(string name)
         {
             if (name != null)
             {
@@ -25,12 +25,12 @@ namespace OnlineShopWebApplication
             }
         }
 
-        public void AddUser(UserViewModel user)
+        public void AddUser(User user)
         {
             usersList.Add(user);
         }
 
-        public List<UserViewModel> GetAll()
+        public List<User> GetAll()
         {
             return usersList;
         }
@@ -41,7 +41,7 @@ namespace OnlineShopWebApplication
             usersList.Remove(userToDelete);
         }
 
-        public UserViewModel TryGetUserById(Guid userId)
+        public User TryGetUserById(Guid userId)
         {
             return usersList.First(x => x.ID == userId);
         }
@@ -58,7 +58,7 @@ namespace OnlineShopWebApplication
             user.Password = randomPass;
         }
 
-        public void ChangeUserData(Guid userId, UserViewModel user)
+        public void ChangeUserData(Guid userId, User user)
         {
             var userToEdit = TryGetUserById(userId);
             userToEdit.Name = user.Name;

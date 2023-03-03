@@ -7,31 +7,29 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class AdminController : Controller
     {
-        IProductStorage productStorage;
-        IOrderStorage orderStorage;
-        IUserRoleStorage userRoleStorage;
-        IUserStorage userStorage;
-        private readonly ToViewModelConverter toViewModelConverter;
+        readonly IProductStorage productStorage;
+        readonly IOrderStorage orderStorage;
+        readonly IUserRoleStorage userRoleStorage;
+        readonly IUserStorage userStorage;
 
-        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage, IUserRoleStorage userRoleStorage, IUserStorage userStorage, ToViewModelConverter toViewModelConverter)
+        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage, IUserRoleStorage userRoleStorage, IUserStorage userStorage)
         {
             this.productStorage = productStorage;
             this.orderStorage = orderStorage;
             this.userRoleStorage = userRoleStorage;
             this.userStorage = userStorage;
-            this.toViewModelConverter = toViewModelConverter;
         }
 
         // GET: AdminController
         public ActionResult Orders()
         {
-            return View(orderStorage.GetOrderList());
+            return View(orderStorage.GetOrderList().ToOrdersViewModel());
         }
 
         // GET: AdminController/Products/
         public ActionResult Products()
         {
-            return View(toViewModelConverter.ProductsToViewModel(productStorage.GetAll()));
+            return View(productStorage.GetAll().ToProductsViewModel());
         }
 
         // GET: AdminController/Users

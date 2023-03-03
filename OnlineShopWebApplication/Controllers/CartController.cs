@@ -9,18 +9,16 @@ namespace OnlineShopWebApplication.Controllers
     {
         private readonly IProductStorage productStorage;
         private readonly ICartStorage cartStorage;
-        private readonly ToViewModelConverter toViewModelConverter;
-        public CartController(IProductStorage productStorage, ICartStorage cartStorage, ToViewModelConverter toViewModelConverter)
+        public CartController(IProductStorage productStorage, ICartStorage cartStorage)
         {
             this.productStorage = productStorage;
             this.cartStorage = cartStorage;
-            this.toViewModelConverter = toViewModelConverter;
         }
         // GET: CartController
         public ActionResult Index()
         {
             var cart = cartStorage.TryGetByUserId(Constants.UserId);
-            var cartToView = toViewModelConverter.CartToViewModel(cart);
+            var cartToView = cart.ToCartViewModel();
             return View(cartToView);
         }
 

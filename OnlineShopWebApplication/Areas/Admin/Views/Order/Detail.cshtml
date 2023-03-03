@@ -20,23 +20,19 @@
             </tr>
             <tr>
                 <td>Клиент:</td>
-                <td>@Model.Name</td>
+                <td>@Model.DeliveryInfo.Name</td>
             </tr>
             <tr>
                 <td>Адрес доставки:</td>
-                <td>@Model.Address</td>
+                <td>@Model.DeliveryInfo.Address</td>
             </tr>
             <tr>
                 <td>Телефон:</td>
-                <td>@Model.Phone</td>
+                <td>@Model.DeliveryInfo.Phone</td>
             </tr>
             <tr>
                 <td>Заказ создан:</td>
                 <td>@Model.CreationDatetime</td>
-            </tr>
-            <tr>
-                <td>User ID:</td>
-                <td>@Model.userCart.UserID</td>
             </tr>
         </table>
 
@@ -51,7 +47,7 @@
                 <th>Количество</th>
                 <th>Общая стоимость</th>
             </tr>
-            @foreach (var item in @Model.userCart.CartItems)
+            @foreach (var item in @Model.CartItems)
             {
                 <tr>
                     <td>@item.Id</td>
@@ -64,8 +60,8 @@
             }
         </table>
         <br />
-        <p><h4>Общая сумма: @Model.userCart.FullCost</h4></p>
+        <p><h4>Общая сумма: @Model.CartItems.Sum(x => x.Cost * x.Count)</h4></p>
         <br />
-        <button class="btn btn-success" asp-controller="order" asp-action="saveOrder" asp-route-productId="@Model.Id">Сохранить изменения</button>
+        <button class="btn btn-success" asp-controller="order" asp-action="saveOrder" asp-route-orderId="@Model.Id" asp>Сохранить изменения</button>
     </div>
 </form>

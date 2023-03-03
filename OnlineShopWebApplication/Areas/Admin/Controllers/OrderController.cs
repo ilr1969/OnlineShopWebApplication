@@ -6,8 +6,9 @@ using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Helpers;
 using OnlineShopWebApplication.Models;
 
-namespace OnlineShopWebApplication.Controllers
+namespace OnlineShopWebApplication.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class OrderController : Controller
     {
         public ICartStorage cartStorage;
@@ -29,19 +30,18 @@ namespace OnlineShopWebApplication.Controllers
             return View();
         }
 
-        [HttpPost]
-        // GET: OrderController/Success
-        public ActionResult Success(OrderDeliveryInfoViewModel orderDeliveryInfoViewModel)
+        public IActionResult Detail(int orderNumber)
         {
-            var order = new Order
-            {
-                DeliveryInfo = orderDeliveryInfoViewModel.ToOrderDeliveryInfo(),
-                CartItems = cartStorage.TryGetByUserId(Constants.UserId).CartItems
-            };
+            var order = orderStorage.TryGetByNumber(orderNumber).ToOrderViewModel();
+            return View(order);
+        }
 
-            orderStorage.Add(order);
-            cartStorage.ClearBasket(Constants.UserId);
-            return View();
+        [HttpPost]
+        public IActionResult SaveOrder(Guid orderId, OrderStatusViewModel Status)
+        {
+            orderStorage.ChangeOrderStatus(orderId, (int)Status);
+            var order = orderStorage.TryGetById(orderId).ToOrderViewModel();
+            return View("Detail", order);
         }
     }
 }

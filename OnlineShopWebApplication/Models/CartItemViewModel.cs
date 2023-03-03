@@ -1,4 +1,5 @@
 ﻿using System;
+using OnlineShop.Database.Models;
 
 namespace OnlineShopWebApplication.Models
 {
@@ -7,6 +8,7 @@ namespace OnlineShopWebApplication.Models
         public Guid Id { get; set; }
         public ProductViewModel Product { get; set; }
         public int Count { get; set; }
+        public Cart UserCart { get; set; }
         public decimal Cost
         {
             get
