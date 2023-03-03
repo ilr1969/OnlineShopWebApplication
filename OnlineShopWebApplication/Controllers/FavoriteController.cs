@@ -10,19 +10,17 @@ namespace OnlineShopWebApplication.Controllers
     {
         readonly IProductStorage productStorage;
         readonly IFavoriteStorage favoriteStorage;
-        private readonly ToViewModelConverter toViewModelConverter;
 
-        public FavoriteController(IProductStorage productStorage, IFavoriteStorage favoriteStorage, ToViewModelConverter toViewModelConverter)
+        public FavoriteController(IProductStorage productStorage, IFavoriteStorage favoriteStorage)
         {
             this.productStorage = productStorage;
             this.favoriteStorage = favoriteStorage;
-            this.toViewModelConverter = toViewModelConverter;
         }
         // GET: FavoriteController
         public ActionResult Index()
         {
-            var favoriteList = favoriteStorage.TryGetById(Constants.UserId).FavoriteItems;
-            var favorite = toViewModelConverter.ProductsToViewModel(favoriteList.Select(x => x.Product).ToList());
+            var favoriteList = favoriteStorage.GetAll(Constants.UserId);
+            var favorite = favoriteList.Select(x => x.Product).ToList().ToProductsViewModel();
             return View(favorite);
         }
 

@@ -26,21 +26,20 @@ namespace OnlineShopWebApplication
         {
             string connection = Configuration.GetConnectionString("OnlineShop");
             services.AddDbContext<DatabaseContext>(option => option.UseSqlServer(connection));
-            services.AddSingleton<ToViewModelConverter>();
-            services.AddSingleton<ToModelConverter>();
             services.AddControllersWithViews();
             services.AddTransient<IProductStorage, ProductDbStorage>();
             services.AddTransient<ICompareStorage, CompareDbStorage>();
-            services.AddSingleton<IUserStorage, UserInMemoryStorage>();
+            services.AddSingleton<IUserStorage, UserDbStorage>();
             services.AddTransient<ICartStorage, CartDbStorage>();
             services.AddTransient<IMemoryProvider, MemoryProvider>();
-            services.AddSingleton<IOrderStorage, OrderInMemoryStorage>();
+            services.AddTransient<IOrderStorage, OrderDbStorage>();
             services.AddTransient<IFavoriteStorage, FavoriteDbStorage>();
             services.AddSingleton<IUserRoleStorage, UserRoleInMemoryStorage>();
 
-            services.Configure<RequestLocalizationOptions>(option => { 
-                var supportedCultures = new[] { 
-                    new CultureInfo("en-US"), 
+            services.Configure<RequestLocalizationOptions>(option =>
+            {
+                var supportedCultures = new[] {
+                    new CultureInfo("en-US"),
                 };
                 option.SupportedCultures = supportedCultures;
                 option.SupportedUICultures = supportedCultures;

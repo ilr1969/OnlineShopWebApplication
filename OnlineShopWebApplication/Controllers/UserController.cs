@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Database;
+using OnlineShopWebApplication.Helpers;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Controllers
 {
     public class UserController : Controller
     {
-        IUserStorage userStorage;
+        private readonly IUserStorage userStorage;
 
         public UserController(IUserStorage userStorage)
         {
@@ -41,7 +43,7 @@ namespace OnlineShopWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                userStorage.AddUser(user);
+                userStorage.AddUser(user.ToUser());
                 return Redirect("/home/index");
             }
             return View("RegisterForm");

@@ -10,12 +10,10 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductStorage productStorage;
-        private readonly ToViewModelConverter toViewModelConverter;
         private readonly DatabaseContext databaseContext;
-        public ProductController(IProductStorage productStorage, ToViewModelConverter toViewModelConverter, DatabaseContext databaseContext)
+        public ProductController(IProductStorage productStorage, DatabaseContext databaseContext)
         {
             this.productStorage = productStorage;
-            this.toViewModelConverter = toViewModelConverter;
             this.databaseContext = databaseContext;
         }
 
@@ -23,7 +21,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         public ActionResult EditProduct(Guid productId)
         {
             var product = productStorage.TryGetById(productId);
-            return View(toViewModelConverter.ProductToViewModel(product));
+            return View(product.ToProductViewModel());
         }
 
         [HttpPost]
@@ -39,7 +37,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
                 databaseContext.SaveChanges();
                 return Redirect("/admin/admin/products");
             }
-            return RedirectToAction("EditProduct", toViewModelConverter.ProductToViewModel(productToEdit));
+            return RedirectToAction("EditProduct", productToEdit.ToProductViewModel());
         }
         public IActionResult Remove(Guid productId)
         {
@@ -54,11 +52,11 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(ProductViewModel product)
+        public IActionResult Add(ProductViewModel productViewModel)
         {
             if (ModelState.IsValid)
             {
-                productStorage.Add(ToModelConverter.ProductToModel(product));
+                productStorage.Add(productViewModel.ToProduct());
                 return Redirect("/admin/admin/products");
             }
             return View();

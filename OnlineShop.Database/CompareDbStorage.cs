@@ -17,32 +17,30 @@ namespace OnlineShop.Database
             this.productStorage = productStorage;
         }
 
-        public CompareProduct TryGetById(string userId)
+        public List<Product> GetAll(string userId)
         {
-            return databaseContext.CompareProducts.Include(x => x.CompareItems).ThenInclude(x => x.Product).FirstOrDefault(x => x.UserId == userId);
+            return databaseContext.CompareProducts.Include(x => x.Product).Where(x => x.UserId == userId).Select(x => x.Product).ToList();
+        }
+
+        public CompareProduct TryGetById(string userId, Guid productId)
+        {
+            return databaseContext.CompareProducts.Include(x => x.Product).FirstOrDefault(x => x.UserId == userId && x.Product.Id == productId);
         }
 
         public void Add(string userId, Product product)
         {
-            var userCompareList = TryGetById(userId);
-            if (userCompareList == null)
+            var userCompareProduct = TryGetById(userId, product.Id);
+            if (userCompareProduct == null)
             {
-                userCompareList = new CompareProduct { UserId = userId, CompareItems = new List<CompareItem>() };
-                userCompareList.CompareItems.Add(new CompareItem { Product = product, CompareProduct = userCompareList });
-                databaseContext.Add(userCompareList);
-            }
-            else if (!userCompareList.CompareItems.Select(x => x.Product).Contains(product))
-            {
-                userCompareList.CompareItems.Add(new CompareItem { Product = product, CompareProduct = userCompareList });
+                databaseContext.CompareProducts.Add(new CompareProduct { UserId = userId, Product = product });
             }
             databaseContext.SaveChanges();
         }
 
         public void Remove(string userId, Guid productId)
         {
-            var userFavoriteList = TryGetById(userId);
-            var compareItemToRemove = userFavoriteList.CompareItems.First(x => x.Product.Id == productId);
-            userFavoriteList.CompareItems.Remove(compareItemToRemove);
+            var compareItemToRemove = TryGetById(userId, productId);
+            databaseContext.CompareProducts.Remove(compareItemToRemove);
             databaseContext.SaveChanges();
         }
     }

@@ -1,7 +1,7 @@
-﻿@model OrderViewModel
+﻿@model OrderDeliveryInfoViewModel
 
 Укажите данные для доставки @Constants.UserId
-<form method="post" asp-controller="order" asp-action="success">
+<form method="post" asp-area="" asp-controller="order" asp-action="success">
     <div>
         <label asp-for="Name">Имя:</label><br />
         <input asp-for="Name" type="text" name="Name" />

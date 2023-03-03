@@ -17,37 +17,30 @@ namespace OnlineShop.Database
             this.productStorage = productStorage;
         }
 
-        public FavoriteProduct TryGetById(string userId)
+        public List<FavoriteProduct> GetAll(string userId)
         {
-            return databaseContext.FavoriteProducts.Include(x => x.FavoriteItems).ThenInclude(x => x.Product).FirstOrDefault(x => x.UserId == userId);
+            return databaseContext.FavoriteProducts.Include(x => x.Product).Where(x => x.UserId == userId).ToList();
+        }
+
+        public FavoriteProduct TryGetById(string userId, Guid productId)
+        {
+            return databaseContext.FavoriteProducts.Include(x => x.Product).FirstOrDefault(x => x.UserId == userId && x.Product.Id == productId);
         }
 
         public void Add(string userId, Product product)
         {
-            var userFavoriteList = TryGetById(userId);
-            if (userFavoriteList == null)
+            var existingProduct = TryGetById(userId, product.Id);
+            if (existingProduct == null)
             {
-                userFavoriteList = new FavoriteProduct { UserId = userId, FavoriteItems = new List<FavoriteItem>() };
-                var userFavoriteItem = new FavoriteItem
-                {
-                    Product = product,
-                    FavoriteProduct = userFavoriteList
-                };
-                userFavoriteList.FavoriteItems.Add(userFavoriteItem);
-                databaseContext.Add(userFavoriteList);
-            }
-            else if (!userFavoriteList.FavoriteItems.Select(x => x.Product).Contains(product))
-            {
-                userFavoriteList.FavoriteItems.Add(new FavoriteItem { Product = product, FavoriteProduct = userFavoriteList});
+                databaseContext.FavoriteProducts.Add(new FavoriteProduct { UserId = userId, Product = product });
             }
             databaseContext.SaveChanges();
         }
 
         public void Remove(string userId, Guid productId)
         {
-            var userFavoriteList = TryGetById(userId);
-            var favoriteItemToRemove = userFavoriteList.FavoriteItems.First(x => x.Product.Id == productId);
-            userFavoriteList.FavoriteItems.Remove(favoriteItemToRemove);
+            var userFavoriteProduct = TryGetById(userId, productId);
+            databaseContext.FavoriteProducts.Remove(userFavoriteProduct);
             databaseContext.SaveChanges();
         }
     }

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
 using OnlineShopWebApplication.Helpers;
-using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Controllers
 {
@@ -12,21 +10,18 @@ namespace OnlineShopWebApplication.Controllers
     {
         public IProductStorage productStorage;
         private readonly ICompareStorage compareStorage;
-        private readonly ToViewModelConverter toViewModelConverter;
 
-        public CompareController(IProductStorage productStorage, ToViewModelConverter toViewModelConverter, ICompareStorage compareStorage)
+        public CompareController(IProductStorage productStorage, ICompareStorage compareStorage)
         {
             this.productStorage = productStorage;
-            this.toViewModelConverter = toViewModelConverter;
             this.compareStorage = compareStorage;
         }
 
         // GET: CompareController
         public ActionResult Index()
         {
-            var compareList = compareStorage.TryGetById(Constants.UserId);
-            var productsCompareList = compareList.CompareItems.Select(x => x.Product).ToList();
-            return View(toViewModelConverter.ProductsToViewModel(productsCompareList));
+            var compareList = compareStorage.GetAll(Constants.UserId);
+            return View(compareList.ToProductsViewModel());
         }
 
         public ActionResult Add(Guid productId)

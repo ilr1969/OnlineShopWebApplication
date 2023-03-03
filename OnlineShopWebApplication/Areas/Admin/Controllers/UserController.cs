@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Database;
+using OnlineShopWebApplication.Helpers;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Areas.Admin.Controllers
@@ -7,7 +9,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
     [Area("Admin")]
     public class UserController : Controller
     {
-        IUserStorage userStorage;
+        private readonly IUserStorage userStorage;
 
         public UserController(IUserStorage userStorage)
         {
@@ -26,7 +28,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                userStorage.AddUser(user);
+                userStorage.AddUser(user.ToUser());
                 return Redirect("/admin/admin/users");
             }
             return View("AddUser");
@@ -43,7 +45,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult SaveUser(Guid userId, UserViewModel user)
         {
-            userStorage.ChangeUserData(userId, user);
+            userStorage.ChangeUserData(userId, user.ToUser());
             return Redirect("/admin/admin/users");
         }
 

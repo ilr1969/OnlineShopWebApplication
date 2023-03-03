@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Helpers
 {
-    public class ToViewModelConverter
+    public static class ToViewModelConverter
     {
-        public ProductViewModel ProductToViewModel(Product product)
+        public static ProductViewModel ToProductViewModel(this Product product)
         {
             var productViewModel = new ProductViewModel
             {
@@ -22,43 +20,76 @@ namespace OnlineShopWebApplication.Helpers
             return productViewModel;
         }
 
-        public List<ProductViewModel> ProductsToViewModel(List<Product> products)
+        public static List<ProductViewModel> ToProductsViewModel(this List<Product> products)
         {
             var productsViewModel = new List<ProductViewModel>();
             foreach (var prod in products)
             {
-                var productViewModel = new ProductViewModel();
-                productViewModel.ID = prod.Id;
-                productViewModel.Name = prod.Name;
-                productViewModel.Description = prod.Description;
-                productViewModel.Cost = prod.Cost;
-                productViewModel.ImagePath = prod.ImagePath;
-                productsViewModel.Add(productViewModel);
+                productsViewModel.Add(prod.ToProductViewModel());
             }
             return productsViewModel;
         }
 
-        public CartViewModel CartToViewModel(Cart cart)
+        public static List<OrderViewModel> ToOrdersViewModel(this List<Order> orders)
+        {
+            var ordersViewModel = new List<OrderViewModel>();
+            foreach (var order in orders)
+            {
+                ordersViewModel.Add(order.ToOrderViewModel());
+            }
+            return ordersViewModel;
+        }
+
+        public static OrderViewModel ToOrderViewModel(this Order order)
+        {
+            var orderViewModel = new OrderViewModel()
+            {
+                Id = order.Id,
+                OrderNumber = order.OrderNumber,
+                CartItems = order.CartItems.ToCartItemsViewModel(),
+                DeliveryInfo = order.DeliveryInfo.ToOrderDeliveryInfoViewModel(),
+                CreationDatetime = order.CreationDatetime,
+                Status = (OrderStatusViewModel)(int)order.Status
+            };
+            return orderViewModel;
+        }
+
+        public static OrderDeliveryInfoViewModel ToOrderDeliveryInfoViewModel(this OrderDeliveryInfo orderDeliveryInfo)
+        {
+            var orderDeliveryInfoViewModel = new OrderDeliveryInfoViewModel()
+            {
+                Id = orderDeliveryInfo.Id,
+                Name = orderDeliveryInfo.Name,
+                Address = orderDeliveryInfo.Address,
+                Phone = orderDeliveryInfo.Phone,
+                Agree = orderDeliveryInfo.Agree,
+            };
+            return orderDeliveryInfoViewModel;
+        }
+
+        public static CartViewModel ToCartViewModel(this Cart cart)
         {
             var cartViewModel = new CartViewModel();
             if (cart != null)
             {
                 cartViewModel.Id = cart.Id;
                 cartViewModel.UserID = cart.UserID;
-                cartViewModel.CartItems = CartItemsToViewModel(cart.CartItems);
+                cartViewModel.CartItems = cart.CartItems.ToCartItemsViewModel();
             }
             return cartViewModel;
         }
 
-        public List<CartItemViewModel> CartItemsToViewModel(List<CartItem> cartItems)
+        public static List<CartItemViewModel> ToCartItemsViewModel(this List<CartItem> cartItems)
         {
             var cartItemsViewModel = new List<CartItemViewModel>();
             foreach (var item in cartItems)
             {
-                var cartItemViewModel = new CartItemViewModel();
-                cartItemViewModel.Id = item.Id;
-                cartItemViewModel.Product = ProductToViewModel(item.Product);
-                cartItemViewModel.Count = item.Count;
+                var cartItemViewModel = new CartItemViewModel
+                {
+                    Id = item.Id,
+                    Product = item.Product.ToProductViewModel(),
+                    Count = item.Count,
+                };
                 cartItemsViewModel.Add(cartItemViewModel);
             }
             return cartItemsViewModel;
