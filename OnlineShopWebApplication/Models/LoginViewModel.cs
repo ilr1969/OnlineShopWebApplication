@@ -15,6 +15,6 @@ namespace OnlineShopWebApplication.Models
 
         public bool RememberMe { get; set; }
 
-        public string ReturnURL { get; set; }
+        public string ReturnURL = "/home/index";
     }
 }

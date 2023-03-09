@@ -2,14 +2,17 @@
 
 @{ Random random = new Random();
     string randomPass = "";
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 2; i++)
     {
-        randomPass += Convert.ToChar(random.Next(33, 125));
+        randomPass += Convert.ToChar(random.Next(33, 47));
+        randomPass += Convert.ToChar(random.Next(48, 57));
+        randomPass += Convert.ToChar(random.Next(65, 90));
+        randomPass += Convert.ToChar(random.Next(97, 122));
     }
 }
 
 <h2>Добавление нового пользователя</h2>
-<form method="post" asp-area="admin" asp-controller="user" asp-action="add">
+<form method="post" asp-area="admin" asp-controller="account" asp-action="add">
     <div>
         <div>
             <label asp-for="UserName">Имя: </label><br />

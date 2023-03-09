@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
+using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Helpers;
 
 namespace OnlineShopWebApplication.Areas.Admin.Controllers
@@ -9,17 +12,17 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
     [Authorize(Roles = Constants.AdminRole)]
     public class AdminController : Controller
     {
+        private readonly UserManager<User> userManager;
         readonly IProductStorage productStorage;
         readonly IOrderStorage orderStorage;
         readonly IUserRoleStorage userRoleStorage;
-        readonly IUserStorage userStorage;
 
-        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage, IUserRoleStorage userRoleStorage, IUserStorage userStorage)
+        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage, IUserRoleStorage userRoleStorage, UserManager<User> userManager)
         {
             this.productStorage = productStorage;
             this.orderStorage = orderStorage;
             this.userRoleStorage = userRoleStorage;
-            this.userStorage = userStorage;
+            this.userManager = userManager;
         }
 
         // GET: AdminController
@@ -37,7 +40,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         // GET: AdminController/Users
         public ActionResult Users()
         {
-            return View();  //userStorage.GetAll()
+            return View(userManager.Users.ToList());
         }
 
         // GET: AdminController/Roles
