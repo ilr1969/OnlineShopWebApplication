@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OnlineShop.Database.Migrations
 {
-    public partial class Initialization : Migration
+    public partial class DatabaseInitialization : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,7 +42,8 @@ namespace OnlineShop.Database.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreationDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,17 +54,25 @@ namespace OnlineShop.Database.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Age = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
-                    ComparePassword = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.ID);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -156,6 +165,19 @@ namespace OnlineShop.Database.Migrations
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "Cost", "CreationDateTime", "Description", "ImagePath", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("fc80bb38-b88d-483d-b9b7-27e46685eac6"), 15000000m, new DateTime(2023, 3, 7, 10, 59, 53, 589, DateTimeKind.Local).AddTicks(7589), "good", "/images/image1.jpg", "Ferrari" },
+                    { new Guid("5e4bb5f0-8d18-4870-9371-a7ac7dfec844"), 25000000m, new DateTime(2023, 3, 7, 10, 59, 53, 591, DateTimeKind.Local).AddTicks(2569), "best", "/images/image2.jpg", "Lambo" },
+                    { new Guid("882c0644-b5cf-422b-a9b0-fddb87812741"), 5000000m, new DateTime(2023, 3, 7, 10, 59, 53, 591, DateTimeKind.Local).AddTicks(2644), "good", "/images/image3.jpg", "Camaro" },
+                    { new Guid("35b1ebe6-75f0-4a2b-add9-1aadfccdf8f9"), 7000000m, new DateTime(2023, 3, 7, 10, 59, 53, 591, DateTimeKind.Local).AddTicks(2650), "good", "/images/image4.jpg", "Mustang" },
+                    { new Guid("135fb79d-d49f-4ec6-9f81-4f714a24e87f"), 7000m, new DateTime(2023, 3, 7, 10, 59, 53, 591, DateTimeKind.Local).AddTicks(2653), "not bad", "/images/image5.jpg", "Volga" },
+                    { new Guid("65c9ba3e-67d6-4c67-bfd6-5c261914408e"), 700m, new DateTime(2023, 3, 7, 10, 59, 53, 591, DateTimeKind.Local).AddTicks(2707), "foo", "/images/image6.jpg", "Kopeyka" }
                 });
 
             migrationBuilder.CreateIndex(

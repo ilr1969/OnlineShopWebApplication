@@ -176,54 +176,54 @@ namespace OnlineShop.Database.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("570f9908-d532-4758-84a8-f3dd65b4b216"),
+                            Id = new Guid("fc80bb38-b88d-483d-b9b7-27e46685eac6"),
                             Cost = 15000000m,
-                            CreationDateTime = new DateTime(2023, 3, 3, 13, 35, 54, 969, DateTimeKind.Local).AddTicks(400),
+                            CreationDateTime = new DateTime(2023, 3, 7, 10, 59, 53, 589, DateTimeKind.Local).AddTicks(7589),
                             Description = "good",
                             ImagePath = "/images/image1.jpg",
                             Name = "Ferrari"
                         },
                         new
                         {
-                            Id = new Guid("8ccdae17-15fe-4dab-b1ee-cd9753040886"),
+                            Id = new Guid("5e4bb5f0-8d18-4870-9371-a7ac7dfec844"),
                             Cost = 25000000m,
-                            CreationDateTime = new DateTime(2023, 3, 3, 13, 35, 54, 970, DateTimeKind.Local).AddTicks(5260),
+                            CreationDateTime = new DateTime(2023, 3, 7, 10, 59, 53, 591, DateTimeKind.Local).AddTicks(2569),
                             Description = "best",
                             ImagePath = "/images/image2.jpg",
                             Name = "Lambo"
                         },
                         new
                         {
-                            Id = new Guid("365e1fe8-4cfd-4793-9fd5-93d03b50fc8c"),
+                            Id = new Guid("882c0644-b5cf-422b-a9b0-fddb87812741"),
                             Cost = 5000000m,
-                            CreationDateTime = new DateTime(2023, 3, 3, 13, 35, 54, 970, DateTimeKind.Local).AddTicks(5334),
+                            CreationDateTime = new DateTime(2023, 3, 7, 10, 59, 53, 591, DateTimeKind.Local).AddTicks(2644),
                             Description = "good",
                             ImagePath = "/images/image3.jpg",
                             Name = "Camaro"
                         },
                         new
                         {
-                            Id = new Guid("2c2d5ed6-44ce-408d-ac6a-2901e6286529"),
+                            Id = new Guid("35b1ebe6-75f0-4a2b-add9-1aadfccdf8f9"),
                             Cost = 7000000m,
-                            CreationDateTime = new DateTime(2023, 3, 3, 13, 35, 54, 970, DateTimeKind.Local).AddTicks(5339),
+                            CreationDateTime = new DateTime(2023, 3, 7, 10, 59, 53, 591, DateTimeKind.Local).AddTicks(2650),
                             Description = "good",
                             ImagePath = "/images/image4.jpg",
                             Name = "Mustang"
                         },
                         new
                         {
-                            Id = new Guid("d3f9cfb8-17e0-4433-8805-9f8cec2ac93a"),
+                            Id = new Guid("135fb79d-d49f-4ec6-9f81-4f714a24e87f"),
                             Cost = 7000m,
-                            CreationDateTime = new DateTime(2023, 3, 3, 13, 35, 54, 970, DateTimeKind.Local).AddTicks(5342),
+                            CreationDateTime = new DateTime(2023, 3, 7, 10, 59, 53, 591, DateTimeKind.Local).AddTicks(2653),
                             Description = "not bad",
                             ImagePath = "/images/image5.jpg",
                             Name = "Volga"
                         },
                         new
                         {
-                            Id = new Guid("0c7284c5-8ce8-4115-a643-a71b8cfa05e6"),
+                            Id = new Guid("65c9ba3e-67d6-4c67-bfd6-5c261914408e"),
                             Cost = 700m,
-                            CreationDateTime = new DateTime(2023, 3, 3, 13, 35, 54, 970, DateTimeKind.Local).AddTicks(5346),
+                            CreationDateTime = new DateTime(2023, 3, 7, 10, 59, 53, 591, DateTimeKind.Local).AddTicks(2707),
                             Description = "foo",
                             ImagePath = "/images/image6.jpg",
                             Name = "Kopeyka"
@@ -232,36 +232,52 @@ namespace OnlineShop.Database.Migrations
 
             modelBuilder.Entity("OnlineShop.Database.Models.User", b =>
                 {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Age")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
 
-                    b.Property<string>("ComparePassword")
-                        .IsRequired()
+                    b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
 
-                    b.Property<string>("Role")
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
                 });

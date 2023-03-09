@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
 using OnlineShopWebApplication.Helpers;
 
 namespace OnlineShopWebApplication.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = Constants.AdminRole)]
     public class AdminController : Controller
     {
         readonly IProductStorage productStorage;
@@ -35,7 +37,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         // GET: AdminController/Users
         public ActionResult Users()
         {
-            return View(userStorage.GetAll());
+            return View();  //userStorage.GetAll()
         }
 
         // GET: AdminController/Roles

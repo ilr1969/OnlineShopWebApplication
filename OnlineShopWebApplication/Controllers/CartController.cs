@@ -1,10 +1,12 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
 using OnlineShopWebApplication.Helpers;
 
 namespace OnlineShopWebApplication.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly IProductStorage productStorage;

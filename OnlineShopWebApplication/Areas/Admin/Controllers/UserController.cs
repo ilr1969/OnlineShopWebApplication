@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
 using OnlineShopWebApplication.Helpers;
@@ -7,6 +8,7 @@ using OnlineShopWebApplication.Models;
 namespace OnlineShopWebApplication.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = Constants.AdminRole)]
     public class UserController : Controller
     {
         private readonly IUserStorage userStorage;
@@ -22,7 +24,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
             return View();
         }
 
-        // GET: UserController/Add
+/*        // GET: UserController/Add
         [HttpPost]
         public ActionResult Add(UserViewModel user)
         {
@@ -62,6 +64,6 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         {
             userStorage.changePassword(userId);
             return Redirect("/admin/admin/users");
-        }
+        }*/
     }
 }

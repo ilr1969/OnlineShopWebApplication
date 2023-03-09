@@ -1,6 +1,6 @@
-﻿@model List<UserViewModel>
+﻿@model List<LoginViewModel>
 
-<div class="row">
+@*<div class="row">
     @await Html.PartialAsync("AdminLeftMenu")
 
     <div class="col-9">
@@ -8,7 +8,6 @@
         <a asp-area="admin" asp-controller="User" asp-action="AddUser">Добавить пользователя</a>
         <table class="table-bordered" width="100%">
             <tr>
-                <th>ID</th>
                 <th>Имя</th>
                 <th>Email</th>
                 <th>Возраст</th>
@@ -18,11 +17,7 @@
             @foreach (var item in @Model)
             {
                 <tr>
-                    <td>@item.ID</td>
-                    <td>@item.Name</td>
                     <td>@item.Email</td>
-                    <td>@item.Age</td>
-                    <td>@item.Role</td>
                     <td class="dropdown">
                         <button class="btn btn-success dropdown-toggle" type="button" id="actionMenu" data-toggle="dropdown">Действие</button>
                         <ul class="dropdown-menu" aria-labelledby="actionMenu">
@@ -35,7 +30,7 @@
             }
         </table>
     </div>
-</div>
+</div>*@
 
 <form method="post" asp-area="admin" asp-controller="user" asp-action="removeUser">
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
