@@ -25,9 +25,9 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         // GET: UserControllerRegsterForm
-        public ActionResult RegisterForm()
+        public ActionResult RegisterForm(string returnURL)
         {
-            return View();
+            return View(new RegisterViewModel { ReturnURL = returnURL });
         }
 
         // GET: UserController/Login
@@ -56,7 +56,7 @@ namespace OnlineShopWebApplication.Controllers
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync(newUser, Constants.UserRole).Wait();
-                    return Redirect("/home/index");
+                    return Redirect(registerViewModel.ReturnURL);
                 }
             }
             return View("RegisterForm");

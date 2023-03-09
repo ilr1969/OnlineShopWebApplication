@@ -22,4 +22,4 @@
         <button class="btn btn-success" type="submit">Вход</button>
     </div>
 </form>
-<a asp-controller="Account" asp-action="register">Регистрация нового пользователя</a>
+<a asp-controller="Account" asp-action="registerForm" asp-route-returnURL ="@Model.ReturnURL">Регистрация нового пользователя</a>

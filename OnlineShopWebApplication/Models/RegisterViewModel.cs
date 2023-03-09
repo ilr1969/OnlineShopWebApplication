@@ -20,5 +20,7 @@ namespace OnlineShopWebApplication.Models
         [Required(ErrorMessage = "Подтверждение пароля обязательно")]
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ComparePassword { get; set; }
+
+        public string ReturnURL { get; set; }
     }
 }
