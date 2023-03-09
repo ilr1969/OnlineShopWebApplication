@@ -1,12 +1,16 @@
+using System;
 using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using OnlineShop.Database;
+using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Helpers;
 using Serilog;
 
@@ -25,7 +29,19 @@ namespace OnlineShopWebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             string connection = Configuration.GetConnectionString("OnlineShop");
+
             services.AddDbContext<DatabaseContext>(option => option.UseSqlServer(connection));
+
+            services.AddDbContext<IdentityContext>(option => option.UseSqlServer(connection));
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
+            services.ConfigureApplicationCookie(option =>
+            {
+                option.ExpireTimeSpan = TimeSpan.FromHours(8);
+                option.LoginPath = "/account/loginForm";
+                option.LogoutPath = "/home/index";
+                option.Cookie = new CookieBuilder { IsEssential = true };
+            });
+
             services.AddControllersWithViews();
             services.AddTransient<IProductStorage, ProductDbStorage>();
             services.AddTransient<ICompareStorage, CompareDbStorage>();
@@ -66,6 +82,7 @@ namespace OnlineShopWebApplication
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value;

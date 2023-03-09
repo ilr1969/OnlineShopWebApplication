@@ -1,11 +1,11 @@
-﻿@model UserViewModel
+﻿@model RegisterViewModel
 
-<h2>Редактирование продукта</h2>
+<h2>Редактирование пользователя</h2>
 <form method="post" asp-area="admin" asp-controller="user" asp-action="SaveUser">
     <div>
         <div>
-            <input type="text" name="userId" value="@Model.ID" hidden/>
-            <div>
+            @*<input type="text" name="userId" value="@Model.ID" hidden/>*@
+@*            <div>
                 <label asp-for="Name">Имя: </label><br />
                 <input asp-for="Name" type="text" value="@Model.Name" name="Name" />
                 <span asp-validation-for="Name"></span>
@@ -24,7 +24,7 @@
                 <label asp-for="Role">Роль: </label><br />
                 <input asp-for="Role" type="text" value="@Model.Role" name="Role" />
                 <span asp-validation-for="Role"></span>
-            </div>
+            </div>*@
         </div>
         <button class="btn btn-success" type="submit">Сохранить изменения</button>
     </div>

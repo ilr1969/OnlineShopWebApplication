@@ -20,7 +20,7 @@ namespace OnlineShopWebApplication.Helpers
             return product;
         }
 
-        public static User ToUser(this UserViewModel userViewModel)
+/*        public static User ToUser(this UserViewModel userViewModel)
         {
             var user = new User
             {
@@ -33,7 +33,7 @@ namespace OnlineShopWebApplication.Helpers
                 Role = userViewModel.Role
             };
             return user;
-        }
+        }*/
 
 
         public static List<Order> ToOrders(this List<OrderViewModel> ordersViewModel)

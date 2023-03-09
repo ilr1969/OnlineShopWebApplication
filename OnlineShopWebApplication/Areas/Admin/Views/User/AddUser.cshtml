@@ -1,4 +1,4 @@
-﻿@model UserViewModel
+﻿@model RegisterViewModel
 
 @{ Random random = new Random();
     string randomPass = "";
@@ -12,24 +12,14 @@
 <form method="post" asp-area="admin" asp-controller="user" asp-action="add">
     <div>
         <div>
-            <label asp-for="Name">Имя: </label><br />
-            <input asp-for="Name" type="text" name="Name" />
-            <span asp-validation-for="Name"></span>
+            <label asp-for="UserName">Имя: </label><br />
+            <input asp-for="UserName" type="text" name="UserName" />
+            <span asp-validation-for="UserName"></span>
         </div>
         <div>
             <label asp-for="Email">Email: </label><br />
             <input asp-for="Email" type="email" name="Email" />
             <span asp-validation-for="Email"></span>
-        </div>
-        <div>
-            <label asp-for="Age">Возраст: </label><br />
-            <input asp-for="Age" type="number" name="Age" />
-            <span asp-validation-for="Age"></span>
-        </div>
-        <div>
-            <label asp-for="Role">Роль: </label><br />
-            <input asp-for="Role" type="text" name="Role" />
-            <span asp-validation-for="Role"></span>
         </div>
         <div>
             <label asp-for="Password">Пароль: </label><br />

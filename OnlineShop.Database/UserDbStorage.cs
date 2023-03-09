@@ -7,7 +7,7 @@ namespace OnlineShop.Database
 {
     public class UserDbStorage : IUserStorage
     {
-        public List<User> usersList = new List<User>()
+/*        public List<User> usersList = new List<User>()
         {
             new User() {Name = "Дмитрий", Password = "123" },
             new User() {Name = "Дмитрий Савченко", Password = "1" }
@@ -65,6 +65,6 @@ namespace OnlineShop.Database
             userToEdit.Email = user.Email;
             userToEdit.Age = user.Age;
             userToEdit.Role = user.Role;
-        }
+        }*/
     }
 }

@@ -6,7 +6,7 @@ namespace OnlineShop.Database
 {
     public interface IUserStorage
     {
-        static List<User> usersList;
+/*        static List<User> usersList;
 
         User TryGetUserByName(string name);
 
@@ -15,6 +15,6 @@ namespace OnlineShop.Database
         void DeleteUser(Guid userId);
         User TryGetUserById(Guid userId);
         void changePassword(Guid userId);
-        void ChangeUserData(Guid userId, User user);
+        void ChangeUserData(Guid userId, User user);*/
     }
 }

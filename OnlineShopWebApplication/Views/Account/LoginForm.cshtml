@@ -1,0 +1,25 @@
+﻿@model LoginViewModel
+
+<h2>Вход</h2>
+<form method="post" asp-controller="Account" asp-action="login">
+    <div>
+        <input type="hidden" name="returnURL" value="@Model.ReturnURL" />
+        <div>
+            <label asp-for="UserName">Имя: </label><br />
+            <input type="text" name="UserName" asp-for="UserName" />
+            <span asp-validation-for="UserName"></span>
+        </div>
+        <div>
+            <label asp-for="Password">Пароль: </label><br />
+            <input type="password" name="Password" asp-for="Password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div>
+            <label>Запомнить меня</label>
+            <input type="checkbox" name="RememberMe" asp-for="RememberMe" value="True" />
+            <span asp-validation-for="RememberMe"></span>
+        </div>
+        <button class="btn btn-success" type="submit">Вход</button>
+    </div>
+</form>
+<a asp-controller="Account" asp-action="register">Регистрация нового пользователя</a>

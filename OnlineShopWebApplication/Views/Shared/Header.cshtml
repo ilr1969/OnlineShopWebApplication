@@ -21,15 +21,33 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="favorite" asp-action="Index">&#11088;<sup style="color:red">@await Component.InvokeAsync("Favorite")</sup></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="user" asp-action="LoginForm">Вход</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="user" asp-action="RegisterForm">Регистрация</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="admin" asp-controller="admin" asp-action="orders">Админ</a>
-                        </li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LoginForm">@User.Identity.Name</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOut">Выйти</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LoginForm">Вход</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="RegisterForm">Регистрация</a>
+                            </li>
+                        }
+
+                        @if (User.IsInRole(Constants.AdminRole))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="admin" asp-controller="admin" asp-action="orders">Админ</a>
+                            </li>
+                        }
+
                         <li>
                             <input type="search" id="searchInput" name="searchText" onkeydown="search()" placeholder="Поиск">
                         </li>
