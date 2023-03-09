@@ -3,6 +3,7 @@
 <h2>Регистрация</h2>
 <form method="post" asp-controller="Account" asp-action="register">
     <div>
+        <input type="hidden" name="returnURL" value="@Model.ReturnURL" />
         <div>
             <label asp-for="UserName">Имя: </label><br />
             <input type="text" name="UserName" asp-for="UserName" />
