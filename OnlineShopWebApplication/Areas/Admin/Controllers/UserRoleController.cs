@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
+using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Areas.Admin.Controllers
@@ -11,11 +13,11 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
     [Authorize(Roles = Constants.AdminRole)]
     public class UserRoleController : Controller
     {
-        IUserRoleStorage userRoleStorage;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public UserRoleController(IUserRoleStorage userRoleStorage)
+        public UserRoleController(RoleManager<IdentityRole> roleManager)
         {
-            this.userRoleStorage = userRoleStorage;
+            this.roleManager = roleManager;
         }
 
         // GET: UserRoleController
@@ -31,36 +33,23 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddRole(UserRoleViewModel userRole)
+        public IActionResult AddRole(IdentityRole userRole)
         {
-            var userRoleList = userRoleStorage.GetRolesList();
-            if (ModelState.IsValid && userRoleList.FirstOrDefault(x => x.RoleName == userRole.RoleName) == null)
+            
+            if (roleManager.Roles.FirstOrDefault(x => x.Name == userRole.Name) == null)
             {
-                userRoleStorage.AddUserRole(userRole);
+                var role = new IdentityRole { Name = userRole.Name };
+                roleManager.CreateAsync(role).Wait();
                 return Redirect("/admin/admin/userroles");
             }
             return View("AddUserRole");
         }
 
-        // GET: UserRoleController/EditUserRole/5
-        public ActionResult EditUserRole(Guid userRoleId)
-        {
-            var UserRoleToEdit = userRoleStorage.GetRole(userRoleId);
-            return View(UserRoleToEdit);
-        }
-
-        [HttpPost]
-        public ActionResult SaveRole(Guid userRoleId, string roleName, string roleDescription)
-        {
-            userRoleStorage.UpdateRole(userRoleId, roleName, roleDescription);
-            return Redirect("/admin/admin/userroles");
-        }
-
         // GET: UserRoleController/RemoveUserRole/5
-        public ActionResult RemoveUserRole(Guid userRoleId)
+        public ActionResult RemoveUserRole(string userRoleId)
         {
-            var UserRoleToRemove = userRoleStorage.GetRole(userRoleId);
-            userRoleStorage.RemoveUserRole(UserRoleToRemove);
+            var userRoleToRemove = roleManager.Roles.First(x => x.Id == userRoleId);
+            roleManager.DeleteAsync(userRoleToRemove);
             return Redirect("/admin/admin/userroles");
         }
     }

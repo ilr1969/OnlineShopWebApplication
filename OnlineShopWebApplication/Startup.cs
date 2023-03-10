@@ -49,7 +49,6 @@ namespace OnlineShopWebApplication
             services.AddTransient<IMemoryProvider, MemoryProvider>();
             services.AddTransient<IOrderStorage, OrderDbStorage>();
             services.AddTransient<IFavoriteStorage, FavoriteDbStorage>();
-            services.AddSingleton<IUserRoleStorage, UserRoleInMemoryStorage>();
 
             services.Configure<RequestLocalizationOptions>(option =>
             {

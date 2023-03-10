@@ -19,9 +19,19 @@ namespace OnlineShop.Database.Models
 
         public DateTime CreationDateTime { get; set; }
 
+        public Product(Guid id, string name, decimal cost, string description, string imagePath)
+        {
+            Id = id;
+            Name = name;
+            Cost = cost;
+            Description = description;
+            ImagePath = imagePath;
+            CartItems = new List<CartItem>();
+            CreationDateTime = DateTime.Now;
+        }
+
         public Product()
         {
-            Id = Guid.NewGuid();
             CartItems = new List<CartItem>();
             CreationDateTime = DateTime.Now;
         }

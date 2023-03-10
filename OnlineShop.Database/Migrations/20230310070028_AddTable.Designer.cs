@@ -10,8 +10,8 @@ using OnlineShop.Database;
 namespace OnlineShop.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230307075955_DatabaseInitialization")]
-    partial class DatabaseInitialization
+    [Migration("20230310070028_AddTable")]
+    partial class AddTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -178,54 +178,54 @@ namespace OnlineShop.Database.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("fc80bb38-b88d-483d-b9b7-27e46685eac6"),
-                            Cost = 15000000m,
-                            CreationDateTime = new DateTime(2023, 3, 7, 10, 59, 53, 589, DateTimeKind.Local).AddTicks(7589),
-                            Description = "good",
+                            Id = new Guid("8a5cf474-c473-48e1-bc3e-bbe0f22a80f2"),
+                            Cost = 35000000m,
+                            CreationDateTime = new DateTime(2023, 3, 10, 10, 0, 26, 806, DateTimeKind.Local).AddTicks(6591),
+                            Description = "super",
                             ImagePath = "/images/image1.jpg",
                             Name = "Ferrari"
                         },
                         new
                         {
-                            Id = new Guid("5e4bb5f0-8d18-4870-9371-a7ac7dfec844"),
+                            Id = new Guid("e6d46e32-765c-487d-bf57-78759b32a47c"),
                             Cost = 25000000m,
-                            CreationDateTime = new DateTime(2023, 3, 7, 10, 59, 53, 591, DateTimeKind.Local).AddTicks(2569),
+                            CreationDateTime = new DateTime(2023, 3, 10, 10, 0, 26, 807, DateTimeKind.Local).AddTicks(9610),
                             Description = "best",
                             ImagePath = "/images/image2.jpg",
                             Name = "Lambo"
                         },
                         new
                         {
-                            Id = new Guid("882c0644-b5cf-422b-a9b0-fddb87812741"),
+                            Id = new Guid("59d7a46d-79a2-4a09-b6ad-a2333c3d3dcc"),
                             Cost = 5000000m,
-                            CreationDateTime = new DateTime(2023, 3, 7, 10, 59, 53, 591, DateTimeKind.Local).AddTicks(2644),
+                            CreationDateTime = new DateTime(2023, 3, 10, 10, 0, 26, 807, DateTimeKind.Local).AddTicks(9655),
                             Description = "good",
                             ImagePath = "/images/image3.jpg",
                             Name = "Camaro"
                         },
                         new
                         {
-                            Id = new Guid("35b1ebe6-75f0-4a2b-add9-1aadfccdf8f9"),
+                            Id = new Guid("b41fefb9-1c66-4f2a-86af-090ada282060"),
                             Cost = 7000000m,
-                            CreationDateTime = new DateTime(2023, 3, 7, 10, 59, 53, 591, DateTimeKind.Local).AddTicks(2650),
+                            CreationDateTime = new DateTime(2023, 3, 10, 10, 0, 26, 807, DateTimeKind.Local).AddTicks(9662),
                             Description = "good",
                             ImagePath = "/images/image4.jpg",
                             Name = "Mustang"
                         },
                         new
                         {
-                            Id = new Guid("135fb79d-d49f-4ec6-9f81-4f714a24e87f"),
+                            Id = new Guid("36211d90-17e0-42d0-9f3b-3b17d2885ec1"),
                             Cost = 7000m,
-                            CreationDateTime = new DateTime(2023, 3, 7, 10, 59, 53, 591, DateTimeKind.Local).AddTicks(2653),
+                            CreationDateTime = new DateTime(2023, 3, 10, 10, 0, 26, 807, DateTimeKind.Local).AddTicks(9667),
                             Description = "not bad",
                             ImagePath = "/images/image5.jpg",
                             Name = "Volga"
                         },
                         new
                         {
-                            Id = new Guid("65c9ba3e-67d6-4c67-bfd6-5c261914408e"),
+                            Id = new Guid("968bfe01-31ba-44c0-a7c8-d1d04c1ffeb5"),
                             Cost = 700m,
-                            CreationDateTime = new DateTime(2023, 3, 7, 10, 59, 53, 591, DateTimeKind.Local).AddTicks(2707),
+                            CreationDateTime = new DateTime(2023, 3, 10, 10, 0, 26, 807, DateTimeKind.Local).AddTicks(9740),
                             Description = "foo",
                             ImagePath = "/images/image6.jpg",
                             Name = "Kopeyka"
