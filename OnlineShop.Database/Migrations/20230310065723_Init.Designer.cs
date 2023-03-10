@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Database;
 
 namespace OnlineShop.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230310065723_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,7 +180,7 @@ namespace OnlineShop.Database.Migrations
                         {
                             Id = new Guid("8a5cf474-c473-48e1-bc3e-bbe0f22a80f2"),
                             Cost = 35000000m,
-                            CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreationDateTime = new DateTime(2023, 3, 10, 9, 57, 21, 785, DateTimeKind.Local).AddTicks(9877),
                             Description = "super",
                             ImagePath = "/images/image1.jpg",
                             Name = "Ferrari"
@@ -187,7 +189,7 @@ namespace OnlineShop.Database.Migrations
                         {
                             Id = new Guid("e6d46e32-765c-487d-bf57-78759b32a47c"),
                             Cost = 25000000m,
-                            CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreationDateTime = new DateTime(2023, 3, 10, 9, 57, 21, 787, DateTimeKind.Local).AddTicks(3006),
                             Description = "best",
                             ImagePath = "/images/image2.jpg",
                             Name = "Lambo"
@@ -196,7 +198,7 @@ namespace OnlineShop.Database.Migrations
                         {
                             Id = new Guid("59d7a46d-79a2-4a09-b6ad-a2333c3d3dcc"),
                             Cost = 5000000m,
-                            CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreationDateTime = new DateTime(2023, 3, 10, 9, 57, 21, 787, DateTimeKind.Local).AddTicks(3129),
                             Description = "good",
                             ImagePath = "/images/image3.jpg",
                             Name = "Camaro"
@@ -205,7 +207,7 @@ namespace OnlineShop.Database.Migrations
                         {
                             Id = new Guid("b41fefb9-1c66-4f2a-86af-090ada282060"),
                             Cost = 7000000m,
-                            CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreationDateTime = new DateTime(2023, 3, 10, 9, 57, 21, 787, DateTimeKind.Local).AddTicks(3139),
                             Description = "good",
                             ImagePath = "/images/image4.jpg",
                             Name = "Mustang"
@@ -214,7 +216,7 @@ namespace OnlineShop.Database.Migrations
                         {
                             Id = new Guid("36211d90-17e0-42d0-9f3b-3b17d2885ec1"),
                             Cost = 7000m,
-                            CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreationDateTime = new DateTime(2023, 3, 10, 9, 57, 21, 787, DateTimeKind.Local).AddTicks(3144),
                             Description = "not bad",
                             ImagePath = "/images/image5.jpg",
                             Name = "Volga"
@@ -223,11 +225,63 @@ namespace OnlineShop.Database.Migrations
                         {
                             Id = new Guid("968bfe01-31ba-44c0-a7c8-d1d04c1ffeb5"),
                             Cost = 700m,
-                            CreationDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreationDateTime = new DateTime(2023, 3, 10, 9, 57, 21, 787, DateTimeKind.Local).AddTicks(3156),
                             Description = "foo",
                             ImagePath = "/images/image6.jpg",
                             Name = "Kopeyka"
                         });
+                });
+
+            modelBuilder.Entity("OnlineShop.Database.Models.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("OnlineShop.Database.Models.CartItem", b =>

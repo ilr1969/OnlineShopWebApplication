@@ -1,4 +1,4 @@
-﻿@model List<UserRoleViewModel>
+﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
 
 <div class="row">
     @await Html.PartialAsync("AdminLeftMenu")
@@ -10,7 +10,6 @@
             <tr>
                 <th>ID</th>
                 <th>Наименование</th>
-                <th>Описание</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -18,9 +17,10 @@
             {
                 <tr>
                     <td>@item.Id</td>
-                    <td>@item.RoleName</td>
-                    <td>@item.RoleDescription</td>
-                    <td><a asp-area="admin" asp-controller="userrole" asp-action="edituserrole" asp-route-userRoleId="@item.Id">Редактировать</a></td>
+                    <td>@item.Name</td>
+                    <td>
+                        
+                    </td>
                     <td><a asp-area="admin" asp-controller="userrole" asp-action="removeuserrole" asp-route-userRoleId="@item.Id">Удалить</a></td>
                 </tr>
             }

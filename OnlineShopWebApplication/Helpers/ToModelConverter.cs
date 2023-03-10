@@ -20,22 +20,6 @@ namespace OnlineShopWebApplication.Helpers
             return product;
         }
 
-/*        public static User ToUser(this UserViewModel userViewModel)
-        {
-            var user = new User
-            {
-                ID = userViewModel.ID,
-                Name = userViewModel.Name,
-                Age = userViewModel.Age,
-                Email = userViewModel.Email,
-                Password = userViewModel.Password,
-                ComparePassword = userViewModel.ComparePassword,
-                Role = userViewModel.Role
-            };
-            return user;
-        }*/
-
-
         public static List<Order> ToOrders(this List<OrderViewModel> ordersViewModel)
         {
             var orders = new List<Order>();

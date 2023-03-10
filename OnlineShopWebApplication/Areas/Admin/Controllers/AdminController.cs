@@ -13,16 +13,16 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
     public class AdminController : Controller
     {
         private readonly UserManager<User> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         readonly IProductStorage productStorage;
         readonly IOrderStorage orderStorage;
-        readonly IUserRoleStorage userRoleStorage;
 
-        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage, IUserRoleStorage userRoleStorage, UserManager<User> userManager)
+        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.productStorage = productStorage;
             this.orderStorage = orderStorage;
-            this.userRoleStorage = userRoleStorage;
             this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         // GET: AdminController
@@ -46,7 +46,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         // GET: AdminController/Roles
         public ActionResult UserRoles()
         {
-            return View(userRoleStorage.GetRolesList());
+            return View(roleManager.Roles.ToList());
         }
     }
 }
