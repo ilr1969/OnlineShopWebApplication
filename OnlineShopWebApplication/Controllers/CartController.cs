@@ -6,7 +6,6 @@ using OnlineShopWebApplication.Helpers;
 
 namespace OnlineShopWebApplication.Controllers
 {
-    [Authorize]
     public class CartController : Controller
     {
         private readonly IProductStorage productStorage;
