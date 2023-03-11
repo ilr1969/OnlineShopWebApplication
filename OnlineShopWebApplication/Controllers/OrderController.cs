@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
 using OnlineShop.Database.Models;
@@ -8,6 +9,7 @@ using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         public ICartStorage cartStorage;
