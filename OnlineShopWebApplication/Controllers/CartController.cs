@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
+using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Helpers;
+using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Controllers
 {
@@ -10,15 +15,17 @@ namespace OnlineShopWebApplication.Controllers
     {
         private readonly IProductStorage productStorage;
         private readonly ICartStorage cartStorage;
-        public CartController(IProductStorage productStorage, ICartStorage cartStorage)
+        private readonly UserManager<User> userManager;
+        public CartController(IProductStorage productStorage, ICartStorage cartStorage, UserManager<User> userManager)
         {
             this.productStorage = productStorage;
             this.cartStorage = cartStorage;
+            this.userManager = userManager;
         }
         // GET: CartController
         public ActionResult Index()
         {
-            var cart = cartStorage.TryGetByUserId(Constants.UserId);
+            var cart = cartStorage.TryGetByUserId(userManager.GetUserId(HttpContext.User));
             var cartToView = cart.ToCartViewModel();
             return View(cartToView);
         }
@@ -26,7 +33,7 @@ namespace OnlineShopWebApplication.Controllers
         public ActionResult Add(Guid productId)
         {
             var product = productStorage.TryGetById(productId);
-            cartStorage.Add(product, Constants.UserId);
+            cartStorage.Add(product, userManager.GetUserId(HttpContext.User));
             return RedirectToAction("Index");
         }
 

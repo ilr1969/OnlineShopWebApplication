@@ -10,5 +10,6 @@ namespace OnlineShop.Database
         List<Product> GetAll(string userId);
         void Add(string userId, Product product);
         void Remove(string userId, Guid productId);
+        void TransferCompareListOnLogin(string userName, List<Product> unregisteredUserCompareList);
     }
 }

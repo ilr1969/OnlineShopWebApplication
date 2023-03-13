@@ -31,10 +31,9 @@ namespace OnlineShopWebApplication
             string connection = Configuration.GetConnectionString("OnlineShop");
 
             services.AddDbContext<DatabaseContext>(option => option.UseSqlServer(connection));
-            services.AddSession();
 
             services.AddDbContext<IdentityContext>(option => option.UseSqlServer(connection));
-            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();
             services.ConfigureApplicationCookie(option =>
             {
                 option.ExpireTimeSpan = TimeSpan.FromHours(8);
@@ -44,8 +43,8 @@ namespace OnlineShopWebApplication
             });
 
             services.AddControllersWithViews();
-            services.AddTransient<IProductStorage, ProductDbStorage>();
             services.AddTransient<ICompareStorage, CompareDbStorage>();
+            services.AddTransient<IProductStorage, ProductDbStorage>();
             services.AddTransient<ICartStorage, CartDbStorage>();
             services.AddTransient<IMemoryProvider, MemoryProvider>();
             services.AddTransient<IOrderStorage, OrderDbStorage>();

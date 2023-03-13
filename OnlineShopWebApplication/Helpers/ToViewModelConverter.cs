@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OnlineShop.Database.Models;
+using OnlineShopWebApplication.Areas.Admin.Models;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Helpers
@@ -18,6 +19,18 @@ namespace OnlineShopWebApplication.Helpers
                 ImagePath = product.ImagePath
             };
             return productViewModel;
+        }
+
+        public static EditProductViewModel ToEditProductViewModel(this Product product)
+        {
+            var editProductViewModel = new EditProductViewModel
+            {
+                ID = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Cost = product.Cost,
+            };
+            return editProductViewModel;
         }
 
         public static List<ProductViewModel> ToProductsViewModel(this List<Product> products)

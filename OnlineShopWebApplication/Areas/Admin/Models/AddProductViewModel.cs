@@ -1,0 +1,26 @@
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
+
+namespace OnlineShopWebApplication.Areas.Admin.Models
+{
+    public class AddProductViewModel
+    {
+        public Guid ID { get; set; }
+
+        [Required(ErrorMessage = "Поле обязательно для заполнения")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "Поле обязательно для заполнения")]
+        public decimal Cost { get; set; }
+
+        [Required(ErrorMessage = "Поле обязательно для заполнения")]
+        public string Description { get; set; }
+
+        public IFormFile FileToUpload { get; set; }
+        public AddProductViewModel()
+        {
+            ID = Guid.NewGuid();
+        }
+    }
+}

@@ -1,7 +1,8 @@
-﻿@model ProductViewModel
+﻿@using OnlineShopWebApplication.Areas.Admin.Models
+@model AddProductViewModel
 
 <h2>Добавление нового продукта</h2>
-<form method="post" asp-area="admin" asp-controller="product" asp-action="add">
+<form method="post" asp-area="admin" asp-controller="product" asp-action="add" enctype="multipart/form-data">
     <div>
         <div>
             <label asp-for="Name">Название: </label><br />
@@ -19,9 +20,9 @@
             <span asp-validation-for="Cost"></span>
         </div>
         <div>
-            <label asp-for="ImagePath">ImagePath: </label><br />
-            <input asp-for="ImagePath" type="text" name="ImagePath" />
-            <span asp-validation-for="ImagePath"></span>
+            <label asp-for="FileToUpload">ImagePath: </label><br />
+            <input asp-for="FileToUpload" type="file" name="FileToUpload" />
+            <span asp-validation-for="FileToUpload"></span>
         </div>
         <button class="btn btn-success" type="submit">Добавить</button>
     </div>
