@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
+using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Areas.Admin.Models;
 using OnlineShopWebApplication.Helpers;
 using OnlineShopWebApplication.Models;
@@ -54,7 +55,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
                     {
                         editProductViewModel.FileToUpload.CopyTo(fileStream);
                     }
-                    productToEdit.ImagePath = "/images/" + editProductViewModel.ID + "/" + fileName;
+                    productToEdit.Images.Add(new Image { Name = "/images/" + editProductViewModel.ID + "/" + fileName });
                 }
 
                 databaseContext.SaveChanges();
@@ -79,6 +80,13 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var product = new ProductViewModel()
+                {
+                    ID = addProductViewModel.ID,
+                    Name = addProductViewModel.Name,
+                    Description = addProductViewModel.Description,
+                    Cost = addProductViewModel.Cost
+                };
                 if (addProductViewModel.FileToUpload != null)
                 {
                     var filePath = Path.Combine(webHostEnvironment.WebRootPath + "/images/" + addProductViewModel.ID + "/");
@@ -91,16 +99,10 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
                     {
                         addProductViewModel.FileToUpload.CopyTo(fileStream);
                     }
-                    var product = new ProductViewModel()
-                    {
-                        ID = addProductViewModel.ID,
-                        Name = addProductViewModel.Name,
-                        Description = addProductViewModel.Description,
-                        Cost = addProductViewModel.Cost,
-                        ImagePath = "/images/" + addProductViewModel.ID + "/" + fileName
-                    };
-                    productStorage.Add(product.ToProduct());
+
+                    product.Images.Add(new Image { Name = "/images/" + addProductViewModel.ID + "/" + fileName });
                 }
+                productStorage.Add(product.ToProduct());
                 return Redirect("/admin/admin/products");
             }
             return View();

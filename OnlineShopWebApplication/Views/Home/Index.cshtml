@@ -8,15 +8,38 @@
     @foreach (var product in @Model)
     {
         <div class="col-3 border-success shadow">
-            <br>
-            <a asp-controller="product" asp-action="index" asp-route-productId="@product.ID"><img class="card-img-top" src=@product.ImagePath height="150"></a>
-            <a style="color:blue" asp-controller="product" asp-action="index" asp-route-productId="@product.ID">
-                <h3>@product.Name</h3>
-            </a>
-            <h5>@product.Cost</h5>
-            <a class=" btn btn-success" asp-controller="cart" asp-action="add" asp-route-productId="@product.ID">Купить</a>
-            <p>
-        </div>
-     }
-</div>
 
+            <div id="carousel" class="carousel" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src=@(product.Images.FirstOrDefault() == null ? "" : product.Images.FirstOrDefault().Name) class="card-img" height="150">
+                    </div>
+                    @foreach (var photo in product.Images)
+                    {
+                        <div class="carousel-item">
+                            <a asp-controller="product" asp-action="index" asp-route-productId="@product.ID"><img src=@photo.Name class="card-img" height="150"></a>
+                        </div>
+                    }
+                </div>
+                <a class="carousel-control-prev" role="button" href="#carousel" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Предыдущий</span>
+                </a>
+                <a class="carousel-control-next" role="button" href="#carousel" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Следующий</span>
+                </a>
+            </div>
+
+            <div>
+                <br>
+                <a style="color:blue" asp-controller="product" asp-action="index" asp-route-productId="@product.ID">
+                    <h3>@product.Name</h3>
+                </a>
+                <h5>@product.Cost</h5>
+                <a class=" btn btn-success" asp-controller="cart" asp-action="add" asp-route-productId="@product.ID">Купить</a>
+                <p>
+            </div>
+        </div>
+    }
+</div>

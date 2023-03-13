@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Database.Models;
 
 namespace OnlineShop.Database
@@ -16,12 +17,12 @@ namespace OnlineShop.Database
 
         public Product TryGetById(Guid productId)
         {
-            return databaseContext.Products.FirstOrDefault(product => product.Id == productId);
+            return databaseContext.Products.Include(x => x.Images).FirstOrDefault(product => product.Id == productId);
         }
 
         public List<Product> GetAll()
         {
-            return databaseContext.Products.ToList();
+            return databaseContext.Products.Include(x => x.Images).ToList();
         }
 
         public void Add(Product product)

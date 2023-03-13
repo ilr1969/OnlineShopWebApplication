@@ -16,7 +16,7 @@ namespace OnlineShopWebApplication.Helpers
                 Name = product.Name,
                 Description = product.Description,
                 Cost = product.Cost,
-                ImagePath = product.ImagePath
+                Images = product.Images
             };
             return productViewModel;
         }

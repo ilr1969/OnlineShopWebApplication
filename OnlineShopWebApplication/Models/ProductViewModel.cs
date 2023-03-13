@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using OnlineShop.Database.Models;
 
 namespace OnlineShopWebApplication.Models
 {
@@ -16,6 +18,6 @@ namespace OnlineShopWebApplication.Models
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
         public string Description { get; set; }
 
-        public string ImagePath { get; set; }
+        public List<Image> Images { get; set; }
     }
 }
