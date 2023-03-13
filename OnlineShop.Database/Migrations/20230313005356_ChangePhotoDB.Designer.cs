@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Database;
 
 namespace OnlineShop.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230313005356_ChangePhotoDB")]
+    partial class ChangePhotoDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -197,48 +199,54 @@ namespace OnlineShop.Database.Migrations
                         {
                             Id = new Guid("8a5cf474-c473-48e1-bc3e-bbe0f22a80f2"),
                             Cost = 35000000m,
-                            CreationDateTime = new DateTime(2023, 3, 13, 5, 8, 55, 867, DateTimeKind.Local).AddTicks(508),
+                            CreationDateTime = new DateTime(2023, 3, 13, 3, 53, 55, 251, DateTimeKind.Local).AddTicks(1107),
                             Description = "super",
+                            ImagePath = "/images/image1.jpg",
                             Name = "Ferrari"
                         },
                         new
                         {
                             Id = new Guid("e6d46e32-765c-487d-bf57-78759b32a47c"),
                             Cost = 25000000m,
-                            CreationDateTime = new DateTime(2023, 3, 13, 5, 8, 55, 868, DateTimeKind.Local).AddTicks(7210),
+                            CreationDateTime = new DateTime(2023, 3, 13, 3, 53, 55, 252, DateTimeKind.Local).AddTicks(4606),
                             Description = "best",
+                            ImagePath = "/images/image2.jpg",
                             Name = "Lambo"
                         },
                         new
                         {
                             Id = new Guid("59d7a46d-79a2-4a09-b6ad-a2333c3d3dcc"),
                             Cost = 5000000m,
-                            CreationDateTime = new DateTime(2023, 3, 13, 5, 8, 55, 868, DateTimeKind.Local).AddTicks(7318),
+                            CreationDateTime = new DateTime(2023, 3, 13, 3, 53, 55, 252, DateTimeKind.Local).AddTicks(4650),
                             Description = "good",
+                            ImagePath = "/images/image3.jpg",
                             Name = "Camaro"
                         },
                         new
                         {
                             Id = new Guid("b41fefb9-1c66-4f2a-86af-090ada282060"),
                             Cost = 7000000m,
-                            CreationDateTime = new DateTime(2023, 3, 13, 5, 8, 55, 868, DateTimeKind.Local).AddTicks(7333),
+                            CreationDateTime = new DateTime(2023, 3, 13, 3, 53, 55, 252, DateTimeKind.Local).AddTicks(4657),
                             Description = "good",
+                            ImagePath = "/images/image4.jpg",
                             Name = "Mustang"
                         },
                         new
                         {
                             Id = new Guid("36211d90-17e0-42d0-9f3b-3b17d2885ec1"),
                             Cost = 7000m,
-                            CreationDateTime = new DateTime(2023, 3, 13, 5, 8, 55, 868, DateTimeKind.Local).AddTicks(7342),
+                            CreationDateTime = new DateTime(2023, 3, 13, 3, 53, 55, 252, DateTimeKind.Local).AddTicks(4661),
                             Description = "not bad",
+                            ImagePath = "/images/image5.jpg",
                             Name = "Volga"
                         },
                         new
                         {
                             Id = new Guid("968bfe01-31ba-44c0-a7c8-d1d04c1ffeb5"),
                             Cost = 700m,
-                            CreationDateTime = new DateTime(2023, 3, 13, 5, 8, 55, 868, DateTimeKind.Local).AddTicks(7366),
+                            CreationDateTime = new DateTime(2023, 3, 13, 3, 53, 55, 252, DateTimeKind.Local).AddTicks(4673),
                             Description = "foo",
+                            ImagePath = "/images/image6.jpg",
                             Name = "Kopeyka"
                         });
                 });
