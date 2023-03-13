@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Database.Models;
 
@@ -9,12 +10,12 @@ namespace OnlineShop.Database
     public class FavoriteDbStorage : IFavoriteStorage
     {
         private readonly DatabaseContext databaseContext;
-        private readonly IProductStorage productStorage;
+        private readonly UserManager<User> userManager;
 
-        public FavoriteDbStorage(DatabaseContext databaseContext, IProductStorage productStorage)
+        public FavoriteDbStorage(DatabaseContext databaseContext, UserManager<User> userManager)
         {
             this.databaseContext = databaseContext;
-            this.productStorage = productStorage;
+            this.userManager = userManager;
         }
 
         public List<FavoriteProduct> GetAll(string userId)
@@ -42,6 +43,15 @@ namespace OnlineShop.Database
             var userFavoriteProduct = TryGetById(userId, productId);
             databaseContext.FavoriteProducts.Remove(userFavoriteProduct);
             databaseContext.SaveChanges();
+        }
+
+        public void TransferFavoriteListOnLogin(string userName, List<FavoriteProduct> unregisteredUserFavoriteList)
+        {
+            var loggedUserId = userManager.Users.FirstOrDefault(x => x.UserName == userName).Id;
+            foreach (var item in unregisteredUserFavoriteList)
+            {
+                Add(loggedUserId, item.Product);
+            }
         }
     }
 }

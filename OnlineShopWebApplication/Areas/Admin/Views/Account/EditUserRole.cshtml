@@ -1,0 +1,17 @@
+﻿@using OnlineShopWebApplication.Areas.Admin.Models
+@model ChangeRoleViewModel
+
+<h2>Изменение ролей для @Model.UserEmail</h2>
+
+<form method="post" asp-area="admin" asp-controller="account" asp-action="SaveRole">
+    <div>
+        <input name="userId" value="@Model.UserId" type="hidden"><br />
+    </div>
+    <div class="form-group">
+        @foreach (var role in @Model.AllRoles)
+        {
+        <input type="checkbox" name="roles" value="@role.Name" @(Model.UserRoles.Contains(role.Name) ? "checked=\"checked\"" : "") /> @role.Name <br />
+        }
+    </div>
+    <button class="btm btn-success" type="submit">Обновить</button>
+</form>

@@ -11,16 +11,12 @@
                 <th>ID</th>
                 <th>Наименование</th>
                 <th></th>
-                <th></th>
             </tr>
             @foreach (var item in @Model)
             {
                 <tr>
                     <td>@item.Id</td>
                     <td>@item.Name</td>
-                    <td>
-                        
-                    </td>
                     <td><a asp-area="admin" asp-controller="userrole" asp-action="removeuserrole" asp-route-userRoleId="@item.Id">Удалить</a></td>
                 </tr>
             }

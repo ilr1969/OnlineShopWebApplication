@@ -1,10 +1,11 @@
-﻿@model ProductViewModel
+﻿@using OnlineShopWebApplication.Areas.Admin.Models
+@model EditProductViewModel
 
 <h2>Редактирование продукта</h2>
-<form method="post" asp-area="admin" asp-controller="product" asp-action="SaveProduct">
+<form method="post" asp-area="admin" asp-controller="product" asp-action="SaveProduct" enctype="multipart/form-data">
     <div>
         <div>
-            <input value="@Model.ID" name="productId" hidden /></>
+            <input value="@Model.ID" name="ID" hidden /></>
         </div>
         <div>
             <label asp-for="Name">Название: </label>
@@ -22,9 +23,9 @@
             <span asp-validation-for="Cost"></span>
         </div>
         <div>
-            <label asp-for="ImagePath">ImagePath: </label>
-            <input asp-for="ImagePath" type="text" value="@Model.ImagePath" name="ImagePath" /></>
-            <span asp-validation-for="ImagePath"></span>
+            <label asp-for="FileToUpload">Photo: </label>
+            <input asp-for="FileToUpload" type="file" value="@Model.FileToUpload" name="FileToUpload" /></>
+            <span asp-validation-for="FileToUpload"></span>
         </div>
         <button class="btn btn-success" type="submit">Сохранить изменения</button>
     </div>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Database.Models;
 
@@ -10,11 +11,13 @@ namespace OnlineShop.Database
     {
         private readonly DatabaseContext databaseContext;
         private readonly IProductStorage productStorage;
+        private readonly UserManager<User> userManager;
 
-        public CompareDbStorage(DatabaseContext databaseContext, IProductStorage productStorage)
+        public CompareDbStorage(DatabaseContext databaseContext, IProductStorage productStorage, UserManager<User> userManager)
         {
             this.databaseContext = databaseContext;
             this.productStorage = productStorage;
+            this.userManager = userManager;
         }
 
         public List<Product> GetAll(string userId)
@@ -43,7 +46,14 @@ namespace OnlineShop.Database
             databaseContext.CompareProducts.Remove(compareItemToRemove);
             databaseContext.SaveChanges();
         }
+
+        public void TransferCompareListOnLogin(string userName, List<Product> unregisteredUserCompareList)
+        {
+            var loggedUserId = userManager.Users.FirstOrDefault(x => x.UserName == userName).Id;
+            foreach (var item in unregisteredUserCompareList)
+            {
+                Add(loggedUserId, item);
+            }
+        }
     }
 }
-
-

@@ -1,17 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Database.Models;
 
 namespace OnlineShop.Database
-{
+{ 
     public class CartDbStorage : ICartStorage
     {
         private readonly DatabaseContext databaseContext;
+        private readonly UserManager<User> userManager;
 
-        public CartDbStorage(DatabaseContext databaseContext)
+        public CartDbStorage(DatabaseContext databaseContext, UserManager<User> userManager)
         {
             this.databaseContext = databaseContext;
+            this.userManager = userManager;
         }
 
         public Cart TryGetByUserId(string userId)
@@ -76,6 +80,24 @@ namespace OnlineShop.Database
                 userCart = null;
             }
             databaseContext.SaveChanges();
+        }
+
+        public Cart TryGetCartById(Guid cartId)
+        {
+            return databaseContext.Carts.FirstOrDefault(x => x.Id == cartId);
+        }
+
+        public void TransferProductsOnLogin(string userName, List<CartItem> unregisteredUserCdrtItems)
+        {
+            var loggedUserId = userManager.Users.FirstOrDefault(x => x.UserName == userName).Id;
+            foreach (var item in unregisteredUserCdrtItems)
+            {
+                for (int i = 0; i < item.Count; i++)
+                {
+                    Add(item.Product, loggedUserId);
+                }
+
+            }
         }
     }
 }

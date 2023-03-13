@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
 using OnlineShop.Database.Models;
+using OnlineShopWebApplication.Areas.Admin.Models;
 using OnlineShopWebApplication.Controllers;
 using OnlineShopWebApplication.Helpers;
 using OnlineShopWebApplication.Models;
@@ -16,10 +18,12 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
     public class AccountController : Controller
     {
         private readonly UserManager<User> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public AccountController(UserManager<User> userManager)
+        public AccountController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         // GET: UserController/AddUser
@@ -38,7 +42,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
             {
                 userManager.AddToRoleAsync(user, Constants.UserRole).Wait();
             }
-            return View("/admin/users");
+            return Redirect("/admin/admin/users");
         }
 
         // GET: UserController/EditUser
@@ -53,7 +57,10 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         {
             var userToEdit = userManager.Users.First(x => x.Id == userId);
             userManager.SetEmailAsync(userToEdit, user.Email).Wait();
-            userManager.SetUserNameAsync(userToEdit, user.UserName).Wait();
+            if (userToEdit.UserName != "Admin")
+            {
+                userManager.SetUserNameAsync(userToEdit, user.UserName).Wait();
+            }
             return Redirect("/admin/admin/users");
         }
 
@@ -62,7 +69,10 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         public ActionResult RemoveUser(string userId)
         {
             var userToRemove = userManager.Users.First(x => x.Id == userId);
-            userManager.DeleteAsync(userToRemove).Wait();
+            if (userToRemove.UserName != "Admin")
+            {
+                userManager.DeleteAsync(userToRemove).Wait();
+            }
             return Redirect("/admin/admin/users");
         }
 
@@ -84,6 +94,39 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
                 userManager.UpdateAsync(userToChange).Wait();
                 return Redirect("/admin/admin/users");
             }
+            return Redirect("/admin/admin/users");
+        }
+
+        // GET: UserRoleController/editUserRole/5
+        public IActionResult EditUserRole(string userId)
+        {
+            var user = userManager.FindByIdAsync(userId).Result;
+            var userRoles = userManager.GetRolesAsync(user).Result.ToList();
+            var allRoles = roleManager.Roles.ToList();
+            var model = new ChangeRoleViewModel
+            {
+                UserId = userId,
+                AllRoles = allRoles,
+                UserEmail = user.Email,
+                UserRoles = userRoles,
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult SaveRole(string userId, List<string> roles)
+        {
+            var user = userManager.FindByIdAsync(userId).Result;
+            if (user.UserName == "Admin")
+            {
+                roles.Add(Constants.AdminRole);
+            }
+            var userRoles = userManager.GetRolesAsync(user).Result.ToList();
+            var addedRoles = roles.Except(userRoles);
+            var removedRoles = userRoles.Except(roles);
+
+            userManager.AddToRolesAsync(user, addedRoles).Wait();
+            userManager.RemoveFromRolesAsync(user, removedRoles).Wait();
             return Redirect("/admin/admin/users");
         }
     }

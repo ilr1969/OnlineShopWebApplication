@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OnlineShop.Database.Models;
 
 namespace OnlineShop.Database
@@ -14,5 +15,9 @@ namespace OnlineShop.Database
         void ClearBasket(string userId);
 
         void ChangeCount(string userId, int count, string product);
+
+        Cart TryGetCartById(Guid cartId);
+
+        void TransferProductsOnLogin(string userName, List<CartItem> unregisteredUserCdrtItems);
     }
 }

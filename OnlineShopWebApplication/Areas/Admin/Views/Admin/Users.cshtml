@@ -21,6 +21,7 @@
                 <button class="btn btn-success dropdown-toggle" type="button" id="actionMenu" data-toggle="dropdown">Действие</button>
                 <ul class="dropdown-menu" aria-labelledby="actionMenu">
                     <li class="dropdown-item"><a asp-area="admin" asp-controller="account" asp-action="editUser" asp-route-userId="@item.Id">Редактировать</a></li>
+                    <li class="dropdown-item"><a asp-area="admin" asp-controller="account" asp-action="editUserRole" asp-route-userId="@item.Id">Права доступа</a></li>
                     <li class="dropdown-item"><a asp-area="admin" asp-controller="account" asp-action="changePassword" asp-route-userId="@item.Id">Сменить пароль</a></li>
                     <li class="dropdown-item"><a data-toggle="modal" data-target="#deleteModal" data-userId="@item.Id">Удалить</a></li>
                 </ul>
