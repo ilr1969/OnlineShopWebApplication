@@ -1,0 +1,32 @@
+﻿@model EditUserCabinetViewModel
+
+<h2>Личный кабинет пользователя @Model.Name</h2>
+
+<form method="post" asp-area="" asp-controller="account" asp-action="saveUser" enctype="multipart/form-data">
+    <div>
+        <input type="text" name="Id" value="@Model.Id" hidden />
+        <input type="text" name="Name" value="@Model.Name" hidden />
+        <input type="text" name="Email" value="@Model.Email" hidden />
+        <div>
+            <label>Email:</label> <br />
+            <input name="Email" value="@Model.Email">
+        </div>
+        <div>
+            <label>Описание:</label> <br />
+            <input name="Description" value="@Model.Description">
+        </div>
+        <div>
+            <label>Загрузить новое фото</label> <br />
+            <input type="file" name="Image" />
+        </div>
+        <div>
+            <label>Фотографии пользователя:</label> <br />
+            @foreach (var photo in @Model.Photos)
+            {
+                <img src=@photo.Name alt="Это я!" />
+            }
+        </div>
+        <br />
+        <button class="btn btn-success" type="submit">Сохранить данные</button>
+    </div>
+</form>

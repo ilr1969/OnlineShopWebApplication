@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OnlineShop.Database.Models;
 using OnlineShop.Database;
+using OnlineShop.Database.Models;
 using Serilog;
 
 namespace OnlineShopWebApplication
@@ -18,9 +18,9 @@ namespace OnlineShopWebApplication
             {
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-                IdentityInitializer.Initialize(userManager,roleManager);
+                IdentityInitializer.Initialize(userManager, roleManager);
             }
-            
+
             host.Run();
         }
 

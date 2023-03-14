@@ -17,7 +17,7 @@
                     @foreach (var photo in product.Images)
                     {
                         <div class="carousel-item">
-                            <a asp-controller="product" asp-action="index" asp-route-productId="@product.ID"><img src=@photo.Name class="card-img" height="150"></a>
+                            <a asp-controller="product" asp-action="index" asp-route-productId="@product.Id"><img src=@photo.Name class="card-img" height="150"></a>
                         </div>
                     }
                 </div>
@@ -33,11 +33,11 @@
 
             <div>
                 <br>
-                <a style="color:blue" asp-controller="product" asp-action="index" asp-route-productId="@product.ID">
+                <a style="color:blue" asp-controller="product" asp-action="index" asp-route-productId="@product.Id">
                     <h3>@product.Name</h3>
                 </a>
                 <h5>@product.Cost</h5>
-                <a class=" btn btn-success" asp-controller="cart" asp-action="add" asp-route-productId="@product.ID">Купить</a>
+                <a class=" btn btn-success" asp-controller="cart" asp-action="add" asp-route-productId="@product.Id">Купить</a>
                 <p>
             </div>
         </div>

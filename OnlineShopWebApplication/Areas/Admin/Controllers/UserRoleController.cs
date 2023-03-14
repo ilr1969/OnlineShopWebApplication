@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
-using OnlineShop.Database.Models;
-using OnlineShopWebApplication.Areas.Admin.Models;
-using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Areas.Admin.Controllers
 {
@@ -37,7 +32,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddRole(IdentityRole userRole)
         {
-            
+
             if (roleManager.Roles.FirstOrDefault(x => x.Name == userRole.Name) == null)
             {
                 var role = new IdentityRole { Name = userRole.Name };

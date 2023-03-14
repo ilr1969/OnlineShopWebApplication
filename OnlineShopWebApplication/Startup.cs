@@ -43,10 +43,10 @@ namespace OnlineShopWebApplication
             });
 
             services.AddControllersWithViews();
+            services.AddSingleton<FileUploader>();
             services.AddTransient<ICompareStorage, CompareDbStorage>();
             services.AddTransient<IProductStorage, ProductDbStorage>();
             services.AddTransient<ICartStorage, CartDbStorage>();
-            services.AddTransient<IMemoryProvider, MemoryProvider>();
             services.AddTransient<IOrderStorage, OrderDbStorage>();
             services.AddTransient<IFavoriteStorage, FavoriteDbStorage>();
 

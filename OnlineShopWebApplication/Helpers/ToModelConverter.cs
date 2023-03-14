@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using OnlineShop.Database.Models;
-using OnlineShopWebApplication.Areas.Admin.Models;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Helpers
@@ -12,7 +10,7 @@ namespace OnlineShopWebApplication.Helpers
         {
             var product = new Product
             {
-                Id = productviewmodel.ID,
+                Id = productviewmodel.Id,
                 Name = productviewmodel.Name,
                 Description = productviewmodel.Description,
                 Cost = productviewmodel.Cost,

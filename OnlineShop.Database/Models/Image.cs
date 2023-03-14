@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnlineShop.Database.Models
 {
@@ -15,7 +13,7 @@ namespace OnlineShop.Database.Models
         }
         public Image()
         {
-            
+
         }
     }
 }

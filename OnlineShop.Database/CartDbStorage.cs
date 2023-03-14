@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using OnlineShop.Database.Models;
 
 namespace OnlineShop.Database
-{ 
+{
     public class CartDbStorage : ICartStorage
     {
         private readonly DatabaseContext databaseContext;

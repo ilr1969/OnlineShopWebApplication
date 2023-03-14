@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApplication.Models
 {
@@ -20,6 +19,8 @@ namespace OnlineShopWebApplication.Models
         [Required(ErrorMessage = "Подтверждение пароля обязательно")]
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ComparePassword { get; set; }
+
+        public string Description { get; set; }
 
         public string ReturnURL { get; set; }
     }

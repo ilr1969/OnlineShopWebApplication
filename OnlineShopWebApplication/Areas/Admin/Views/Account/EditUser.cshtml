@@ -4,7 +4,7 @@
 <form method="post" asp-area="admin" asp-controller="account" asp-action="SaveUser">
     <div>
         <div>
-            <input type="text" name="userId" value="@Model.Id" hidden/>
+            <input type="text" name="userId" value="@Model.Id" hidden />
             <div>
                 <label asp-for="UserName">Имя: </label><br />
                 <input asp-for="UserName" type="text" value="@Model.UserName" name="UserName" />
@@ -15,7 +15,13 @@
                 <input asp-for="Email" type="email" value="@Model.Email" name="Email" />
                 <span asp-validation-for="Email"></span>
             </div>
+            <div>
+                <label asp-for="Description">Описание: </label><br />
+                <input asp-for="Description" type="text" value="@Model.Description" name="Description" />
+                <span asp-validation-for="Description"></span>
+            </div>
         </div>
+        <br />
         <button class="btn btn-success" type="submit">Сохранить изменения</button>
     </div>
 </form>
