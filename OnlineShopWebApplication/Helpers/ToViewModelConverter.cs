@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Areas.Admin.Models;
 using OnlineShopWebApplication.Models;
@@ -12,7 +11,7 @@ namespace OnlineShopWebApplication.Helpers
         {
             var productViewModel = new ProductViewModel
             {
-                ID = product.Id,
+                Id = product.Id,
                 Name = product.Name,
                 Description = product.Description,
                 Cost = product.Cost,
@@ -106,6 +105,32 @@ namespace OnlineShopWebApplication.Helpers
                 cartItemsViewModel.Add(cartItemViewModel);
             }
             return cartItemsViewModel;
+        }
+
+        public static UserCabinetViewModel ToUserCabinetViewModel(this User user)
+        {
+            var userCabinetViewModel = new UserCabinetViewModel()
+            {
+                Id = user.Id,
+                Name = user.UserName,
+                Email = user.Email,
+                Description = user.Description,
+                Photos = user.Photos
+            };
+            return userCabinetViewModel;
+        }
+
+        public static EditUserCabinetViewModel ToEditUserCabinetViewModel(this User user)
+        {
+            var editUserCabinetViewModel = new EditUserCabinetViewModel()
+            {
+                Id = user.Id,
+                Name = user.UserName,
+                Email = user.Email,
+                Description = user.Description,
+                Photos = user.Photos
+            };
+            return editUserCabinetViewModel;
         }
     }
 }

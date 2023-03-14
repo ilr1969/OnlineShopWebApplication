@@ -34,6 +34,11 @@
             <input asp-for="ComparePassword" type="text" name="ComparePassword" value="@randomPass" />
             <span asp-validation-for="ComparePassword"></span>
         </div>
+        <div>
+            <label asp-for="Description">Описание: </label><br />
+            <input asp-for="Description" type="text" name="Description" />
+            <span asp-validation-for="Description"></span>
+        </div>
         <button class="btn btn-success" type="submit">Добавить</button>
     </div>
 </form>

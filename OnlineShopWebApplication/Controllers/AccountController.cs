@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Database;
 using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Helpers;
@@ -18,14 +16,18 @@ namespace OnlineShopWebApplication.Controllers
         private readonly ICompareStorage compareStorage;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
+        private readonly FileUploader fileUploader;
+        private readonly DatabaseContext databaseContext;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ICartStorage cartStorage, IFavoriteStorage favoriteStorage, ICompareStorage compareStorage)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ICartStorage cartStorage, IFavoriteStorage favoriteStorage, ICompareStorage compareStorage, FileUploader fileUploader, DatabaseContext databaseContext)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.cartStorage = cartStorage;
             this.favoriteStorage = favoriteStorage;
             this.compareStorage = compareStorage;
+            this.fileUploader = fileUploader;
+            this.databaseContext = databaseContext;
         }
 
         // GET: UserControllerLoginform
@@ -44,17 +46,17 @@ namespace OnlineShopWebApplication.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel loginViewModel)
         {
-/*            var unregisteredUserCartItems = cartStorage.TryGetByUserId(userManager.GetUserId(HttpContext.User)).CartItems;
-            var unregisteredUserFavoriteList = favoriteStorage.GetAll(userManager.GetUserId(HttpContext.User));
-            var unregisteredUserCompareList = compareStorage.GetAll(userManager.GetUserId(HttpContext.User));*/
+            /*            var unregisteredUserCartItems = cartStorage.TryGetByUserId(userManager.GetUserId(HttpContext.User)).CartItems;
+                        var unregisteredUserFavoriteList = favoriteStorage.GetAll(userManager.GetUserId(HttpContext.User));
+                        var unregisteredUserCompareList = compareStorage.GetAll(userManager.GetUserId(HttpContext.User));*/
             if (ModelState.IsValid)
             {
                 var result = signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, loginViewModel.RememberMe, false).Result;
                 if (result.Succeeded)
                 {
-/*                    cartStorage.TransferProductsOnLogin(loginViewModel.UserName, unregisteredUserCartItems);
-                    favoriteStorage.TransferFavoriteListOnLogin(loginViewModel.UserName, unregisteredUserFavoriteList);
-                    compareStorage.TransferCompareListOnLogin(loginViewModel.UserName, unregisteredUserCompareList);*/
+                    /*                    cartStorage.TransferProductsOnLogin(loginViewModel.UserName, unregisteredUserCartItems);
+                                        favoriteStorage.TransferFavoriteListOnLogin(loginViewModel.UserName, unregisteredUserFavoriteList);
+                                        compareStorage.TransferCompareListOnLogin(loginViewModel.UserName, unregisteredUserCompareList);*/
                     return Redirect(loginViewModel.ReturnURL);
                 }
             }
@@ -87,6 +89,44 @@ namespace OnlineShopWebApplication.Controllers
         {
             signInManager.SignOutAsync().Wait();
             return Redirect("/home/index");
+        }
+
+        public IActionResult UserCabinet(string userName)
+        {
+            var user = userManager.Users.Where(x => x.UserName == userName).Include(x => x.Photos).FirstOrDefault();
+            return View(user.ToUserCabinetViewModel());
+        }
+
+        public IActionResult EditUser(string userName)
+        {
+            var user = userManager.Users.Where(x => x.UserName == userName).Include(x => x.Photos).FirstOrDefault();
+            return View(user.ToEditUserCabinetViewModel());
+        }
+
+        public IActionResult SaveUser(EditUserCabinetViewModel editUserCabinetViewModel)
+        {
+            var user = userManager.FindByIdAsync(editUserCabinetViewModel.Id).Result;
+            if (ModelState.IsValid)
+            {
+                if (user.UserName != "Admin")
+                {
+                    userManager.SetUserNameAsync(user, editUserCabinetViewModel.Name).Wait();
+                }
+                userManager.SetEmailAsync(user, editUserCabinetViewModel.Email).Wait();
+                user.Description = editUserCabinetViewModel.Description;
+                userManager.UpdateAsync(user).Wait();
+
+                if (editUserCabinetViewModel.Image != null)
+                {
+                    var fileName = fileUploader.UploadUserImage(editUserCabinetViewModel.Id.ToString(), editUserCabinetViewModel.Image);
+                    user.Photos.Add(new Image { Name = fileName });
+                    userManager.UpdateAsync(user).Wait();
+                }
+
+                return View("UserCabinet", user.ToUserCabinetViewModel());
+
+            };
+            return View("EditUser", editUserCabinetViewModel);
         }
     }
 }

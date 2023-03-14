@@ -13,12 +13,12 @@
     @foreach (var item in @Model)
     {
         <tr>
-            <td>@item.ID</td>
-            <td><a asp-controller="product" asp-action="index" asp-route-productId="@item.ID">@item.Name</a></td>
+            <td>@item.Id</td>
+            <td><a asp-controller="product" asp-action="index" asp-route-productId="@item.Id">@item.Name</a></td>
             <td>@item.Description</td>
             <td>@item.Cost</td>
-            <td><a asp-controller="admin" asp-action="editproduct" asp-route-productId="@item.ID">Редактировать</a></td>
-            <td><a asp-controller="product" asp-action="remove" asp-route-productId="@item.ID">Удалить</a></td>
+            <td><a asp-controller="admin" asp-action="editproduct" asp-route-productId="@item.Id">Редактировать</a></td>
+            <td><a asp-controller="product" asp-action="remove" asp-route-productId="@item.Id">Удалить</a></td>
         </tr>
     }
 </table>

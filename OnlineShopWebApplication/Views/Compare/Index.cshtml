@@ -11,7 +11,7 @@ else
             <th>Свойство</th>
             @foreach (var item in @Model)
             {
-                <th>@item.Name (<a asp-controller="compare" asp-action="delete" asp-route-productId="@item.ID">Удалить</a>)</th>
+                <th>@item.Name (<a asp-controller="compare" asp-action="delete" asp-route-productId="@item.Id">Удалить</a>)</th>
             }
         </tr>
         <tr>

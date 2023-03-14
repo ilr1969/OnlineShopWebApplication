@@ -7,7 +7,7 @@ namespace OnlineShopWebApplication.Models
 {
     public class ProductViewModel
     {
-        public Guid ID { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
         public string Name { get; set; }

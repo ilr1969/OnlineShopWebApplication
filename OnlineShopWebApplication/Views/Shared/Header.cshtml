@@ -24,11 +24,12 @@
 
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LoginForm">@User.Identity.Name</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOut">Выйти</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="cabinet" data-toggle="dropdown">@User.Identity.Name</a>
+                                <div class="dropdown-menu" aria-labelledby="cabinet">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="UserCabinet" asp-route-userName="@User.Identity.Name">Личный кабинет</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="LogOut">Выйти</a>
+                                </div>
                             </li>
                         }
                         else

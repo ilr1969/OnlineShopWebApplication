@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using OnlineShop.Database.Models;
-
-namespace OnlineShop.Database
+﻿namespace OnlineShop.Database
 {
     public static class Constants
     {

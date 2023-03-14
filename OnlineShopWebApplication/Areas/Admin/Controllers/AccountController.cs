@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -7,8 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
 using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Areas.Admin.Models;
-using OnlineShopWebApplication.Controllers;
-using OnlineShopWebApplication.Helpers;
 using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Areas.Admin.Controllers
@@ -56,11 +53,13 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         public ActionResult SaveUser(string userId, User user)
         {
             var userToEdit = userManager.Users.First(x => x.Id == userId);
+            userToEdit.Description = user.Description;
             userManager.SetEmailAsync(userToEdit, user.Email).Wait();
             if (userToEdit.UserName != "Admin")
             {
                 userManager.SetUserNameAsync(userToEdit, user.UserName).Wait();
             }
+            userManager.UpdateAsync(userToEdit);
             return Redirect("/admin/admin/users");
         }
 

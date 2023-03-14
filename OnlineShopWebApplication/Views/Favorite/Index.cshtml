@@ -10,10 +10,10 @@ else
         @foreach (var item in @Model)
         {
         <tr>
-            <td><a asp-controller="product" asp-action="index" asp-route-productId="@item.ID">@item.Name</a></td>
+            <td><a asp-controller="product" asp-action="index" asp-route-productId="@item.Id">@item.Name</a></td>
             <td>@item.Description</td>
-            <td style="width:fit-content"><a asp-controller="cart" asp-action="add" asp-route-productId="@item.ID">Добавить в корзину</a></td>
-            <td style="width:fit-content"><a asp-controller="favorite" asp-action="delete" asp-route-productId="@item.ID">Удалить</a></td>
+            <td style="width:fit-content"><a asp-controller="cart" asp-action="add" asp-route-productId="@item.Id">Добавить в корзину</a></td>
+            <td style="width:fit-content"><a asp-controller="favorite" asp-action="delete" asp-route-productId="@item.Id">Удалить</a></td>
         </tr>
         }
     </table>

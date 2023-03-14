@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
@@ -14,14 +12,12 @@ namespace OnlineShopWebApplication.Controllers
     public class OrderController : Controller
     {
         public ICartStorage cartStorage;
-        public IMemoryProvider memoryProvider;
         public IOrderStorage orderStorage;
         private readonly UserManager<User> userManager;
 
-        public OrderController(ICartStorage cartStorage, IMemoryProvider memoryProvider, IOrderStorage orderStorage, UserManager<User> userManager)
+        public OrderController(ICartStorage cartStorage, IOrderStorage orderStorage, UserManager<User> userManager)
         {
             this.cartStorage = cartStorage;
-            this.memoryProvider = memoryProvider;
             this.orderStorage = orderStorage;
             this.userManager = userManager;
         }
