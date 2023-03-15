@@ -38,7 +38,8 @@ namespace OnlineShopWebApplication.Helpers
                 CartItems = orderViewModel.CartItems.ToCartItems(),
                 DeliveryInfo = orderViewModel.DeliveryInfo.ToOrderDeliveryInfo(),
                 CreationDatetime = orderViewModel.CreationDatetime,
-                Status = (OrderStatus)(int)orderViewModel.Status
+                Status = (OrderStatus)(int)orderViewModel.Status,
+                UserName = orderViewModel.UserName
             };
             return order;
         }

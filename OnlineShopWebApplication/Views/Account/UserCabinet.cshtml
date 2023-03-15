@@ -2,33 +2,78 @@
 
 <h2>Личный кабинет пользователя @Model.Name</h2>
 
-<div>
-    <div>
-        <label>ID:</label> <br />
-        <input value="@Model.Id">
+<div class="row">
+    <div class="col-6">
+        <div>
+            <label>ID:</label> <br />
+            <input value="@Model.Id">
+        </div>
+        <div>
+            <label>Name:</label> <br />
+            <input value="@Model.Name">
+        </div>
+        <div>
+            <label>Email:</label> <br />
+            <input value="@Model.Email">
+        </div>
+        <div>
+            <label>Описание:</label> <br />
+            <input value="@Model.Description">
+        </div>
     </div>
-    <div>
-        <label>Name:</label> <br />
-        <input value="@Model.Name">
-    </div>
-    <div>
-        <label>Email:</label> <br />
-        <input value="@Model.Email">
-    </div>
-    <div>
-        <label>Описание:</label> <br />
-        <input value="@Model.Description">
-    </div>
-    <div>
-        <label>Photo:</label> <br />
-        @if (@Model.Photos != null)
-        {
-            foreach (var photo in @Model.Photos)
+    <div class="col-6">
+        <div>
+            <label>Photo:</label> <br />
+            @if (@Model.Photos != null)
             {
-                <img src=@photo.Name width="200" />
+                foreach (var photo in @Model.Photos)
+                {
+                    <img src=@photo.Name width="200" />
+                }
             }
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div>
+        <br />
+        <a class="btn btn-success" asp-area="" asp-controller="account" asp-action="editUser" asp-route-userName="@Model.Name">Редактировать</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <br />
+        @if (@Model.Orders == null)
+        {
+            <div><h3>Нет активных заказов</h3></div>
+        }
+        else
+        {
+            <div>
+                <table class="table-bordered" width="100%">
+                    <tr>
+                        <th>Номер заказа</th>
+                        <th>Статус</th>
+                        <th>Клиент</th>
+                        <th>Дата</th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in @Model.Orders)
+                    {
+                        <tr>
+                            <td>@item.OrderNumber</td>
+                            <td>@EnumHelper.GetEnumDiaplayName(item.Status)</td>
+                            <td>@item.DeliveryInfo.Name</td>
+                            <td>@item.CreationDatetime</td>
+                            <td><a asp-area="" asp-controller="order" asp-action="detail" asp-route-orderNumber="@item.OrderNumber">Подробности</a></td>
+                        </tr>
+                    }
+                </table>
+            </div>
         }
     </div>
-    <br />
-    <a class="btn btn-success" asp-area="" asp-controller="account" asp-action="editUser" asp-route-userName="@Model.Name">Редактировать</a>
 </div>
+
+

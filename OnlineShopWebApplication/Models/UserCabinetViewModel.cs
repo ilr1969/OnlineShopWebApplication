@@ -10,5 +10,6 @@ namespace OnlineShopWebApplication.Models
         public string Email { get; set; }
         public string Description { get; set; }
         public List<Image> Photos { get; set; }
+        public List<OrderViewModel> Orders { get; set; }
     }
 }

@@ -8,6 +8,7 @@ namespace OnlineShop.Database.Models
         static int OrderCounter = 1;
         public Guid Id { get; set; }
         public int OrderNumber { get; set; }
+        public string UserName { get; set; }
         public OrderStatus Status { get; set; }
         public DateTime CreationDatetime { get; set; }
         public List<CartItem> CartItems { get; set; }
