@@ -35,12 +35,19 @@ namespace OnlineShopWebApplication.Controllers
             var order = new Order
             {
                 DeliveryInfo = orderDeliveryInfoViewModel.ToOrderDeliveryInfo(),
-                CartItems = cartStorage.TryGetByUserId(userManager.GetUserId(HttpContext.User)).CartItems
+                CartItems = cartStorage.TryGetByUserId(userManager.GetUserId(HttpContext.User)).CartItems,
+                UserName = userManager.GetUserAsync(HttpContext.User).Result.UserName
             };
 
             orderStorage.Add(order);
             cartStorage.ClearBasket(userManager.GetUserId(HttpContext.User));
             return View();
+        }
+
+        public IActionResult Detail(int orderNumber)
+        {
+            var order = orderStorage.TryGetByNumber(orderNumber).ToOrderViewModel();
+            return View(order);
         }
     }
 }

@@ -57,11 +57,13 @@ namespace OnlineShopWebApplication.Helpers
             var orderViewModel = new OrderViewModel()
             {
                 Id = order.Id,
+
                 OrderNumber = order.OrderNumber,
                 CartItems = order.CartItems.ToCartItemsViewModel(),
                 DeliveryInfo = order.DeliveryInfo.ToOrderDeliveryInfoViewModel(),
                 CreationDatetime = order.CreationDatetime,
-                Status = (OrderStatusViewModel)(int)order.Status
+                Status = (OrderStatusViewModel)(int)order.Status,
+                UserName = order.UserName
             };
             return orderViewModel;
         }
@@ -115,7 +117,7 @@ namespace OnlineShopWebApplication.Helpers
                 Name = user.UserName,
                 Email = user.Email,
                 Description = user.Description,
-                Photos = user.Photos
+                Photos = user.Photos,
             };
             return userCabinetViewModel;
         }

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,9 +8,6 @@ using Microsoft.Extensions.Logging;
 using OnlineShop.Database;
 using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Helpers;
-using System.Web;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
 
 namespace OnlineShopWebApplication.Controllers
 {
@@ -47,7 +46,7 @@ namespace OnlineShopWebApplication.Controllers
         public FileContentResult DisplayAvatar()
         {
             var currentUser = userManager.Users.Where(x => x.UserName == userManager.GetUserAsync(HttpContext.User).Result.UserName).Include(x => x.Photos).FirstOrDefault();
-            string fileName = currentUser.Photos[0].Name;
+            string fileName = currentUser.Photos.Count != 0 ? currentUser.Photos[0].Name : "/images/users/emptyAvatar.png";
             var path = Path.Combine(webHostEnvironment.WebRootPath + fileName);
             byte[] content = System.IO.File.ReadAllBytes(path);
             return File(content, "image/png");

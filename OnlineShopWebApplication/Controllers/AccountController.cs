@@ -12,14 +12,14 @@ namespace OnlineShopWebApplication.Controllers
     public class AccountController : Controller
     {
         private readonly ICartStorage cartStorage;
+        private readonly IOrderStorage orderStorage;
         private readonly IFavoriteStorage favoriteStorage;
         private readonly ICompareStorage compareStorage;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly FileUploader fileUploader;
-        private readonly DatabaseContext databaseContext;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ICartStorage cartStorage, IFavoriteStorage favoriteStorage, ICompareStorage compareStorage, FileUploader fileUploader, DatabaseContext databaseContext)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ICartStorage cartStorage, IFavoriteStorage favoriteStorage, ICompareStorage compareStorage, FileUploader fileUploader, IOrderStorage orderStorage)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -27,7 +27,7 @@ namespace OnlineShopWebApplication.Controllers
             this.favoriteStorage = favoriteStorage;
             this.compareStorage = compareStorage;
             this.fileUploader = fileUploader;
-            this.databaseContext = databaseContext;
+            this.orderStorage = orderStorage;
         }
 
         // GET: UserControllerLoginform
@@ -46,9 +46,9 @@ namespace OnlineShopWebApplication.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel loginViewModel)
         {
-/*            var unregisteredUserCartItems = cartStorage.TryGetByUserId(userManager.GetUserId(HttpContext.User)).CartItems;
-            var unregisteredUserFavoriteList = favoriteStorage.GetAll(userManager.GetUserId(HttpContext.User));
-            var unregisteredUserCompareList = compareStorage.GetAll(userManager.GetUserId(HttpContext.User));*/
+            /*            var unregisteredUserCartItems = cartStorage.TryGetByUserId(userManager.GetUserId(HttpContext.User)).CartItems;
+                        var unregisteredUserFavoriteList = favoriteStorage.GetAll(userManager.GetUserId(HttpContext.User));
+                        var unregisteredUserCompareList = compareStorage.GetAll(userManager.GetUserId(HttpContext.User));*/
             if (ModelState.IsValid)
             {
                 var result = signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, loginViewModel.RememberMe, false).Result;
@@ -94,7 +94,18 @@ namespace OnlineShopWebApplication.Controllers
         public IActionResult UserCabinet(string userName)
         {
             var user = userManager.Users.Where(x => x.UserName == userName).Include(x => x.Photos).FirstOrDefault();
-            return View(user.ToUserCabinetViewModel());
+            var userCart = cartStorage.TryGetByUserId(user.Id);
+            var userOrders = orderStorage.GetOrderList().Where(x => x.UserName == userName).ToList();
+            var userCabinet = new UserCabinetViewModel()
+            {
+                Id = user.Id,
+                Name = user.UserName,
+                Description = user.Description,
+                Email = user.Email,
+                Photos = user.Photos,
+                Orders = userOrders.ToOrdersViewModel()
+            };
+            return View(userCabinet);
         }
 
         public IActionResult EditUser(string userName)

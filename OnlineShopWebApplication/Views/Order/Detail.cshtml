@@ -11,12 +11,7 @@
             </tr>
             <tr>
                 <td>Статус заказа:</td>
-                <td>
-                    <select asp-for="@Model.Status"
-                            asp-items="@Html.GetEnumSelectList<OrderStatusViewModel>()"
-                            class="form-control">
-                    </select>
-                </td>
+                <td>@EnumHelper.GetEnumDiaplayName(@Model.Status)</td>
             </tr>
             <tr>
                 <td>Клиент:</td>
@@ -65,7 +60,5 @@
         </table>
         <br />
         <p><h4>Общая сумма: @Model.CartItems.Sum(x => x.Cost * x.Count)</h4></p>
-        <br />
-        <button class="btn btn-success" asp-controller="order" asp-action="saveOrder" asp-route-orderId="@Model.Id" asp>Сохранить изменения</button>
     </div>
 </form>
