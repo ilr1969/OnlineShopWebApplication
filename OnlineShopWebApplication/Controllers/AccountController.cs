@@ -46,9 +46,9 @@ namespace OnlineShopWebApplication.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel loginViewModel)
         {
-            /*            var unregisteredUserCartItems = cartStorage.TryGetByUserId(userManager.GetUserId(HttpContext.User)).CartItems;
-                        var unregisteredUserFavoriteList = favoriteStorage.GetAll(userManager.GetUserId(HttpContext.User));
-                        var unregisteredUserCompareList = compareStorage.GetAll(userManager.GetUserId(HttpContext.User));*/
+/*            var unregisteredUserCartItems = cartStorage.TryGetByUserId(userManager.GetUserId(HttpContext.User)).CartItems;
+            var unregisteredUserFavoriteList = favoriteStorage.GetAll(userManager.GetUserId(HttpContext.User));
+            var unregisteredUserCompareList = compareStorage.GetAll(userManager.GetUserId(HttpContext.User));*/
             if (ModelState.IsValid)
             {
                 var result = signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, loginViewModel.RememberMe, false).Result;
@@ -105,7 +105,7 @@ namespace OnlineShopWebApplication.Controllers
 
         public IActionResult SaveUser(EditUserCabinetViewModel editUserCabinetViewModel)
         {
-            var user = userManager.FindByIdAsync(editUserCabinetViewModel.Id).Result;
+            var user = userManager.Users.Where(x => x.Id == editUserCabinetViewModel.Id).Include(x => x.Photos).FirstOrDefault();
             if (ModelState.IsValid)
             {
                 if (user.UserName != "Admin")
@@ -119,6 +119,7 @@ namespace OnlineShopWebApplication.Controllers
                 if (editUserCabinetViewModel.Image != null)
                 {
                     var fileName = fileUploader.UploadUserImage(editUserCabinetViewModel.Id.ToString(), editUserCabinetViewModel.Image);
+                    user.Photos.Clear();
                     user.Photos.Add(new Image { Name = fileName });
                     userManager.UpdateAsync(user).Wait();
                 }
