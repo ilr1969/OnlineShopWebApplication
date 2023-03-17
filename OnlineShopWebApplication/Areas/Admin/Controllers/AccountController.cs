@@ -33,11 +33,21 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Add(RegisterViewModel registerViewModel)
         {
-            var user = new User { UserName = registerViewModel.UserName, Email = registerViewModel.Email };
-            var result = userManager.CreateAsync(user, registerViewModel.Password).Result;
-            if (result.Succeeded)
+            if (ModelState.IsValid)
             {
-                userManager.AddToRoleAsync(user, Constants.UserRole).Wait();
+                var user = new User { UserName = registerViewModel.UserName, Email = registerViewModel.Email };
+                var result = userManager.CreateAsync(user, registerViewModel.Password).Result;
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, Constants.UserRole).Wait();
+                    return Redirect("/admin/admin/users");
+                }
+                else
+                {
+                    var errors = string.Join("\n", result.Errors.Select(x => x.Description).ToList());
+                    ModelState.AddModelError("Errors", errors);
+                    return View("AddUser", registerViewModel);
+                }
             }
             return Redirect("/admin/admin/users");
         }

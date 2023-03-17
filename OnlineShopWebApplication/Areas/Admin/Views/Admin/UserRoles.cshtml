@@ -1,4 +1,5 @@
-﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+﻿@using OnlineShopWebApplication.Areas.Admin.Models
+@model List<RoleUsersViewModel>
 
 <div class="row">
     @await Html.PartialAsync("AdminLeftMenu")
@@ -6,18 +7,18 @@
     <div class="col-9">
         <h3>Список ролей</h3>
         <a asp-area="admin" asp-controller="UserRole" asp-action="AddUserRole">Добавить новую роль</a>
-        <table class="table-bordered">
+        <table class="table-bordered" width="100%">
             <tr>
-                <th>ID</th>
                 <th>Наименование</th>
+                <th>Пользователи</th>
                 <th></th>
             </tr>
-            @foreach (var item in @Model)
+            @foreach (var role in @Model)
             {
                 <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Name</td>
-                    <td><a asp-area="admin" asp-controller="userrole" asp-action="removeuserrole" asp-route-userRoleId="@item.Id">Удалить</a></td>
+                    <td>@role.Role</td>
+                    <td>@string.Join(", ", role.UsersInRole)</td>
+                    <td><a asp-area="admin" asp-controller="userrole" asp-action="removeuserrole" asp-route-userRoleId="@role.Id">Удалить</a></td>
                 </tr>
             }
         </table>

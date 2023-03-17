@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
 using OnlineShop.Database.Models;
+using OnlineShopWebApplication.Areas.Admin.Models;
 using OnlineShopWebApplication.Helpers;
 
 namespace OnlineShopWebApplication.Areas.Admin.Controllers
@@ -46,7 +48,14 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         // GET: AdminController/Roles
         public ActionResult UserRoles()
         {
-            return View(roleManager.Roles.ToList());
+            var roleUsers = new List<RoleUsersViewModel>();
+            var roles = roleManager.Roles.ToList();
+            foreach (var role in roles)
+            {
+                var dd = userManager.GetUsersInRoleAsync(role.Name).Result.Select(x => x.UserName);
+                roleUsers.Add(new RoleUsersViewModel { Id = role.Id, Role = role.Name, UsersInRole = dd.ToList() });
+            }
+            return View(roleUsers);
         }
     }
 }

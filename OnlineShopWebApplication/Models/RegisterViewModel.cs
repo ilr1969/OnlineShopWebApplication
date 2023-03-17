@@ -22,6 +22,8 @@ namespace OnlineShopWebApplication.Models
 
         public string Description { get; set; }
 
+        public string Errors { get; set; }
+
         public string ReturnURL { get; set; }
     }
 }

@@ -32,16 +32,20 @@ namespace OnlineShopWebApplication.Controllers
         // GET: OrderController/Success
         public ActionResult Success(OrderDeliveryInfoViewModel orderDeliveryInfoViewModel)
         {
-            var order = new Order
+            if (ModelState.IsValid)
             {
-                DeliveryInfo = orderDeliveryInfoViewModel.ToOrderDeliveryInfo(),
-                CartItems = cartStorage.TryGetByUserId(userManager.GetUserId(HttpContext.User)).CartItems,
-                UserName = userManager.GetUserAsync(HttpContext.User).Result.UserName
-            };
+                var order = new Order
+                {
+                    DeliveryInfo = orderDeliveryInfoViewModel.ToOrderDeliveryInfo(),
+                    CartItems = cartStorage.TryGetByUserId(userManager.GetUserId(HttpContext.User)).CartItems,
+                    UserName = userManager.GetUserAsync(HttpContext.User).Result.UserName
+                };
 
-            orderStorage.Add(order);
-            cartStorage.ClearBasket(userManager.GetUserId(HttpContext.User));
-            return View();
+                orderStorage.Add(order);
+                cartStorage.ClearBasket(userManager.GetUserId(HttpContext.User));
+                return View();
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Detail(int orderNumber)

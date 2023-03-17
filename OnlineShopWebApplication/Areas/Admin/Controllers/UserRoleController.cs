@@ -32,12 +32,20 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddRole(IdentityRole userRole)
         {
-
-            if (roleManager.Roles.FirstOrDefault(x => x.Name == userRole.Name) == null)
+            if (ModelState.IsValid)
             {
                 var role = new IdentityRole { Name = userRole.Name };
-                roleManager.CreateAsync(role).Wait();
-                return Redirect("/admin/admin/userroles");
+                var result = roleManager.CreateAsync(role).Result;
+                if (result.Succeeded)
+                {
+                    return Redirect("/admin/admin/userroles");
+                }
+                else
+                {
+                    var error = result.Errors.First().Description;
+                    ModelState.AddModelError("Name", error);
+                    return View("AddUserRole", userRole);
+                }
             }
             return View("AddUserRole");
         }

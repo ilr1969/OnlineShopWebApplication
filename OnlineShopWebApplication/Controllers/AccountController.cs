@@ -33,13 +33,13 @@ namespace OnlineShopWebApplication.Controllers
         // GET: UserControllerLoginform
         public ActionResult LoginForm(string returnURL)
         {
-            return View(new LoginViewModel { ReturnURL = returnURL });
+            return View(new LoginViewModel { ReturnURL = returnURL == null ? "/home/index" : returnURL });
         }
 
         // GET: UserControllerRegsterForm
         public ActionResult RegisterForm(string returnURL)
         {
-            return View(new RegisterViewModel { ReturnURL = returnURL });
+            return View(new RegisterViewModel { ReturnURL = returnURL == null ? "/home/index" : returnURL });
         }
 
         // GET: UserController/Login
@@ -59,7 +59,12 @@ namespace OnlineShopWebApplication.Controllers
                                         compareStorage.TransferCompareListOnLogin(loginViewModel.UserName, unregisteredUserCompareList);*/
                     return Redirect(loginViewModel.ReturnURL);
                 }
+                else
+                {
+                    return View("LoginForm", loginViewModel);
+                }
             }
+
             return View(loginViewModel);
         }
 
@@ -75,6 +80,13 @@ namespace OnlineShopWebApplication.Controllers
                 {
                     userManager.AddToRoleAsync(newUser, Constants.UserRole).Wait();
                     return Redirect(registerViewModel.ReturnURL);
+                }
+                else
+                {
+                    var errorList = result.Errors.Select(x => x.Description).ToList();
+                    var errors = string.Join('\n', errorList);
+                    ModelState.AddModelError("Errors", errors);
+                    return View("RegisterForm", registerViewModel);
                 }
             }
             return View("RegisterForm");
