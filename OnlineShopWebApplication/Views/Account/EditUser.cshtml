@@ -6,10 +6,10 @@
     <div>
         <input type="text" name="Id" value="@Model.Id" hidden />
         <input type="text" name="Name" value="@Model.Name" hidden />
-        <input type="text" name="Email" value="@Model.Email" hidden />
         <div>
-            <label>Email:</label> <br />
-            <input name="Email" value="@Model.Email">
+            <label asp-for="Email">Email:</label> <br />
+            <input asp-for="Email" name="Email" value="@Model.Email">
+            <span asp-validation-for="Email"></span>
         </div>
         <div>
             <label>Описание:</label> <br />

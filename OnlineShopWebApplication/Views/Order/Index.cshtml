@@ -1,6 +1,5 @@
 ﻿@model OrderDeliveryInfoViewModel
 
-@*Укажите данные для доставки @Constants.UserId*@
 <form method="post" asp-area="" asp-controller="order" asp-action="success">
     <div>
         <label asp-for="Name">Имя:</label><br />
@@ -19,11 +18,10 @@
     </div>
     <div>
         <input asp-for="Agree" type="checkbox" name="Agree" />
-        <label asp-for="Agree">Тут я соглашаюсь с тем, что придумали ваши юристы:</label>
+        <label asp-for="Agree">Тут я соглашаюсь с тем, что придумали ваши юристы</label><br />
         <span asp-validation-for="Agree"></span>
     </div>
 
     <br />
     <button class="btn btn-success" type="submit">Оформить</button>
 </form>
-

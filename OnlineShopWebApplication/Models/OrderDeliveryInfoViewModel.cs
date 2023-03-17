@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using OnlineShopWebApplication.Helpers;
 
 namespace OnlineShopWebApplication.Models
 {
@@ -16,8 +17,7 @@ namespace OnlineShopWebApplication.Models
         [Required(ErrorMessage = "Укажите телефон для связи")]
         public string Phone { get; set; }
 
-        [Required(ErrorMessage = "Необходимо согласие")]
+        [CheckBoxValidation(ErrorMessage = "Необходимо согласие")]
         public bool Agree { get; set; }
-
     }
 }

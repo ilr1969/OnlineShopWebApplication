@@ -1,4 +1,6 @@
-﻿@model RegisterViewModel
+﻿@using OnlineShopWebApplication.Models
+
+@model RegisterViewModel
 
 <h2>Регистрация</h2>
 <form method="post" asp-controller="Account" asp-action="register">
@@ -6,7 +8,7 @@
         <input type="hidden" name="returnURL" value="@Model.ReturnURL" />
         <div>
             <label asp-for="UserName">Имя: </label><br />
-            <input type="text" name="UserName" asp-for="UserName" />
+            <input type="text" name="UserName" asp-for="UserName" /> 
             <span asp-validation-for="UserName"></span>
         </div>
         <div>
@@ -23,6 +25,9 @@
             <label asp-for="ComparePassword">Повторите пароль: </label><br />
             <input type="password" name="ComparePassword" asp-for="ComparePassword" />
             <span asp-validation-for="ComparePassword"></span>
+        </div>
+        <div>
+            @Html.ValidationMessageFor(model => model.Errors)
         </div>
         <button class="btn btn-success" type="submit">Зарегистрироваться</button>
     </div>

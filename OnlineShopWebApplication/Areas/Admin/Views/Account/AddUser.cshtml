@@ -39,6 +39,7 @@
             <input asp-for="Description" type="text" name="Description" />
             <span asp-validation-for="Description"></span>
         </div>
+        <div>@Html.ValidationMessageFor(model => model.Errors)</div>
         <button class="btn btn-success" type="submit">Добавить</button>
     </div>
 </form>
