@@ -23,6 +23,14 @@
                     <td><a asp-area="" asp-controller="product" asp-action="index" asp-route-productId="@item.Id">@item.Name</a></td>
                     <td>@item.Description</td>
                     <td>@item.Cost</td>
+                    <td>
+                        @foreach (var photo in item.Images)
+                        {
+                        <img src="@photo.Name" width="300" /><br />
+                        <a asp-area="admin" asp-controller="Product" asp-action="DeletePhoto" asp-route-productId="@item.Id" asp-route-imageId="@photo.Id">Удалить фото</a><br />
+                        <p></p>
+                        }
+                    </td>
                     <td><a asp-area="admin" asp-controller="product" asp-action="editproduct" asp-route-productId="@item.Id">Редактировать</a></td>
                     <td><a asp-area="admin" asp-controller="product" asp-action="remove" asp-route-productId="@item.Id">Удалить</a></td>
                 </tr>

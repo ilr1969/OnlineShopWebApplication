@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Database;
 using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Areas.Admin.Models;
@@ -84,6 +86,15 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
                 return Redirect("/admin/admin/products");
             }
             return View();
+        }
+
+        public IActionResult DeletePhoto (Guid productId, Guid imageId)
+        {
+            var product = databaseContext.Products.Where(x => x.Id == productId).Include(x => x.Images).First();
+            var photoToDelete = product.Images.Where(y => y.Id == imageId).First();
+            product.Images.Remove(photoToDelete);
+            databaseContext.SaveChanges();
+            return Redirect("/admin/admin/products");
         }
     }
 }
