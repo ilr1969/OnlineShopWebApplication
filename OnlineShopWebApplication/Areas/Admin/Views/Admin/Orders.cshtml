@@ -25,7 +25,7 @@
                         <td>@EnumHelper.GetEnumDiaplayName(item.Status)</td>
                         <td>@item.DeliveryInfo.Name</td>
                         <td>@item.CreationDatetime</td>
-                        <td><a asp-area="admin" asp-controller="order" asp-action="detail" asp-route-orderNumber="@item.OrderNumber">Подробности</a></td>
+                        <td><a asp-area="admin" asp-controller="order" asp-action="detail" asp-route-orderId="@item.Id">Подробности</a></td>
                     </tr>
                 }
             </table>

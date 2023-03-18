@@ -28,9 +28,9 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult Detail(int orderNumber)
+        public IActionResult Detail(Guid orderId)
         {
-            var order = orderStorage.TryGetByNumber(orderNumber).ToOrderViewModel();
+            var order = orderStorage.TryGetById(orderId).ToOrderViewModel();
             return View(order);
         }
 

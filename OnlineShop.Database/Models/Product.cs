@@ -13,15 +13,13 @@ namespace OnlineShop.Database.Models
 
         public string Description { get; set; }
 
-        public string ImagePath { get; set; }
-
         public List<Image> Images { get; set; }
 
         public List<CartItem> CartItems { get; set; }
 
         public DateTime CreationDateTime { get; set; }
 
-        public Product(Guid id, string name, decimal cost, string description, string image)
+        public Product(Guid id, string name, decimal cost, string description)
         {
             Id = id;
             Name = name;
