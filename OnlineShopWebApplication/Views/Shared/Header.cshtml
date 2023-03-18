@@ -25,7 +25,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="cabinet" data-toggle="dropdown"><img src=@Url.Action("DisplayAvatar", "Home") width="24" height="24" /></a>
+                                <a class="nav-link dropdown-toggle" href="#" id="cabinet" data-toggle="dropdown"><img src=@Url.Content("/home/DisplayAvatar") width="24" height="24" /></a>
                                 <div class="dropdown-menu" aria-labelledby="cabinet">
                                     <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="UserCabinet" asp-route-userName="@User.Identity.Name">Личный кабинет</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="LogOut">Выйти</a>

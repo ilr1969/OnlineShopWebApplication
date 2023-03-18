@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Database;
 
 namespace OnlineShop.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230317142445_DeleteProductImage")]
+    partial class DeleteProductImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,38 +119,6 @@ namespace OnlineShop.Database.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Image");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("73848a92-c52f-4972-9f8a-1dcc8c36acb8"),
-                            Name = "/images/products/59d7a46d-79a2-4a09-b6ad-a2333c3d3dcc/1952d648-dca3-4072-b889-c2f3f5c6a9e0.jpg"
-                        },
-                        new
-                        {
-                            Id = new Guid("7e406def-9e54-48e2-9113-be1daacaeeb7"),
-                            Name = "/images/products/36211d90-17e0-42d0-9f3b-3b17d2885ec1/26807f5d-b732-48d8-9a38-7ce09ffd3709.jpg"
-                        },
-                        new
-                        {
-                            Id = new Guid("3f097c9f-fcb8-4d35-beee-4abf721d74ec"),
-                            Name = "/images/products/8a5cf474-c473-48e1-bc3e-bbe0f22a80f2/daa919d9-7a5a-4370-bc3b-39dfb16ea8bc.jpg"
-                        },
-                        new
-                        {
-                            Id = new Guid("c7aaafa9-8512-4f92-a1d3-d9a73db74c6a"),
-                            Name = "/images/products/968bfe01-31ba-44c0-a7c8-d1d04c1ffeb5/31a97fb3-4c6e-4e98-968f-6c488f261670.jpg"
-                        },
-                        new
-                        {
-                            Id = new Guid("38b7ca0d-5381-4246-9f04-1eaf2ecb30e5"),
-                            Name = "/images/products/b41fefb9-1c66-4f2a-86af-090ada282060/ee0e7ded-ba17-45c2-a932-d3bd2363de4d.jpg"
-                        },
-                        new
-                        {
-                            Id = new Guid("d93c51ef-44df-4e58-b6df-6adadbab2f89"),
-                            Name = "/images/products/e6d46e32-765c-487d-bf57-78759b32a47c/36117249-2d5f-4fef-900e-9580fa641af5.jpg"
-                        });
                 });
 
             modelBuilder.Entity("OnlineShop.Database.Models.Order", b =>
@@ -223,6 +193,56 @@ namespace OnlineShop.Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8a5cf474-c473-48e1-bc3e-bbe0f22a80f2"),
+                            Cost = 35000000m,
+                            CreationDateTime = new DateTime(2023, 3, 17, 17, 24, 44, 262, DateTimeKind.Local).AddTicks(3433),
+                            Description = "super",
+                            Name = "Ferrari"
+                        },
+                        new
+                        {
+                            Id = new Guid("e6d46e32-765c-487d-bf57-78759b32a47c"),
+                            Cost = 25000000m,
+                            CreationDateTime = new DateTime(2023, 3, 17, 17, 24, 44, 263, DateTimeKind.Local).AddTicks(7497),
+                            Description = "best",
+                            Name = "Lambo"
+                        },
+                        new
+                        {
+                            Id = new Guid("59d7a46d-79a2-4a09-b6ad-a2333c3d3dcc"),
+                            Cost = 5000000m,
+                            CreationDateTime = new DateTime(2023, 3, 17, 17, 24, 44, 263, DateTimeKind.Local).AddTicks(7543),
+                            Description = "good",
+                            Name = "Camaro"
+                        },
+                        new
+                        {
+                            Id = new Guid("b41fefb9-1c66-4f2a-86af-090ada282060"),
+                            Cost = 7000000m,
+                            CreationDateTime = new DateTime(2023, 3, 17, 17, 24, 44, 263, DateTimeKind.Local).AddTicks(7551),
+                            Description = "good",
+                            Name = "Mustang"
+                        },
+                        new
+                        {
+                            Id = new Guid("36211d90-17e0-42d0-9f3b-3b17d2885ec1"),
+                            Cost = 7000m,
+                            CreationDateTime = new DateTime(2023, 3, 17, 17, 24, 44, 263, DateTimeKind.Local).AddTicks(7557),
+                            Description = "not bad",
+                            Name = "Volga"
+                        },
+                        new
+                        {
+                            Id = new Guid("968bfe01-31ba-44c0-a7c8-d1d04c1ffeb5"),
+                            Cost = 700m,
+                            CreationDateTime = new DateTime(2023, 3, 17, 17, 24, 44, 263, DateTimeKind.Local).AddTicks(7569),
+                            Description = "foo",
+                            Name = "Kopeyka"
+                        });
                 });
 
             modelBuilder.Entity("OnlineShop.Database.Models.CartItem", b =>
