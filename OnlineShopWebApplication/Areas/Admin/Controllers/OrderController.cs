@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
 using OnlineShopWebApplication.Helpers;
 using OnlineShopWebApplication.Models;
+using System;
 
 namespace OnlineShopWebApplication.Areas.Admin.Controllers
 {

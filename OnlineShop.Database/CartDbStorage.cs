@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Database.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShop.Database
 {
@@ -33,9 +33,9 @@ namespace OnlineShop.Database
                     UserID = userId,
                 };
 
-                newCart.CartItems = new List<CartItem>
+                newCart.CartItems = new List<CartItems>
                     {
-                        new CartItem
+                        new CartItems
                         {
                             Product = product,
                             Count = 1,
@@ -49,7 +49,7 @@ namespace OnlineShop.Database
                 var existingCartItem = existingCart.CartItems.FirstOrDefault(x => x.Product.Name == product.Name);
                 if (existingCartItem == null)
                 {
-                    existingCart.CartItems.Add(new CartItem { Product = product, Count = 1 });
+                    existingCart.CartItems.Add(new CartItems { Product = product, Count = 1 });
                 }
                 else
                 {
@@ -87,7 +87,7 @@ namespace OnlineShop.Database
             return databaseContext.Carts.FirstOrDefault(x => x.Id == cartId);
         }
 
-        public void TransferProductsOnLogin(string userName, List<CartItem> unregisteredUserCdrtItems)
+        public void TransferProductsOnLogin(string userName, List<CartItems> unregisteredUserCdrtItems)
         {
             var loggedUserId = userManager.Users.FirstOrDefault(x => x.UserName == userName).Id;
             foreach (var item in unregisteredUserCdrtItems)

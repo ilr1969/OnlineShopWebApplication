@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShop.Database.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using OnlineShop.Database.Models;
 
 namespace OnlineShop.Database
 {

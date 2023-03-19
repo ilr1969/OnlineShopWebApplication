@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
 using OnlineShopWebApplication.Helpers;
+using System;
 
 namespace OnlineShopWebApplication.Controllers
 {

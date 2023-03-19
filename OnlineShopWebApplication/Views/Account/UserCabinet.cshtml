@@ -24,9 +24,9 @@
     <div class="col-6">
         <div>
             <label>Photo:</label> <br />
-            @if (@Model.Photos != null)
+            @if (@Model.UserImages != null)
             {
-                foreach (var photo in @Model.Photos)
+                foreach (var photo in @Model.UserImages)
                 {
                     <img src=@photo.Name width="200" />
                 }

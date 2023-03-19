@@ -1,5 +1,3 @@
-using System;
-using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -13,6 +11,8 @@ using OnlineShop.Database;
 using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Helpers;
 using Serilog;
+using System;
+using System.Globalization;
 
 namespace OnlineShopWebApplication
 {

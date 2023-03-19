@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
+using System.Linq;
 
 namespace OnlineShopWebApplication.Areas.Admin.Controllers
 {

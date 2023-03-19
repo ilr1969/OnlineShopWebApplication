@@ -11,7 +11,7 @@ namespace OnlineShop.Database.Models
         public string UserName { get; set; }
         public OrderStatus Status { get; set; }
         public DateTime CreationDatetime { get; set; }
-        public List<CartItem> CartItems { get; set; }
+        public List<CartItems> CartItems { get; set; }
         public OrderDeliveryInfo DeliveryInfo { get; set; }
 
         public Order()
@@ -20,7 +20,7 @@ namespace OnlineShop.Database.Models
             OrderCounter++;
             Status = OrderStatus.Created;
             CreationDatetime = DateTime.Now;
-            CartItems = new List<CartItem>();
+            CartItems = new List<CartItems>();
         }
     }
 }

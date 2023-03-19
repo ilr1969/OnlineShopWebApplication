@@ -12,9 +12,9 @@
             <div id="carousel" class="carousel" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src=@(product.Images.FirstOrDefault() == null ? "/images/products/EmptyAutoImage.jpg" : product.Images.FirstOrDefault().Name) class="card-img" height="150">
+                        <img src=@(product.ProductImages.FirstOrDefault() == null ? "/images/products/EmptyAutoImage.jpg" : product.ProductImages.FirstOrDefault().Name) class="card-img" height="150">
                     </div>
-                    @foreach (var photo in product.Images)
+                    @foreach (var photo in product.ProductImages)
                     {
                         <div class="carousel-item">
                             <a asp-controller="product" asp-action="index" asp-route-productId="@product.Id"><img src=@photo.Name class="card-img" height="150"></a>

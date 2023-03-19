@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Database;
 using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Areas.Admin.Models;
 using OnlineShopWebApplication.Helpers;
+using System;
+using System.Linq;
 
 namespace OnlineShopWebApplication.Areas.Admin.Controllers
 {
@@ -44,7 +44,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
                 if (editProductViewModel.FileToUpload != null)
                 {
                     var fileName = fileUploader.UploadProductImage(editProductViewModel.ID.ToString(), editProductViewModel.FileToUpload);
-                    productToEdit.Images.Add(new Image { Name = fileName });
+                    productToEdit.ProductImages.Add(new ProductImages { Name = fileName });
                 }
 
                 databaseContext.SaveChanges();
@@ -80,7 +80,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
                 if (addProductViewModel.FileToUpload != null)
                 {
                     var fileName = fileUploader.UploadProductImage(addProductViewModel.ID.ToString(), addProductViewModel.FileToUpload);
-                    product.Images.Add(new Image { Name = fileName });
+                    product.ProductImages.Add(new ProductImages { Name = fileName });
                 }
                 productStorage.Add(product);
                 return Redirect("/admin/admin/products");
@@ -88,11 +88,11 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult DeletePhoto (Guid productId, Guid imageId)
+        public IActionResult DeletePhoto(Guid productId, Guid imageId)
         {
-            var product = databaseContext.Products.Where(x => x.Id == productId).Include(x => x.Images).First();
-            var photoToDelete = product.Images.Where(y => y.Id == imageId).First();
-            product.Images.Remove(photoToDelete);
+            var product = databaseContext.Products.Where(x => x.Id == productId).Include(x => x.ProductImages).First();
+            var photoToDelete = product.ProductImages.Where(y => y.Id == imageId).First();
+            product.ProductImages.Remove(photoToDelete);
             databaseContext.SaveChanges();
             return Redirect("/admin/admin/products");
         }

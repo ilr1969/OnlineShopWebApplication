@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using OnlineShop.Database.Models;
+﻿using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Areas.Admin.Models;
 using OnlineShopWebApplication.Models;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApplication.Helpers
 {
@@ -15,7 +15,7 @@ namespace OnlineShopWebApplication.Helpers
                 Name = product.Name,
                 Description = product.Description,
                 Cost = product.Cost,
-                Images = product.Images
+                ProductImages = product.ProductImages
             };
             return productViewModel;
         }
@@ -93,7 +93,7 @@ namespace OnlineShopWebApplication.Helpers
             return cartViewModel;
         }
 
-        public static List<CartItemViewModel> ToCartItemsViewModel(this List<CartItem> cartItems)
+        public static List<CartItemViewModel> ToCartItemsViewModel(this List<CartItems> cartItems)
         {
             var cartItemsViewModel = new List<CartItemViewModel>();
             foreach (var item in cartItems)
@@ -117,7 +117,7 @@ namespace OnlineShopWebApplication.Helpers
                 Name = user.UserName,
                 Email = user.Email,
                 Description = user.Description,
-                Photos = user.Photos,
+                UserImages = user.UserImages,
             };
             return userCabinetViewModel;
         }
@@ -130,7 +130,7 @@ namespace OnlineShopWebApplication.Helpers
                 Name = user.UserName,
                 Email = user.Email,
                 Description = user.Description,
-                Photos = user.Photos
+                Photos = user.UserImages
             };
             return editUserCabinetViewModel;
         }
