@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
 using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Helpers;
+using System;
+using System.Linq;
 
 namespace OnlineShopWebApplication.Controllers
 {

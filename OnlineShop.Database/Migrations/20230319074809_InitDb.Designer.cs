@@ -7,19 +7,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Database;
 
+#nullable disable
+
 namespace OnlineShop.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230310070028_AddTable")]
-    partial class AddTable
+    [Migration("20230319074809_InitDb")]
+    partial class InitDb
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.17")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("OnlineShop.Database.Models.Cart", b =>
                 {
@@ -35,7 +39,7 @@ namespace OnlineShop.Database.Migrations
                     b.ToTable("Carts");
                 });
 
-            modelBuilder.Entity("OnlineShop.Database.Models.CartItem", b =>
+            modelBuilder.Entity("OnlineShop.Database.Models.CartItems", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -61,7 +65,7 @@ namespace OnlineShop.Database.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartItem");
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("OnlineShop.Database.Models.CompareProduct", b =>
@@ -120,6 +124,9 @@ namespace OnlineShop.Database.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DeliveryInfoId");
@@ -165,9 +172,6 @@ namespace OnlineShop.Database.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -180,111 +184,110 @@ namespace OnlineShop.Database.Migrations
                         {
                             Id = new Guid("8a5cf474-c473-48e1-bc3e-bbe0f22a80f2"),
                             Cost = 35000000m,
-                            CreationDateTime = new DateTime(2023, 3, 10, 10, 0, 26, 806, DateTimeKind.Local).AddTicks(6591),
+                            CreationDateTime = new DateTime(2023, 3, 19, 10, 48, 9, 126, DateTimeKind.Local).AddTicks(453),
                             Description = "super",
-                            ImagePath = "/images/image1.jpg",
                             Name = "Ferrari"
                         },
                         new
                         {
                             Id = new Guid("e6d46e32-765c-487d-bf57-78759b32a47c"),
                             Cost = 25000000m,
-                            CreationDateTime = new DateTime(2023, 3, 10, 10, 0, 26, 807, DateTimeKind.Local).AddTicks(9610),
+                            CreationDateTime = new DateTime(2023, 3, 19, 10, 48, 9, 126, DateTimeKind.Local).AddTicks(480),
                             Description = "best",
-                            ImagePath = "/images/image2.jpg",
                             Name = "Lambo"
                         },
                         new
                         {
                             Id = new Guid("59d7a46d-79a2-4a09-b6ad-a2333c3d3dcc"),
                             Cost = 5000000m,
-                            CreationDateTime = new DateTime(2023, 3, 10, 10, 0, 26, 807, DateTimeKind.Local).AddTicks(9655),
+                            CreationDateTime = new DateTime(2023, 3, 19, 10, 48, 9, 126, DateTimeKind.Local).AddTicks(484),
                             Description = "good",
-                            ImagePath = "/images/image3.jpg",
                             Name = "Camaro"
                         },
                         new
                         {
                             Id = new Guid("b41fefb9-1c66-4f2a-86af-090ada282060"),
                             Cost = 7000000m,
-                            CreationDateTime = new DateTime(2023, 3, 10, 10, 0, 26, 807, DateTimeKind.Local).AddTicks(9662),
+                            CreationDateTime = new DateTime(2023, 3, 19, 10, 48, 9, 126, DateTimeKind.Local).AddTicks(487),
                             Description = "good",
-                            ImagePath = "/images/image4.jpg",
                             Name = "Mustang"
                         },
                         new
                         {
                             Id = new Guid("36211d90-17e0-42d0-9f3b-3b17d2885ec1"),
                             Cost = 7000m,
-                            CreationDateTime = new DateTime(2023, 3, 10, 10, 0, 26, 807, DateTimeKind.Local).AddTicks(9667),
+                            CreationDateTime = new DateTime(2023, 3, 19, 10, 48, 9, 126, DateTimeKind.Local).AddTicks(545),
                             Description = "not bad",
-                            ImagePath = "/images/image5.jpg",
                             Name = "Volga"
                         },
                         new
                         {
                             Id = new Guid("968bfe01-31ba-44c0-a7c8-d1d04c1ffeb5"),
                             Cost = 700m,
-                            CreationDateTime = new DateTime(2023, 3, 10, 10, 0, 26, 807, DateTimeKind.Local).AddTicks(9740),
+                            CreationDateTime = new DateTime(2023, 3, 19, 10, 48, 9, 126, DateTimeKind.Local).AddTicks(556),
                             Description = "foo",
-                            ImagePath = "/images/image6.jpg",
                             Name = "Kopeyka"
                         });
                 });
 
-            modelBuilder.Entity("OnlineShop.Database.Models.User", b =>
+            modelBuilder.Entity("OnlineShop.Database.Models.ProductImages", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductImages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("73848a92-c52f-4972-9f8a-1dcc8c36acb8"),
+                            Name = "/images/products/59d7a46d-79a2-4a09-b6ad-a2333c3d3dcc/1952d648-dca3-4072-b889-c2f3f5c6a9e0.jpg",
+                            ProductId = new Guid("59d7a46d-79a2-4a09-b6ad-a2333c3d3dcc")
+                        },
+                        new
+                        {
+                            Id = new Guid("7e406def-9e54-48e2-9113-be1daacaeeb7"),
+                            Name = "/images/products/36211d90-17e0-42d0-9f3b-3b17d2885ec1/26807f5d-b732-48d8-9a38-7ce09ffd3709.jpg",
+                            ProductId = new Guid("36211d90-17e0-42d0-9f3b-3b17d2885ec1")
+                        },
+                        new
+                        {
+                            Id = new Guid("3f097c9f-fcb8-4d35-beee-4abf721d74ec"),
+                            Name = "/images/products/8a5cf474-c473-48e1-bc3e-bbe0f22a80f2/daa919d9-7a5a-4370-bc3b-39dfb16ea8bc.jpg",
+                            ProductId = new Guid("8a5cf474-c473-48e1-bc3e-bbe0f22a80f2")
+                        },
+                        new
+                        {
+                            Id = new Guid("c7aaafa9-8512-4f92-a1d3-d9a73db74c6a"),
+                            Name = "/images/products/968bfe01-31ba-44c0-a7c8-d1d04c1ffeb5/31a97fb3-4c6e-4e98-968f-6c488f261670.jpg",
+                            ProductId = new Guid("968bfe01-31ba-44c0-a7c8-d1d04c1ffeb5")
+                        },
+                        new
+                        {
+                            Id = new Guid("38b7ca0d-5381-4246-9f04-1eaf2ecb30e5"),
+                            Name = "/images/products/b41fefb9-1c66-4f2a-86af-090ada282060/ee0e7ded-ba17-45c2-a932-d3bd2363de4d.jpg",
+                            ProductId = new Guid("b41fefb9-1c66-4f2a-86af-090ada282060")
+                        },
+                        new
+                        {
+                            Id = new Guid("d93c51ef-44df-4e58-b6df-6adadbab2f89"),
+                            Name = "/images/products/e6d46e32-765c-487d-bf57-78759b32a47c/36117249-2d5f-4fef-900e-9580fa641af5.jpg",
+                            ProductId = new Guid("e6d46e32-765c-487d-bf57-78759b32a47c")
+                        });
                 });
 
-            modelBuilder.Entity("OnlineShop.Database.Models.CartItem", b =>
+            modelBuilder.Entity("OnlineShop.Database.Models.CartItems", b =>
                 {
                     b.HasOne("OnlineShop.Database.Models.Cart", null)
                         .WithMany("CartItems")
@@ -328,6 +331,15 @@ namespace OnlineShop.Database.Migrations
                     b.Navigation("DeliveryInfo");
                 });
 
+            modelBuilder.Entity("OnlineShop.Database.Models.ProductImages", b =>
+                {
+                    b.HasOne("OnlineShop.Database.Models.Product", null)
+                        .WithMany("ProductImages")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("OnlineShop.Database.Models.Cart", b =>
                 {
                     b.Navigation("CartItems");
@@ -341,6 +353,8 @@ namespace OnlineShop.Database.Migrations
             modelBuilder.Entity("OnlineShop.Database.Models.Product", b =>
                 {
                     b.Navigation("CartItems");
+
+                    b.Navigation("ProductImages");
                 });
 #pragma warning restore 612, 618
         }

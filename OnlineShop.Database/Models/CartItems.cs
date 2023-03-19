@@ -2,7 +2,7 @@
 
 namespace OnlineShop.Database.Models
 {
-    public class CartItem
+    public class CartItems
     {
         public Guid Id { get; set; }
         public Product Product { get; set; }

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using OnlineShop.Database.Models;
+using System;
 using System.Collections.Generic;
-using OnlineShop.Database.Models;
 
 namespace OnlineShop.Database
 {

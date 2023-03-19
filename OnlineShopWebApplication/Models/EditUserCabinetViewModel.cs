@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using OnlineShop.Database.Models;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApplication.Models
 {
@@ -14,7 +14,7 @@ namespace OnlineShopWebApplication.Models
         public string Email { get; set; }
 
         public string Description { get; set; }
-        public List<Image> Photos { get; set; }
+        public List<UserImages> Photos { get; set; }
         public IFormFile Image { get; set; }
     }
 }

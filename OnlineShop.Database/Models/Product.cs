@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineShop.Database.Models
 {
@@ -9,13 +10,14 @@ namespace OnlineShop.Database.Models
 
         public string Name { get; set; }
 
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Cost { get; set; }
 
         public string Description { get; set; }
 
-        public List<Image> Images { get; set; }
+        public List<ProductImages> ProductImages { get; set; }
 
-        public List<CartItem> CartItems { get; set; }
+        public List<CartItems> CartItems { get; set; }
 
         public DateTime CreationDateTime { get; set; }
 
@@ -25,15 +27,15 @@ namespace OnlineShop.Database.Models
             Name = name;
             Cost = cost;
             Description = description;
-            Images = new List<Image>();
-            CartItems = new List<CartItem>();
+            ProductImages = new List<ProductImages>();
+            CartItems = new List<CartItems>();
             CreationDateTime = DateTime.Now;
         }
 
         public Product()
         {
-            Images = new List<Image>();
-            CartItems = new List<CartItem>();
+            ProductImages = new List<ProductImages>();
+            CartItems = new List<CartItems>();
             CreationDateTime = DateTime.Now;
         }
     }

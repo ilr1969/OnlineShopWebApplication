@@ -7,10 +7,10 @@ namespace OnlineShop.Database.Models
     {
         public Guid Id { get; set; }
         public string UserID { get; set; }
-        public List<CartItem> CartItems { get; set; }
+        public List<CartItems> CartItems { get; set; }
         public Cart()
         {
-            CartItems = new List<CartItem>();
+            CartItems = new List<CartItems>();
         }
     }
 }

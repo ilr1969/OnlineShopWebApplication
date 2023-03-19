@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OnlineShopWebApplication.Models;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
-using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Helpers
 {

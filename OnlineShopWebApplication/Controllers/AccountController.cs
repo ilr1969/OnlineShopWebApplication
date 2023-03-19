@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Database;
 using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Helpers;
 using OnlineShopWebApplication.Models;
+using System.Linq;
 
 namespace OnlineShopWebApplication.Controllers
 {
@@ -13,19 +13,15 @@ namespace OnlineShopWebApplication.Controllers
     {
         private readonly ICartStorage cartStorage;
         private readonly IOrderStorage orderStorage;
-        private readonly IFavoriteStorage favoriteStorage;
-        private readonly ICompareStorage compareStorage;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly FileUploader fileUploader;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ICartStorage cartStorage, IFavoriteStorage favoriteStorage, ICompareStorage compareStorage, FileUploader fileUploader, IOrderStorage orderStorage)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ICartStorage cartStorage, FileUploader fileUploader, IOrderStorage orderStorage)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.cartStorage = cartStorage;
-            this.favoriteStorage = favoriteStorage;
-            this.compareStorage = compareStorage;
             this.fileUploader = fileUploader;
             this.orderStorage = orderStorage;
         }
@@ -33,13 +29,13 @@ namespace OnlineShopWebApplication.Controllers
         // GET: UserControllerLoginform
         public ActionResult LoginForm(string returnURL)
         {
-            return View(new LoginViewModel { ReturnURL = returnURL == null ? "/home/index" : returnURL });
+            return View(new LoginViewModel { ReturnURL = returnURL ?? "/home/index" });
         }
 
         // GET: UserControllerRegsterForm
         public ActionResult RegisterForm(string returnURL)
         {
-            return View(new RegisterViewModel { ReturnURL = returnURL == null ? "/home/index" : returnURL });
+            return View(new RegisterViewModel { ReturnURL = returnURL ?? "/home/index" });
         }
 
         // GET: UserController/Login
@@ -105,7 +101,7 @@ namespace OnlineShopWebApplication.Controllers
 
         public IActionResult UserCabinet(string userName)
         {
-            var user = userManager.Users.Where(x => x.UserName == userName).Include(x => x.Photos).FirstOrDefault();
+            var user = userManager.Users.Where(x => x.UserName == userName).Include(x => x.UserImages).FirstOrDefault();
             var userCart = cartStorage.TryGetByUserId(user.Id);
             var userOrders = orderStorage.GetOrderList().Where(x => x.UserName == userName).ToList();
             var userCabinet = new UserCabinetViewModel()
@@ -114,7 +110,7 @@ namespace OnlineShopWebApplication.Controllers
                 Name = user.UserName,
                 Description = user.Description,
                 Email = user.Email,
-                Photos = user.Photos,
+                UserImages = user.UserImages,
                 Orders = userOrders.ToOrdersViewModel()
             };
             return View(userCabinet);
@@ -122,13 +118,13 @@ namespace OnlineShopWebApplication.Controllers
 
         public IActionResult EditUser(string userName)
         {
-            var user = userManager.Users.Where(x => x.UserName == userName).Include(x => x.Photos).FirstOrDefault();
+            var user = userManager.Users.Where(x => x.UserName == userName).Include(x => x.UserImages).FirstOrDefault();
             return View(user.ToEditUserCabinetViewModel());
         }
 
         public IActionResult SaveUser(EditUserCabinetViewModel editUserCabinetViewModel)
         {
-            var user = userManager.Users.Where(x => x.Id == editUserCabinetViewModel.Id).Include(x => x.Photos).FirstOrDefault();
+            var user = userManager.Users.Where(x => x.Id == editUserCabinetViewModel.Id).Include(x => x.UserImages).FirstOrDefault();
             if (ModelState.IsValid)
             {
                 if (user.UserName != "Admin")
@@ -142,8 +138,8 @@ namespace OnlineShopWebApplication.Controllers
                 if (editUserCabinetViewModel.Image != null)
                 {
                     var fileName = fileUploader.UploadUserImage(editUserCabinetViewModel.Id.ToString(), editUserCabinetViewModel.Image);
-                    user.Photos.Clear();
-                    user.Photos.Add(new Image { Name = fileName });
+                    user.UserImages.Clear();
+                    user.UserImages.Add(new UserImages { Name = fileName });
                     userManager.UpdateAsync(user).Wait();
                 }
 

@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
+using System.Linq;
 
 namespace OnlineShopWebApplication.Controllers
 {

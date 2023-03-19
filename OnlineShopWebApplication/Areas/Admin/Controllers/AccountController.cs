@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
 using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Areas.Admin.Models;
 using OnlineShopWebApplication.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopWebApplication.Areas.Admin.Controllers
 {

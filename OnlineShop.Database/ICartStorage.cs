@@ -1,6 +1,6 @@
-﻿using System;
+﻿using OnlineShop.Database.Models;
+using System;
 using System.Collections.Generic;
-using OnlineShop.Database.Models;
 
 namespace OnlineShop.Database
 {
@@ -18,6 +18,6 @@ namespace OnlineShop.Database
 
         Cart TryGetCartById(Guid cartId);
 
-        void TransferProductsOnLogin(string userName, List<CartItem> unregisteredUserCdrtItems);
+        void TransferProductsOnLogin(string userName, List<CartItems> unregisteredUserCdrtItems);
     }
 }

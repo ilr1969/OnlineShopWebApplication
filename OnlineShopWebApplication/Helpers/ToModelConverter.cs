@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using OnlineShop.Database.Models;
+﻿using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Models;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApplication.Helpers
 {
@@ -14,7 +14,7 @@ namespace OnlineShopWebApplication.Helpers
                 Name = productviewmodel.Name,
                 Description = productviewmodel.Description,
                 Cost = productviewmodel.Cost,
-                Images = productviewmodel.Images
+                ProductImages = productviewmodel.ProductImages
             };
             return product;
         }
@@ -69,12 +69,12 @@ namespace OnlineShopWebApplication.Helpers
             return cart;
         }
 
-        public static List<CartItem> ToCartItems(this List<CartItemViewModel> cartItemsViewModel)
+        public static List<CartItems> ToCartItems(this List<CartItemViewModel> cartItemsViewModel)
         {
-            var cartItems = new List<CartItem>();
+            var cartItems = new List<CartItems>();
             foreach (var item in cartItemsViewModel)
             {
-                var cartItem = new CartItem
+                var cartItem = new CartItems
                 {
                     Id = item.Id,
                     Product = item.Product.ToProduct(),
