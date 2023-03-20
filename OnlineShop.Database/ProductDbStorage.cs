@@ -22,7 +22,7 @@ namespace OnlineShop.Database
 
         public List<Product> GetAll()
         {
-            return databaseContext.Products.Include(x => x.ProductImages).ToList();
+            return databaseContext.Products.Include(x => x.ProductImages).Include(x => x.Mark).Include(x => x.Model).Where(x => x.IsDeleted == false).ToList();
         }
 
         public void Add(Product product)
@@ -33,7 +33,7 @@ namespace OnlineShop.Database
 
         public void Remove(Guid productId)
         {
-            databaseContext.Products.Remove(TryGetById(productId));
+            databaseContext.Products.First(x => x.Id == productId).IsDeleted = true;
             databaseContext.SaveChanges();
         }
     }

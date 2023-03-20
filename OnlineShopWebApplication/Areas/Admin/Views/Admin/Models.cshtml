@@ -1,0 +1,20 @@
+﻿@using OnlineShopWebApplication.Areas.Admin.Models
+@model List<ModelViewModel>
+
+<div class="row">
+    @await Html.PartialAsync("AdminLeftMenu")
+
+    <div class="col-9">
+        <div>
+            <a asp-area="admin" asp-controller="model" asp-action="add">Добавить новую модель</a>
+        </div>
+        <div>
+            @foreach (var modelauto in @Model)
+            {
+                <label>@modelauto.Name</label>
+
+                <br />
+            }
+        </div>
+    </div>
+</div>

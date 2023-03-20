@@ -1,0 +1,20 @@
+﻿@using OnlineShopWebApplication.Areas.Admin.Models
+@model List<MarkViewModel>
+
+<div class="row">
+    @await Html.PartialAsync("AdminLeftMenu")
+
+    <div class="col-9">
+        <div>
+            <a asp-area="admin" asp-controller="mark" asp-action="add">Добавить новую марку</a>
+        </div>
+        <div>
+            @foreach (var mark in @Model)
+            {
+                <label>@mark.Name</label>
+
+                <br />
+            }
+        </div>
+    </div>
+</div>

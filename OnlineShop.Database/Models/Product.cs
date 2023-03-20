@@ -13,6 +13,10 @@ namespace OnlineShop.Database.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Cost { get; set; }
 
+        public Mark Mark { get; set; }
+
+        public Model Model { get; set; }
+
         public string Description { get; set; }
 
         public List<ProductImages> ProductImages { get; set; }
@@ -20,6 +24,8 @@ namespace OnlineShop.Database.Models
         public List<CartItems> CartItems { get; set; }
 
         public DateTime CreationDateTime { get; set; }
+
+        public bool IsDeleted { get; set; }
 
         public Product(Guid id, string name, decimal cost, string description)
         {

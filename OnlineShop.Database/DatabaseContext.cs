@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Abstractions;
 using OnlineShop.Database.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace OnlineShop.Database
         public DbSet<FavoriteProduct> FavoriteProducts { get; set; }
         public DbSet<CompareProduct> CompareProducts { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Mark> Marks { get; set; }
+        public DbSet<Model> Models { get; set; }
 
         //Начальное заполнение товарами
         protected override void OnModelCreating(ModelBuilder modelBuilder)

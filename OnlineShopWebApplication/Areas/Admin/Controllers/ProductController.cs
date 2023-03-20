@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Database;
 using OnlineShop.Database.Models;
@@ -62,6 +63,10 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         // GET: ProductController/AddProduct
         public ActionResult AddProduct()
         {
+            var marks = new SelectList(databaseContext.Marks.Select(x => x.Name).ToList());
+            var models = new SelectList(databaseContext.Models.Select(x => x.Name).ToList());
+            ViewBag.marks = marks;
+            ViewBag.models = models;
             return View();
         }
 
@@ -73,7 +78,9 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
                 var product = new Product()
                 {
                     Id = addProductViewModel.ID,
-                    Name = addProductViewModel.Name,
+                    Name = addProductViewModel.Mark + " " + addProductViewModel.Model,
+                    Mark = databaseContext.Marks.First(x => x.Name == addProductViewModel.Mark),
+                    Model = databaseContext.Models.First(x => x.Name == addProductViewModel.Model),
                     Description = addProductViewModel.Description,
                     Cost = addProductViewModel.Cost
                 };
