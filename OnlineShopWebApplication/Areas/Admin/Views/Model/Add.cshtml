@@ -1,0 +1,19 @@
+﻿@using OnlineShopWebApplication.Areas.Admin.Models
+@model AddModelViewModel
+
+@{
+    ViewBag.Title = "Марка";
+}
+
+<form asp-area="admin" asp-controller="model" asp-action="addModel">
+    <div>
+        <label>Выберите марку автомобиля</label>
+        @Html.DropDownListFor(model => model.MarkName, ViewBag.Marks as SelectList)
+    </div>
+    <div>
+        <label asp-for="Name">Укажите модель автомобиля</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <button class="btn btn-success" type="submit">Добавить</button>
+</form>

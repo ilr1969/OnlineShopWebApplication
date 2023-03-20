@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Database;
 
@@ -11,9 +12,11 @@ using OnlineShop.Database;
 namespace OnlineShop.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230320061650_AddMakrAndModel_AddTables")]
+    partial class AddMakrAndModel_AddTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -205,20 +208,10 @@ namespace OnlineShop.Database.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("MarkId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ModelId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MarkId");
-
-                    b.HasIndex("ModelId");
 
                     b.ToTable("Products");
 
@@ -227,7 +220,7 @@ namespace OnlineShop.Database.Migrations
                         {
                             Id = new Guid("8a5cf474-c473-48e1-bc3e-bbe0f22a80f2"),
                             Cost = 35000000m,
-                            CreationDateTime = new DateTime(2023, 3, 20, 13, 9, 23, 703, DateTimeKind.Local).AddTicks(1047),
+                            CreationDateTime = new DateTime(2023, 3, 20, 9, 16, 50, 574, DateTimeKind.Local).AddTicks(5135),
                             Description = "super",
                             IsDeleted = false,
                             Name = "Ferrari"
@@ -236,7 +229,7 @@ namespace OnlineShop.Database.Migrations
                         {
                             Id = new Guid("e6d46e32-765c-487d-bf57-78759b32a47c"),
                             Cost = 25000000m,
-                            CreationDateTime = new DateTime(2023, 3, 20, 13, 9, 23, 703, DateTimeKind.Local).AddTicks(1105),
+                            CreationDateTime = new DateTime(2023, 3, 20, 9, 16, 50, 574, DateTimeKind.Local).AddTicks(5162),
                             Description = "best",
                             IsDeleted = false,
                             Name = "Lambo"
@@ -245,7 +238,7 @@ namespace OnlineShop.Database.Migrations
                         {
                             Id = new Guid("59d7a46d-79a2-4a09-b6ad-a2333c3d3dcc"),
                             Cost = 5000000m,
-                            CreationDateTime = new DateTime(2023, 3, 20, 13, 9, 23, 703, DateTimeKind.Local).AddTicks(1114),
+                            CreationDateTime = new DateTime(2023, 3, 20, 9, 16, 50, 574, DateTimeKind.Local).AddTicks(5166),
                             Description = "good",
                             IsDeleted = false,
                             Name = "Camaro"
@@ -254,7 +247,7 @@ namespace OnlineShop.Database.Migrations
                         {
                             Id = new Guid("b41fefb9-1c66-4f2a-86af-090ada282060"),
                             Cost = 7000000m,
-                            CreationDateTime = new DateTime(2023, 3, 20, 13, 9, 23, 703, DateTimeKind.Local).AddTicks(1121),
+                            CreationDateTime = new DateTime(2023, 3, 20, 9, 16, 50, 574, DateTimeKind.Local).AddTicks(5169),
                             Description = "good",
                             IsDeleted = false,
                             Name = "Mustang"
@@ -263,7 +256,7 @@ namespace OnlineShop.Database.Migrations
                         {
                             Id = new Guid("36211d90-17e0-42d0-9f3b-3b17d2885ec1"),
                             Cost = 7000m,
-                            CreationDateTime = new DateTime(2023, 3, 20, 13, 9, 23, 703, DateTimeKind.Local).AddTicks(1131),
+                            CreationDateTime = new DateTime(2023, 3, 20, 9, 16, 50, 574, DateTimeKind.Local).AddTicks(5172),
                             Description = "not bad",
                             IsDeleted = false,
                             Name = "Volga"
@@ -272,7 +265,7 @@ namespace OnlineShop.Database.Migrations
                         {
                             Id = new Guid("968bfe01-31ba-44c0-a7c8-d1d04c1ffeb5"),
                             Cost = 700m,
-                            CreationDateTime = new DateTime(2023, 3, 20, 13, 9, 23, 703, DateTimeKind.Local).AddTicks(1146),
+                            CreationDateTime = new DateTime(2023, 3, 20, 9, 16, 50, 574, DateTimeKind.Local).AddTicks(5181),
                             Description = "foo",
                             IsDeleted = false,
                             Name = "Kopeyka"
@@ -373,11 +366,9 @@ namespace OnlineShop.Database.Migrations
 
             modelBuilder.Entity("OnlineShop.Database.Models.Model", b =>
                 {
-                    b.HasOne("OnlineShop.Database.Models.Mark", "Mark")
+                    b.HasOne("OnlineShop.Database.Models.Mark", null)
                         .WithMany("Model")
                         .HasForeignKey("MarkId");
-
-                    b.Navigation("Mark");
                 });
 
             modelBuilder.Entity("OnlineShop.Database.Models.Order", b =>
@@ -387,21 +378,6 @@ namespace OnlineShop.Database.Migrations
                         .HasForeignKey("DeliveryInfoId");
 
                     b.Navigation("DeliveryInfo");
-                });
-
-            modelBuilder.Entity("OnlineShop.Database.Models.Product", b =>
-                {
-                    b.HasOne("OnlineShop.Database.Models.Mark", "Mark")
-                        .WithMany("Products")
-                        .HasForeignKey("MarkId");
-
-                    b.HasOne("OnlineShop.Database.Models.Model", "Model")
-                        .WithMany("Products")
-                        .HasForeignKey("ModelId");
-
-                    b.Navigation("Mark");
-
-                    b.Navigation("Model");
                 });
 
             modelBuilder.Entity("OnlineShop.Database.Models.ProductImages", b =>
@@ -421,13 +397,6 @@ namespace OnlineShop.Database.Migrations
             modelBuilder.Entity("OnlineShop.Database.Models.Mark", b =>
                 {
                     b.Navigation("Model");
-
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("OnlineShop.Database.Models.Model", b =>
-                {
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("OnlineShop.Database.Models.Order", b =>

@@ -18,13 +18,15 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         private readonly RoleManager<IdentityRole> roleManager;
         readonly IProductStorage productStorage;
         readonly IOrderStorage orderStorage;
+        private readonly DatabaseContext databaseContext;
 
-        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, DatabaseContext databaseContext)
         {
             this.productStorage = productStorage;
             this.orderStorage = orderStorage;
             this.userManager = userManager;
             this.roleManager = roleManager;
+            this.databaseContext = databaseContext;
         }
 
         // GET: AdminController
@@ -37,6 +39,18 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         public ActionResult Products()
         {
             return View(productStorage.GetAll().ToProductsViewModel());
+        }
+
+        public IActionResult Marks()
+        {
+            var marks = databaseContext.Marks.ToList();
+            return View(marks.ToMarkViewModel());
+        }
+
+        public IActionResult Models()
+        {
+            var models = databaseContext.Models.ToList();
+            return View(models.ToModelViewModel());
         }
 
         // GET: AdminController/Users

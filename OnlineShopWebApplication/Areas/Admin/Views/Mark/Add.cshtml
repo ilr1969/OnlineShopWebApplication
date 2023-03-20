@@ -1,0 +1,11 @@
+﻿@using OnlineShopWebApplication.Areas.Admin.Models
+@model AddMarkViewModel
+
+<form asp-area="admin" asp-controller="mark" asp-action="addMark">
+    <div>
+        <label asp-for="Name">Укажите марку автомобиля</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <button class="btn btn-success" type="submit">Добавить</button>
+</form>

@@ -7,12 +7,36 @@ namespace OnlineShopWebApplication.Helpers
 {
     public static class ToViewModelConverter
     {
-        public static ProductViewModel ToProductViewModel(this Product product)
+        public static List<MarkViewModel> ToMarkViewModel(this List<Mark> marks)
         {
-            var productViewModel = new ProductViewModel
+            var marksViewModel = new List<MarkViewModel>();
+            foreach (var mark in marks)
+            {
+                var markViewModel = new MarkViewModel { Name = mark.Name };
+                marksViewModel.Add(markViewModel);
+            }
+            return marksViewModel;
+        }
+
+        public static List<ModelViewModel> ToModelViewModel(this List<Model> models)
+        {
+            var modelsViewModel = new List<ModelViewModel>();
+            foreach (var model in models)
+            {
+                var modelViewModel = new ModelViewModel { Name = model.Name };
+                modelsViewModel.Add(modelViewModel);
+            }
+            return modelsViewModel;
+        }
+
+        public static Models.ProductViewModel ToProductViewModel(this Product product)
+        {
+            var productViewModel = new Models.ProductViewModel
             {
                 Id = product.Id,
                 Name = product.Name,
+                Mark = product.Mark?.Name,
+                Model = product.Model?.Name,
                 Description = product.Description,
                 Cost = product.Cost,
                 ProductImages = product.ProductImages
@@ -32,9 +56,9 @@ namespace OnlineShopWebApplication.Helpers
             return editProductViewModel;
         }
 
-        public static List<ProductViewModel> ToProductsViewModel(this List<Product> products)
+        public static List<Models.ProductViewModel> ToProductsViewModel(this List<Product> products)
         {
-            var productsViewModel = new List<ProductViewModel>();
+            var productsViewModel = new List<Models.ProductViewModel>();
             foreach (var prod in products)
             {
                 productsViewModel.Add(prod.ToProductViewModel());

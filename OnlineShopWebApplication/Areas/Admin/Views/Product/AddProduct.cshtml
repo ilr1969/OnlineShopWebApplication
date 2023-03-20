@@ -1,13 +1,20 @@
 ﻿@using OnlineShopWebApplication.Areas.Admin.Models
 @model AddProductViewModel
 
+@{
+    ViewBag.Title = "";
+}
+
 <h2>Добавление нового продукта</h2>
 <form method="post" asp-area="admin" asp-controller="product" asp-action="add" enctype="multipart/form-data">
     <div>
         <div>
-            <label asp-for="Name">Название: </label><br />
-            <input asp-for="Name" type="text" name="Name" />
-            <span asp-validation-for="Name"></span>
+            <label>Выберите марку</label>
+            @Html.DropDownListFor(model => model.Mark, ViewBag.marks as SelectList);
+        </div>
+        <div>
+            <label>Выберите модель</label>
+            @Html.DropDownListFor(model => model.Model, ViewBag.models as SelectList);
         </div>
         <div>
             <label asp-for="Description">Описание: </label><br />
