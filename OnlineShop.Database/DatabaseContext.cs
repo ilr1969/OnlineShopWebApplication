@@ -45,6 +45,19 @@ namespace OnlineShop.Database
                             new ProductImages(new Guid("38b7ca0d-5381-4246-9f04-1eaf2ecb30e5"), "/images/products/b41fefb9-1c66-4f2a-86af-090ada282060/ee0e7ded-ba17-45c2-a932-d3bd2363de4d.jpg", new Guid("b41fefb9-1c66-4f2a-86af-090ada282060")),
                             new ProductImages(new Guid("d93c51ef-44df-4e58-b6df-6adadbab2f89"), "/images/products/e6d46e32-765c-487d-bf57-78759b32a47c/36117249-2d5f-4fef-900e-9580fa641af5.jpg", new Guid("e6d46e32-765c-487d-bf57-78759b32a47c")),
                         });
+
+
+            modelBuilder.Entity<Mark>().HasData(new List<Mark>()
+            {
+                new Mark { Id = new Guid("45e03085-c24d-4a9a-95a6-00d49dbf4bb9"), Name = "Ferrari" },
+                new Mark { Id = new Guid("c589375f-897f-45f7-86a2-09011a939695"), Name = "Lamborghini" }
+            });
+
+            modelBuilder.Entity<Model>().HasData(new List<Model>()
+            {
+                new Model{Id = new Guid("1e1620e7-abf1-4228-bfc1-d68d44c9fd83"), Name = "F560", MarkId = new Guid("45e03085-c24d-4a9a-95a6-00d49dbf4bb9")},
+                new Model{Id = new Guid("e617a298-74b2-42ff-a01d-72a8c1b38f79"), Name = "Diablo", MarkId = new Guid("c589375f-897f-45f7-86a2-09011a939695")}
+            });
         }
     }
 }
