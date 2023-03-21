@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
 using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Areas.Admin.Models;
+using OnlineShopWebApplication.Helpers;
 using OnlineShopWebApplication.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,13 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly MailSender mailSender;
 
-        public AccountController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, MailSender mailSender)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
+            this.mailSender = mailSender;
         }
 
         // GET: UserController/AddUser
@@ -101,6 +104,9 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
                 userManager.RemovePasswordAsync(userToChange).Wait();
                 userManager.AddPasswordAsync(userToChange, passwordViewModel.Password).Wait();
                 userManager.UpdateAsync(userToChange).Wait();
+
+                mailSender.SendEmail("Пароль успешно изменён", passwordViewModel.Password, userToChange.Email);
+
                 return Redirect("/admin/admin/users");
             }
             return Redirect("/admin/admin/users");

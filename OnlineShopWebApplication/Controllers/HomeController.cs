@@ -41,8 +41,8 @@ namespace OnlineShopWebApplication.Controllers
 
         public FileContentResult DisplayAvatar()
         {
-            var currentUser = userManager.Users.Where(x => x.UserName == userManager.GetUserAsync(HttpContext.User).Result.UserName).Include(x => x.UserImages).FirstOrDefault();
-            string fileName = currentUser.UserImages.Count != 0 ? currentUser.UserImages[0].Name : "/images/users/emptyAvatar.png";
+            var currentUser = userManager.Users.Include(x => x.UserImages).FirstOrDefault(x => x.UserName == HttpContext.User.Identity.Name);
+            string fileName = currentUser?.UserImages.Count != 0 ? currentUser.UserImages[0].Name : "/images/users/emptyAvatar.png";
             var path = Path.Combine(webHostEnvironment.WebRootPath + fileName);
             byte[] content = System.IO.File.ReadAllBytes(path);
             return File(content, "image/png");
