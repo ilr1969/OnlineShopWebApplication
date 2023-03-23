@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Database;
 using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Areas.Admin.Models;
@@ -58,22 +59,36 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         // GET: UserController/EditUser
         public ActionResult EditUser(string userId)
         {
-            return View(userManager.Users.First(x => x.Id == userId));
+            return View(userManager.Users.First(x => x.Id == userId).ToEditUserViewModel());
         }
 
         // POST: UserController/SaveUser
         [HttpPost]
-        public ActionResult SaveUser(string userId, User user)
+        public ActionResult SaveUser(string userId, EditUserViewModel editUserViewModel)
         {
-            var userToEdit = userManager.Users.First(x => x.Id == userId);
-            userToEdit.Description = user.Description;
-            userManager.SetEmailAsync(userToEdit, user.Email).Wait();
+            var userToEdit = userManager.Users.FirstOrDefault(x => x.Id == userId);
+            if (userToEdit == null)
+            {
+                ModelState.AddModelError("Error", "Запись была удалена!");
+                return View("EditUser", editUserViewModel);
+            }
+
+            userToEdit.Description = editUserViewModel.Description;
+            userManager.SetEmailAsync(userToEdit, editUserViewModel.Email).Wait();
             if (userToEdit.UserName != "Admin")
             {
-                userManager.SetUserNameAsync(userToEdit, user.UserName).Wait();
+                userManager.SetUserNameAsync(userToEdit, editUserViewModel.Name).Wait();
             }
-            userManager.UpdateAsync(userToEdit);
-            return Redirect("/admin/admin/users");
+            try
+            {
+                userManager.UpdateAsync(userToEdit);
+                return Redirect("/admin/admin/users");
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                ModelState.AddModelError("Error", ex.Message);
+                return View("EditUser", editUserViewModel);
+            }
         }
 
         // GET: UserController/removeUser/5

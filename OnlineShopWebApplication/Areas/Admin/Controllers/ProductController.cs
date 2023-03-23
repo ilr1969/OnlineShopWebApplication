@@ -36,11 +36,17 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         public IActionResult SaveProduct(EditProductViewModel editProductViewModel)
         {
             var productToEdit = productStorage.TryGetById(editProductViewModel.ID);
+            if (productToEdit == null)
+            {
+                ModelState.AddModelError("Error", "Запись была удалена!");
+                return View("EditProduct", editProductViewModel);
+            }
             if (ModelState.IsValid)
             {
                 productToEdit.Name = editProductViewModel.Name;
                 productToEdit.Description = editProductViewModel.Description;
                 productToEdit.Cost = editProductViewModel.Cost;
+                databaseContext.Entry(productToEdit).Property("ConcurrencyToken").OriginalValue = editProductViewModel.ConcurrencyToken;
 
                 if (editProductViewModel.FileToUpload != null)
                 {
@@ -48,8 +54,16 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
                     productToEdit.ProductImages.Add(new ProductImages { Name = fileName });
                 }
 
-                databaseContext.SaveChanges();
-                return Redirect("/admin/admin/products");
+                try
+                {
+                    databaseContext.SaveChanges();
+                    return Redirect("/admin/admin/products");
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    ModelState.AddModelError("Error", "Запись была изменена другим пользователем!");
+                    return View("EditProduct", editProductViewModel);
+                }
             }
             return RedirectToAction("EditProduct", productToEdit.ToProductViewModel());
         }

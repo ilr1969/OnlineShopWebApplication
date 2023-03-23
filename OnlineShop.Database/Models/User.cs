@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShop.Database.Models
 {
@@ -7,6 +8,8 @@ namespace OnlineShop.Database.Models
     {
         public string Description { get; set; }
         public List<UserImages> UserImages { get; set; }
+        [Timestamp]
+        public byte[] ConcurrencyToken { get; set; }
 
         public User()
         {
