@@ -52,6 +52,7 @@ namespace OnlineShopWebApplication.Helpers
                 Name = product.Name,
                 Description = product.Description,
                 Cost = product.Cost,
+                ConcurrencyToken = product.ConcurrencyToken,
             };
             return editProductViewModel;
         }
@@ -157,6 +158,19 @@ namespace OnlineShopWebApplication.Helpers
                 Photos = user.UserImages
             };
             return editUserCabinetViewModel;
+        }
+
+        public static EditUserViewModel ToEditUserViewModel(this User user)
+        {
+            var editUserViewModel = new EditUserViewModel()
+            {
+                Id = user.Id,
+                Name = user.UserName,
+                Email = user.Email,
+                Description = user.Description,
+                Photos = user.UserImages
+            };
+            return editUserViewModel;
         }
     }
 }

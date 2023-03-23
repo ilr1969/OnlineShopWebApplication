@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineShop.Database.Models
@@ -26,6 +27,9 @@ namespace OnlineShop.Database.Models
         public DateTime CreationDateTime { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        [Timestamp]
+        public byte[] ConcurrencyToken { get; set; }
 
         public Product(Guid id, string name, decimal cost, string description)
         {

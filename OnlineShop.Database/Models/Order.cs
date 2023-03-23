@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShop.Database.Models
 {
@@ -13,6 +14,9 @@ namespace OnlineShop.Database.Models
         public DateTime CreationDatetime { get; set; }
         public List<CartItems> CartItems { get; set; }
         public OrderDeliveryInfo DeliveryInfo { get; set; }
+
+        [Timestamp]
+        public byte[] ConcurrencyToken { get; set; }
 
         public Order()
         {

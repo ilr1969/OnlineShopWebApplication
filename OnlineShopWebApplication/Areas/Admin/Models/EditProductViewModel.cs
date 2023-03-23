@@ -18,5 +18,9 @@ namespace OnlineShopWebApplication.Areas.Admin.Models
         public string Description { get; set; }
 
         public IFormFile FileToUpload { get; set; }
+
+        public string Error { get; set; }
+
+        public byte[] ConcurrencyToken { get; set; }
     }
 }

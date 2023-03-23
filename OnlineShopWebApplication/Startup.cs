@@ -43,6 +43,7 @@ namespace OnlineShopWebApplication
             });
 
             services.AddControllersWithViews();
+            services.AddSingleton<MailSender>();
             services.AddSingleton<FileUploader>();
             services.AddTransient<ICompareStorage, CompareDbStorage>();
             services.AddTransient<IProductStorage, ProductDbStorage>();

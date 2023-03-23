@@ -1,4 +1,5 @@
-﻿@model User
+﻿@using OnlineShopWebApplication.Areas.Admin.Models
+@model EditUserViewModel
 
 <h2>Редактирование пользователя</h2>
 <form method="post" asp-area="admin" asp-controller="account" asp-action="SaveUser">
@@ -6,9 +7,9 @@
         <div>
             <input type="text" name="userId" value="@Model.Id" hidden />
             <div>
-                <label asp-for="UserName">Имя: </label><br />
-                <input asp-for="UserName" type="text" value="@Model.UserName" name="UserName" />
-                <span asp-validation-for="UserName"></span>
+                <label asp-for="Name">Имя: </label><br />
+                <input asp-for="Name" type="text" value="@Model.Name" name="Name" />
+                <span asp-validation-for="Name"></span>
             </div>
             <div>
                 <label asp-for="Email">Email: </label><br />
@@ -19,6 +20,9 @@
                 <label asp-for="Description">Описание: </label><br />
                 <input asp-for="Description" type="text" value="@Model.Description" name="Description" />
                 <span asp-validation-for="Description"></span>
+            </div>
+            <div>
+                <label style="color:red">@Html.ValidationMessageFor(model => model.Error)</label>
             </div>
         </div>
         <br />
