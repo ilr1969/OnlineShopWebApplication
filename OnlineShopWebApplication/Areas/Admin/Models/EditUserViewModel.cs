@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using OnlineShop.Database.Models;
+﻿using OnlineShop.Database.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
