@@ -1,5 +1,4 @@
-﻿using MailKit.Net.Smtp;
-using MimeKit;
+﻿using MimeKit;
 using System;
 
 namespace OnlineShopWebApplication.Helpers
@@ -18,11 +17,11 @@ namespace OnlineShopWebApplication.Helpers
             emailMessage.From.Add(new MailboxAddress("", "test@yandex.ru"));
             emailMessage.To.Add(new MailboxAddress("", recipient));
 
-            using var client = new SmtpClient();
-            client.Connect("smtp.yandex.ru", 465, true);
-            client.Authenticate("test", "pass");
-            client.Send(emailMessage);
-            client.Disconnect(true);
+            /*            using var client = new SmtpClient();
+                        client.Connect("smtp.yandex.ru", 465, true);
+                        client.Authenticate("test", "pass");
+                        client.Send(emailMessage);
+                        client.Disconnect(true);*/
         }
     }
 }

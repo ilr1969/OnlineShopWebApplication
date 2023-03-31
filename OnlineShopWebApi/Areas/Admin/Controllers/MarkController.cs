@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Database;
 using OnlineShop.Database.Models;
 
-namespace OnlineShopWebApplication.Areas.Admin.Controllers
+namespace OnlineShopWebApi.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = Constants.AdminRole)]
+    [ApiController]
+    [Route("[Controller]")]
     public class MarkController : Controller
     {
         private readonly DatabaseContext databaseContext;
@@ -15,13 +19,7 @@ namespace OnlineShopWebApplication.Areas.Admin.Controllers
         }
 
 
-        public IActionResult Add()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost("AddMark")]
         public IActionResult AddMark(string name)
         {
             try
