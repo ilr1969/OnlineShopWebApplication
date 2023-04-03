@@ -5,10 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineShop.Database.Models
 {
-    public class Product
+    public class Product : Base
     {
-        public Guid Id { get; set; }
-
         public string Name { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
@@ -23,8 +21,6 @@ namespace OnlineShop.Database.Models
         public List<ProductImages> ProductImages { get; set; }
 
         public List<CartItems> CartItems { get; set; }
-
-        public DateTime CreationDateTime { get; set; }
 
         public bool IsDeleted { get; set; }
 

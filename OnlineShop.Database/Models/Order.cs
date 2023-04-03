@@ -4,14 +4,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShop.Database.Models
 {
-    public class Order
+    public class Order : Base
     {
         static int OrderCounter = 1;
-        public Guid Id { get; set; }
         public int OrderNumber { get; set; }
         public string UserName { get; set; }
         public OrderStatus Status { get; set; }
-        public DateTime CreationDatetime { get; set; }
         public List<CartItems> CartItems { get; set; }
         public OrderDeliveryInfo DeliveryInfo { get; set; }
 
@@ -22,8 +20,8 @@ namespace OnlineShop.Database.Models
         {
             OrderNumber = OrderCounter;
             OrderCounter++;
+            CreationDateTime = DateTime.Now;
             Status = OrderStatus.Created;
-            CreationDatetime = DateTime.Now;
             CartItems = new List<CartItems>();
         }
     }

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OnlineShop.Database;
+using OnlineShop.Database.Interfaces;
 using OnlineShop.Database.Models;
 using Serilog;
 

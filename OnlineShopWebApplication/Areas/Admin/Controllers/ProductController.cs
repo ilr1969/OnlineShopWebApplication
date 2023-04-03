@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Database;
+using OnlineShop.Database.Interfaces;
 using OnlineShop.Database.Models;
 using OnlineShopWebApplication.Areas.Admin.Models;
 using OnlineShopWebApplication.Helpers;
