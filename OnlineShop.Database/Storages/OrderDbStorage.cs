@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OnlineShop.Database.Interfaces;
 using OnlineShop.Database.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShop.Database
+namespace OnlineShop.Database.Storages
 {
     public class OrderDbStorage : IOrderStorage
     {

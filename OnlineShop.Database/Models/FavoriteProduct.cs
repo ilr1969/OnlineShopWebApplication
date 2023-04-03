@@ -2,10 +2,13 @@
 
 namespace OnlineShop.Database.Models
 {
-    public class FavoriteProduct
+    public class FavoriteProduct : Base
     {
-        public Guid Id { get; set; }
         public string UserId { get; set; }
         public Product Product { get; set; }
+        public FavoriteProduct()
+        {
+            CreationDateTime = DateTime.Now;
+        }
     }
 }

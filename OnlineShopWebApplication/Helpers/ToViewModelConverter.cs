@@ -86,7 +86,7 @@ namespace OnlineShopWebApplication.Helpers
                 OrderNumber = order.OrderNumber,
                 CartItems = order.CartItems.ToCartItemsViewModel(),
                 DeliveryInfo = order.DeliveryInfo.ToOrderDeliveryInfoViewModel(),
-                CreationDatetime = order.CreationDatetime,
+                CreationDatetime = order.CreationDateTime,
                 Status = (OrderStatusViewModel)(int)order.Status,
                 UserName = order.UserName
             };

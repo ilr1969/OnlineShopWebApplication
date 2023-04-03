@@ -5,11 +5,11 @@ namespace OnlineShopWebApplication.Helpers
 {
     public class MailSender
     {
-        public void SendEmail(string subhect, string body, string recipient)
+        public void SendEmail(string subject, string body, string recipient)
         {
             using var emailMessage = new MimeMessage();
             emailMessage.Date = DateTime.Now;
-            emailMessage.Subject = subhect;
+            emailMessage.Subject = subject;
             emailMessage.Body = new TextPart()
             {
                 Text = body

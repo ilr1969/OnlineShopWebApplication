@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using OnlineShop.Database.Models;
 
-namespace OnlineShop.Database
+namespace OnlineShop.Database.Interfaces
 {
     public class IdentityInitializer
     {

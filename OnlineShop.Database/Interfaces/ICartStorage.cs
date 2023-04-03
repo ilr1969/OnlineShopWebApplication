@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OnlineShop.Database
+namespace OnlineShop.Database.Interfaces
 {
     public interface ICartStorage
     {

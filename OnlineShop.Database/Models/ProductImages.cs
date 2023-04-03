@@ -3,9 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShop.Database.Models
 {
-    public class ProductImages
+    public class ProductImages : Base
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public Guid ProductId { get; set; }
         [Timestamp]
@@ -15,10 +14,11 @@ namespace OnlineShop.Database.Models
             Id = id;
             Name = name;
             ProductId = productId;
+            CreationDateTime = DateTime.Now;
         }
         public ProductImages()
         {
-
+            CreationDateTime = DateTime.Now;
         }
     }
 }

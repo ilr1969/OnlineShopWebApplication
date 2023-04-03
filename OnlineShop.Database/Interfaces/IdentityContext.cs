@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Database.Models;
 
-namespace OnlineShop.Database
+namespace OnlineShop.Database.Interfaces
 {
     public class IdentityContext : IdentityDbContext<User>
     {
