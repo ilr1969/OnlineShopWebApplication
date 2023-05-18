@@ -17,7 +17,9 @@ namespace OnlineShopWebApplication.Models
         [Required(ErrorMessage = "Укажите телефон для связи")]
         public string Phone { get; set; }
 
-        [CheckBoxValidation(ErrorMessage = "Необходимо согласие")]
+        [CheckBoxValidator(ErrorMessage = "Необходимо согласие")]
         public bool Agree { get; set; }
+
+        public string Error { get; set; }
     }
 }

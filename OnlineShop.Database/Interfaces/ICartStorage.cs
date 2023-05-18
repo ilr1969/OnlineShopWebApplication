@@ -6,7 +6,7 @@ namespace OnlineShop.Database.Interfaces
 {
     public interface ICartStorage
     {
-        static List<Cart> carts;
+        static readonly List<Cart> carts;
 
         Cart TryGetByUserId(string userId);
 
@@ -18,6 +18,6 @@ namespace OnlineShop.Database.Interfaces
 
         Cart TryGetCartById(Guid cartId);
 
-        void TransferProductsOnLogin(string userName, List<CartItems> unregisteredUserCdrtItems);
+        void TransferProductsOnLogin(string userName, List<CartItems> unregisteredUserCdrtItems, string tempUserId);
     }
 }

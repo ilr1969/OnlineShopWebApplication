@@ -21,6 +21,9 @@
         <label asp-for="Agree">Тут я соглашаюсь с тем, что придумали ваши юристы</label><br />
         <span asp-validation-for="Agree"></span>
     </div>
+    <div>
+        <label>@Html.ValidationMessageFor(model => model.Error)</label>
+    </div>
 
     <br />
     <button class="btn btn-success" type="submit">Оформить</button>

@@ -11,13 +11,11 @@ namespace OnlineShop.Database.Storages
     public class CompareDbStorage : ICompareStorage
     {
         private readonly DatabaseContext databaseContext;
-        private readonly IProductStorage productStorage;
         private readonly UserManager<User> userManager;
 
-        public CompareDbStorage(DatabaseContext databaseContext, IProductStorage productStorage, UserManager<User> userManager)
+        public CompareDbStorage(DatabaseContext databaseContext, UserManager<User> userManager)
         {
             this.databaseContext = databaseContext;
-            this.productStorage = productStorage;
             this.userManager = userManager;
         }
 
@@ -48,13 +46,16 @@ namespace OnlineShop.Database.Storages
             databaseContext.SaveChanges();
         }
 
-        public void TransferCompareListOnLogin(string userName, List<Product> unregisteredUserCompareList)
+        public void TransferCompareListOnLogin(string userName, List<Product> unregisteredUserCompareList, string tempUserId)
         {
             var loggedUserId = userManager.Users.FirstOrDefault(x => x.UserName == userName).Id;
             foreach (var item in unregisteredUserCompareList)
             {
                 Add(loggedUserId, item);
             }
+            var tempUserCompareList = databaseContext.CompareProducts.FirstOrDefault(x => x.UserId == tempUserId);
+            databaseContext.CompareProducts.Remove(tempUserCompareList);
+            databaseContext.SaveChanges();
         }
     }
 }

@@ -45,7 +45,8 @@ namespace OnlineShopWebApplication.Controllers
                 cartStorage.ClearBasket(userManager.GetUserId(HttpContext.User));
                 return View();
             }
-            return RedirectToAction(nameof(Index));
+            ModelState.AddModelError("Error", "Заполните все поля");
+            return View("Index", orderDeliveryInfoViewModel);
         }
 
         public IActionResult Detail(int orderNumber)

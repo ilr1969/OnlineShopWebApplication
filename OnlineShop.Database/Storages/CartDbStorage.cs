@@ -5,6 +5,7 @@ using OnlineShop.Database.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace OnlineShop.Database.Storages
 {
@@ -32,16 +33,15 @@ namespace OnlineShop.Database.Storages
                 var newCart = new Cart
                 {
                     UserID = userId,
-                };
-
-                newCart.CartItems = new List<CartItems>
+                    CartItems = new List<CartItems>
                     {
                         new CartItems
                         {
                             Product = product,
                             Count = 1,
                         }
-                    };
+                    }
+                };
                 databaseContext.Carts.Add(newCart);
                 databaseContext.SaveChanges();
             }
@@ -88,17 +88,19 @@ namespace OnlineShop.Database.Storages
             return databaseContext.Carts.FirstOrDefault(x => x.Id == cartId);
         }
 
-        public void TransferProductsOnLogin(string userName, List<CartItems> unregisteredUserCdrtItems)
+        public void TransferProductsOnLogin(string userName, List<CartItems> unregisteredUserCdrtItems, string tempUserId)
         {
             var loggedUserId = userManager.Users.FirstOrDefault(x => x.UserName == userName).Id;
             foreach (var item in unregisteredUserCdrtItems)
-            {
+            { 
                 for (int i = 0; i < item.Count; i++)
                 {
                     Add(item.Product, loggedUserId);
                 }
-
             }
+            var tempUserCart = databaseContext.Carts.FirstOrDefault(x => x.UserID == tempUserId);
+            databaseContext.Carts.Remove(tempUserCart);
+            databaseContext.SaveChanges();
         }
     }
 }
