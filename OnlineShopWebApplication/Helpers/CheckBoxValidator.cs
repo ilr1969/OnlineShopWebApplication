@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApplication.Helpers
 {
-    public class CheckBoxValidation : ValidationAttribute
+    public class CheckBoxValidator : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {

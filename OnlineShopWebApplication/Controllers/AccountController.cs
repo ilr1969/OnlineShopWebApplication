@@ -13,18 +13,22 @@ namespace OnlineShopWebApplication.Controllers
     public class AccountController : Controller
     {
         private readonly ICartStorage cartStorage;
+        private readonly ICompareStorage compareStorage;
+        private readonly IFavoriteStorage favoriteStorage;
         private readonly IOrderStorage orderStorage;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly FileUploader fileUploader;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ICartStorage cartStorage, FileUploader fileUploader, IOrderStorage orderStorage)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ICartStorage cartStorage, FileUploader fileUploader, IOrderStorage orderStorage, ICompareStorage compareStorage, IFavoriteStorage favoriteStorage)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.cartStorage = cartStorage;
             this.fileUploader = fileUploader;
             this.orderStorage = orderStorage;
+            this.compareStorage = compareStorage;
+            this.favoriteStorage = favoriteStorage;
         }
 
         // GET: UserControllerLoginform
@@ -43,17 +47,18 @@ namespace OnlineShopWebApplication.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel loginViewModel)
         {
-            /*            var unregisteredUserCartItems = cartStorage.TryGetByUserId(userManager.GetUserId(HttpContext.User)).CartItems;
-                        var unregisteredUserFavoriteList = favoriteStorage.GetAll(userManager.GetUserId(HttpContext.User));
-                        var unregisteredUserCompareList = compareStorage.GetAll(userManager.GetUserId(HttpContext.User));*/
+            var tempUserId = Request.Cookies["TempUser"];
+            var unregisteredUserCartItems = cartStorage.TryGetByUserId(tempUserId).CartItems;
+            var unregisteredUserFavoriteList = favoriteStorage.GetAll(tempUserId);
+            var unregisteredUserCompareList = compareStorage.GetAll(tempUserId);
             if (ModelState.IsValid)
             {
                 var result = signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, loginViewModel.RememberMe, false).Result;
                 if (result.Succeeded)
                 {
-                    /*                    cartStorage.TransferProductsOnLogin(loginViewModel.UserName, unregisteredUserCartItems);
-                                        favoriteStorage.TransferFavoriteListOnLogin(loginViewModel.UserName, unregisteredUserFavoriteList);
-                                        compareStorage.TransferCompareListOnLogin(loginViewModel.UserName, unregisteredUserCompareList);*/
+                    cartStorage.TransferProductsOnLogin(loginViewModel.UserName, unregisteredUserCartItems, tempUserId);
+                    favoriteStorage.TransferFavoriteListOnLogin(loginViewModel.UserName, unregisteredUserFavoriteList, tempUserId);
+                    compareStorage.TransferCompareListOnLogin(loginViewModel.UserName, unregisteredUserCompareList, tempUserId);
                     return Redirect(loginViewModel.ReturnURL);
                 }
                 else

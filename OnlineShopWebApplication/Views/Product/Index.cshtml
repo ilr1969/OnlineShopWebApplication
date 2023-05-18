@@ -9,7 +9,7 @@
         <div class="carousel-inner">
             {
             <div class="carousel-item active">
-                <img src=@(Model.ProductImages.FirstOrDefault() == null ? "" : Model.ProductImages.FirstOrDefault().Name) height="550">
+                <img src=@(Model.ProductImages.FirstOrDefault() == null ? "/images/products/EmptyAutoImage.jpg" : Model.ProductImages.FirstOrDefault().Name) height="550">
             </div>
             }
             @foreach (var photo in @Model.ProductImages)

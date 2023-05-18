@@ -19,7 +19,16 @@ namespace OnlineShopWebApplication.Views.Shared.Components.Cart
 
         public IViewComponentResult Invoke()
         {
-            var cart = cartStorage.TryGetByUserId(userManager.GetUserId(HttpContext.User));
+            OnlineShop.Database.Models.Cart cart;
+            if (HttpContext.User.Identity.Name == null && Request.Cookies.ContainsKey("TempUser"))
+            {
+                var t = Request.Cookies["TempUser"].ToString();
+                cart = cartStorage.TryGetByUserId(t);
+            }
+            else
+            {
+                cart = cartStorage.TryGetByUserId(userManager.GetUserId(HttpContext.User));
+            }
             var cartToView = cart.ToCartViewModel();
             var productcount = cartToView?.Amount ?? 0;
             return View("cart", productcount);

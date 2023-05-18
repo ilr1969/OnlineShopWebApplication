@@ -46,13 +46,16 @@ namespace OnlineShop.Database.Storages
             databaseContext.SaveChanges();
         }
 
-        public void TransferFavoriteListOnLogin(string userName, List<FavoriteProduct> unregisteredUserFavoriteList)
+        public void TransferFavoriteListOnLogin(string userName, List<FavoriteProduct> unregisteredUserFavoriteList, string tempUserId)
         {
             var loggedUserId = userManager.Users.FirstOrDefault(x => x.UserName == userName).Id;
             foreach (var item in unregisteredUserFavoriteList)
             {
                 Add(loggedUserId, item.Product);
             }
+            var tempUserFavoriteList = databaseContext.FavoriteProducts.FirstOrDefault(x => x.UserId == tempUserId);
+            databaseContext.FavoriteProducts.Remove(tempUserFavoriteList);
+            databaseContext.SaveChanges();
         }
     }
 }

@@ -21,7 +21,16 @@ namespace OnlineShopWebApplication.Controllers
         // GET: CartController
         public ActionResult Index()
         {
-            var cart = cartStorage.TryGetByUserId(userManager.GetUserId(HttpContext.User));
+            Cart cart;
+            if (HttpContext.User.Identity.Name == null && Request.Cookies.ContainsKey("TempUser"))
+            {
+                var tempUserId = Request.Cookies["TempUser"];
+                cart = cartStorage.TryGetByUserId(tempUserId);
+            }
+            else
+            {
+                cart = cartStorage.TryGetByUserId(userManager.GetUserId(HttpContext.User));
+            }
             var cartToView = cart.ToCartViewModel();
             return View(cartToView);
         }
@@ -29,7 +38,25 @@ namespace OnlineShopWebApplication.Controllers
         public ActionResult Add(Guid productId)
         {
             var product = productStorage.TryGetById(productId);
-            cartStorage.Add(product, userManager.GetUserId(HttpContext.User));
+            if (HttpContext.User.Identity.Name == null)
+            {
+                if (Request.Cookies.ContainsKey("TempUser"))
+                {
+                    var tempUserId = Request.Cookies["TempUser"];
+                    Response.Cookies.Append("TempUser", tempUserId);
+                    cartStorage.Add(product, tempUserId);
+                }
+                else
+                {
+                    var tempUserId = Guid.NewGuid().ToString();
+                    Response.Cookies.Append("TempUser", tempUserId);
+                    cartStorage.Add(product, tempUserId);
+                }
+            }
+            else
+            {
+                cartStorage.Add(product, userManager.GetUserId(HttpContext.User));
+            }
             return RedirectToAction("Index");
         }
 
