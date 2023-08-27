@@ -9,6 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+git-ssh-key.sh
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
